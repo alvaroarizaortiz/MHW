@@ -5,5 +5,9 @@ public enum Elemento {
 		AGUA,
 		ELECTRICIDAD,
 		HIELO,
-		DRAGON
+		DRAGON,
+		PARALISIS,
+		EXPLOSION,
+		SUEÑO,
+		VENENO,
 }
