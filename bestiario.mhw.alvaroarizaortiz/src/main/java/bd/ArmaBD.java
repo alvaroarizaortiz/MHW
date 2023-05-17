@@ -44,10 +44,10 @@ public class ArmaBD {
 			System.out.println("Estas son todas las armas que se han introducido en la Base de Datos: ");
 			while (resultSet.next()) {
 				String nombre = resultSet.getString("nombre");
-				int poderAtaque = resultSet.getInt("poder_ataque");
-				String elementoAtaqueString = resultSet.getString("elemento_ataque");
+				int poderAtaque = resultSet.getInt("poderAtaque");
+				String elementoAtaqueString = resultSet.getString("elementoAtaque");
 				Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
-				String tipoArma = resultSet.getString("tipo_arma");
+				String tipoArma = resultSet.getString("tipoArma");
 
 				Arma arma = new Arma(nombre, poderAtaque, elementoAtaque, tipoArma);
 				armas.add(arma);
