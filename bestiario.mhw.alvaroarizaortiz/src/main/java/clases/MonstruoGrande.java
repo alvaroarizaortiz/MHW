@@ -31,7 +31,7 @@ public class MonstruoGrande extends Monstruo {
 		this.puntosDebilesMonstruo = puntosDebilesMonstruo;
 	}
 
-	public boolean isEsCapturable() {
+	public boolean getEsCapturable() {
 		return esCapturable;
 	}
 

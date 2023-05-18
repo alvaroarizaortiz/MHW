@@ -7,6 +7,7 @@ import clases.Arma;
 import clases.Mapa;
 import clases.Monstruo;
 import clases.MonstruoGrande;
+import clases.MonstruoPequeño;
 import clases.PuntoDebil;
 import enumeraciones.Elemento;
 
@@ -415,215 +416,331 @@ public class Consultas {
 		 * ", resistenciaGolpes: " + puntoDebil.getResistenciaGolpes()); }
 		 */
 //_______________________________________________________________________________________________________________________________________________________________________
-/*
-		// Crear la instancia de MonstruoGrandeBD
+		/*
+		 * // Crear la instancia de MonstruoGrandeBD MonstruoGrandeBD monstruoGrandeBD =
+		 * new MonstruoGrandeBD();
+		 * 
+		 * // Crear una lista para almacenar los objetos MonstruoGrande
+		 * List<MonstruoGrande> listaMonstruos = new ArrayList<>();
+		 * 
+		 * // Crear y agregar los objetos MonstruoGrande a la lista MonstruoGrande
+		 * Alatreon = new MonstruoGrande("Alatreon", "Dragón Anciano", 2474.69f, 52500,
+		 * 4, false, Elemento.FUEGO, Elemento.HIELO, 1); listaMonstruos.add(Alatreon);
+		 * 
+		 * MonstruoGrande Anjanath = new MonstruoGrande("Anjanath", "Wyvern Bruto",
+		 * 1700f, 18239, 1, true, Elemento.FUEGO, Elemento.AGUA, 2);
+		 * listaMonstruos.add(Anjanath);
+		 * 
+		 * MonstruoGrande Banbaro = new MonstruoGrande("Banbaro", "Wyvern Bruto", 2500f,
+		 * 16240, 5, true, Elemento.HIELO, Elemento.DRAGON, 3);
+		 * listaMonstruos.add(Banbaro);
+		 * 
+		 * MonstruoGrande Barioth = new MonstruoGrande("Barioth", "Wyvern Volador",
+		 * 2200f, 19200, 5, true, Elemento.HIELO, Elemento.FUEGO, 4);
+		 * listaMonstruos.add(Barioth);
+		 * 
+		 * MonstruoGrande Barroth = new MonstruoGrande("Barroth", "Wyvern Bruto", 2000f,
+		 * 14210, 2, true, Elemento.ELECTRICIDAD, Elemento.AGUA, 5);
+		 * listaMonstruos.add(Barroth);
+		 * 
+		 * MonstruoGrande Bazelgeuse = new MonstruoGrande("Bazelgeuse",
+		 * "Wyvern Volador", 2000f, 25600, 3, true, Elemento.FUEGO,
+		 * Elemento.ELECTRICIDAD, 6); listaMonstruos.add(Bazelgeuse);
+		 * 
+		 * MonstruoGrande Beotodus = new MonstruoGrande("Beotodus", "Wyvern Acuático",
+		 * 1700f, 12296, 5, true, Elemento.HIELO, Elemento.FUEGO, 7);
+		 * listaMonstruos.add(Beotodus);
+		 * 
+		 * MonstruoGrande Brachydios = new MonstruoGrande("Brachydios", "Wyvern Bruto",
+		 * 1700f, 19136, 4, true, Elemento.FUEGO, Elemento.HIELO, 8);
+		 * listaMonstruos.add(Brachydios);
+		 * 
+		 * MonstruoGrande Bégimo = new MonstruoGrande("Bégimo", "Dragón Anciano",
+		 * 3423.65f, 35000, 4, false, Elemento.FUEGO, Elemento.DRAGON, 9);
+		 * listaMonstruos.add(Bégimo);
+		 * 
+		 * MonstruoGrande Deviljho = new MonstruoGrande("Deviljho", "Wyvern Bruto",
+		 * 2300f, 23040, 1, true, Elemento.HIELO, Elemento.DRAGON, 10);
+		 * listaMonstruos.add(Deviljho);
+		 * 
+		 * MonstruoGrande Diablos = new MonstruoGrande("Diablos", "Wyvern Bruto", 2200f,
+		 * 20800, 2, true, Elemento.FUEGO, Elemento.HIELO, 11);
+		 * listaMonstruos.add(Diablos);
+		 * 
+		 * MonstruoGrande Dodogama = new MonstruoGrande("Dodogama", "Wyvern Colmillo",
+		 * 1500f, 17400, 4, true, Elemento.FUEGO, Elemento.ELECTRICIDAD, 12);
+		 * listaMonstruos.add(Dodogama);
+		 * 
+		 * MonstruoGrande Fatalis = new MonstruoGrande("Fatalis", "Dragón Anciano",
+		 * 4137.17f, 66000, 4, false, Elemento.AGUA, Elemento.DRAGON, 13);
+		 * listaMonstruos.add(Fatalis);
+		 * 
+		 * MonstruoGrande Glavenus = new MonstruoGrande("Glavenus", "Wyvern Bruto",
+		 * 2500f, 19200, 2, true, Elemento.FUEGO, Elemento.AGUA, 14);
+		 * listaMonstruos.add(Glavenus);
+		 * 
+		 * MonstruoGrande GranGirros = new MonstruoGrande("Gran Girros",
+		 * "Wyvern Colmillo", 1100f, 13920, 3, true, Elemento.ELECTRICIDAD,
+		 * Elemento.AGUA, 15); listaMonstruos.add(GranGirros);
+		 * 
+		 * MonstruoGrande GranJagras = new MonstruoGrande("Gran Jagras",
+		 * "Wyvern Colmillo", 1000f, 12760, 1, true, Elemento.AGUA, Elemento.FUEGO, 16);
+		 * listaMonstruos.add(GranJagras);
+		 * 
+		 * MonstruoGrande Jyuratodus = new MonstruoGrande("Jyuratodus",
+		 * "Wyvern Acuático", 1500f, 16240, 2, true, Elemento.AGUA,
+		 * Elemento.ELECTRICIDAD, 17); listaMonstruos.add(Jyuratodus);
+		 * 
+		 * MonstruoGrande Kirin = new MonstruoGrande("Kirin", "Dragón Anciano", 500f,
+		 * 21440, 6, false, Elemento.ELECTRICIDAD, Elemento.FUEGO, 18);
+		 * listaMonstruos.add(Kirin);
+		 * 
+		 * MonstruoGrande KuluYaKu = new MonstruoGrande("Kulu-Ya-Ku", "Wyvern Pájaro",
+		 * 1200f, 15370, 1, true, Elemento.FUEGO, Elemento.AGUA, 19);
+		 * listaMonstruos.add(KuluYaKu);
+		 * 
+		 * MonstruoGrande KulveTaroth = new MonstruoGrande("Kulve Taroth",
+		 * "Dragón Anciano", 4573f, 54000, 4, false, Elemento.FUEGO, Elemento.HIELO,
+		 * 20); listaMonstruos.add(KulveTaroth);
+		 * 
+		 * MonstruoGrande KushalaDaora = new MonstruoGrande("Kushala Daora",
+		 * "Dragón Anciano", 2000f, 25472, 4, false, Elemento.AGUA,
+		 * Elemento.ELECTRICIDAD, 21); listaMonstruos.add(KushalaDaora);
+		 * 
+		 * MonstruoGrande Lavasioth = new MonstruoGrande("Lavasioth", "Wyvern Acuático",
+		 * 1800f, 25600, 4, true, Elemento.FUEGO, Elemento.AGUA, 22);
+		 * listaMonstruos.add(Lavasioth);
+		 * 
+		 * MonstruoGrande Legiana = new MonstruoGrande("Legiana", "Wyvern Volador",
+		 * 1800f, 19200, 6, true, Elemento.HIELO, Elemento.ELECTRICIDAD, 23);
+		 * listaMonstruos.add(Legiana);
+		 * 
+		 * MonstruoGrande Leshen = new MonstruoGrande("Leshen", "Relicto", 633.81f,
+		 * 67500, 1, false, Elemento.AGUA, Elemento.FUEGO, 24);
+		 * listaMonstruos.add(Leshen);
+		 * 
+		 * MonstruoGrande Lunastra = new MonstruoGrande("Lunastra", "Dragón Anciano",
+		 * 2000f, 30100, 4, false, Elemento.FUEGO, Elemento.HIELO, 25);
+		 * listaMonstruos.add(Lunastra);
+		 * 
+		 * MonstruoGrande Namielle = new MonstruoGrande("Namielle", "Dragón Anciano",
+		 * 2250f, 25600, 6, false, Elemento.AGUA, Elemento.FUEGO, 26);
+		 * listaMonstruos.add(Namielle);
+		 * 
+		 * MonstruoGrande Nargacuga = new MonstruoGrande("Nargacuga", "Wyvern Volador",
+		 * 2000f, 20160, 6, true, Elemento.AGUA, Elemento.ELECTRICIDAD, 27);
+		 * listaMonstruos.add(Nargacuga);
+		 * 
+		 * MonstruoGrande Nergigante = new MonstruoGrande("Nergigante",
+		 * "Dragón Anciano", 1900f, 23680, 4, false, Elemento.DRAGON,
+		 * Elemento.ELECTRICIDAD, 28); listaMonstruos.add(Nergigante);
+		 * 
+		 * MonstruoGrande Odogaron = new MonstruoGrande("Odogaron", "Wyvern Colmillo",
+		 * 1500f, 19200, 3, true, Elemento.DRAGON, Elemento.HIELO, 29);
+		 * listaMonstruos.add(Odogaron);
+		 * 
+		 * MonstruoGrande Paolomu = new MonstruoGrande("Paolomu", "Wyvern Volador",
+		 * 1200f, 17995, 6, true, Elemento.AGUA, Elemento.FUEGO, 30);
+		 * listaMonstruos.add(Paolomu);
+		 * 
+		 * MonstruoGrande PukeiPukei = new MonstruoGrande("Pukei-Pukei",
+		 * "Wyvern Pájaro", 1100f, 17995, 6, true, Elemento.AGUA, Elemento.ELECTRICIDAD,
+		 * 31); listaMonstruos.add(PukeiPukei);
+		 * 
+		 * MonstruoGrande Radobaan = new MonstruoGrande("Radobaan", "Wyvern Bruto",
+		 * 1800f, 18300, 3, true, Elemento.FUEGO, Elemento.DRAGON, 32);
+		 * listaMonstruos.add(Radobaan);
+		 * 
+		 * MonstruoGrande Rajang = new MonstruoGrande("Rajang", "Bestia", 1000f, 40000,
+		 * 5, true, Elemento.DRAGON, Elemento.HIELO, 33); listaMonstruos.add(Rajang);
+		 * 
+		 * MonstruoGrande Rathalos = new MonstruoGrande("Rathalos", "Wyvern Volador",
+		 * 1700f, 20800, 1, true, Elemento.FUEGO, Elemento.DRAGON, 34);
+		 * listaMonstruos.add(Rathalos);
+		 * 
+		 * MonstruoGrande Rathian = new MonstruoGrande("Rathian", "Wyvern Volador",
+		 * 1700f, 18300, 1, true, Elemento.FUEGO, Elemento.DRAGON, 35);
+		 * listaMonstruos.add(Rathian);
+		 * 
+		 * MonstruoGrande Safijiva = new MonstruoGrande("Safi'jiva", "Dragón Anciano",
+		 * 4799.78f, 20000, 4, false, Elemento.FUEGO, Elemento.DRAGON, 36);
+		 * listaMonstruos.add(Safijiva);
+		 * 
+		 * MonstruoGrande SharaIshvalda = new MonstruoGrande("Shara Ishvalda",
+		 * "Dragón Anciano", 2910.91f, 37630, 4, false, Elemento.DRAGON, Elemento.HIELO,
+		 * 37); listaMonstruos.add(SharaIshvalda);
+		 * 
+		 * MonstruoGrande Teostra = new MonstruoGrande("Teostra", "Dragón Anciano",
+		 * 2000f, 27520, 4, false, Elemento.FUEGO, Elemento.AGUA, 38);
+		 * listaMonstruos.add(Teostra);
+		 * 
+		 * MonstruoGrande Tigrex = new MonstruoGrande("Tigrex", "Wyvern Volador", 2500f,
+		 * 19200, 3, true, Elemento.ELECTRICIDAD, Elemento.FUEGO, 39);
+		 * listaMonstruos.add(Tigrex);
+		 * 
+		 * MonstruoGrande TobiKadachi = new MonstruoGrande("Tobi-Kadachi",
+		 * "Wyvern Colmillo", 1200f, 16820, 1, true, Elemento.ELECTRICIDAD,
+		 * Elemento.AGUA, 40); listaMonstruos.add(TobiKadachi);
+		 * 
+		 * MonstruoGrande TzitziYaKu = new MonstruoGrande("Tzitzi-Ya-Ku",
+		 * "Wyvern Pájaro", 900f, 15370, 6, true, Elemento.DRAGON,
+		 * Elemento.ELECTRICIDAD, 41); listaMonstruos.add(TzitziYaKu);
+		 * 
+		 * MonstruoGrande Uragaan = new MonstruoGrande("Uragaan", "Wyvern Bruto", 2200f,
+		 * 27520, 4, true, Elemento.FUEGO, Elemento.AGUA, 42);
+		 * listaMonstruos.add(Uragaan);
+		 * 
+		 * MonstruoGrande VaalHazak = new MonstruoGrande("Vaal Hazak", "Dragón Anciano",
+		 * 2300f, 31070, 3, false, Elemento.AGUA, Elemento.FUEGO, 43);
+		 * listaMonstruos.add(VaalHazak);
+		 * 
+		 * MonstruoGrande Velkhana = new MonstruoGrande("Velkhana", "Dragón Anciano",
+		 * 2500f, 23040, 6, false, Elemento.HIELO, Elemento.FUEGO, 44);
+		 * listaMonstruos.add(Velkhana);
+		 * 
+		 * MonstruoGrande Xenojiiva = new MonstruoGrande("Xeno'jiiva", "Dragón Anciano",
+		 * 4509.10f, 25500, 4, false, Elemento.DRAGON, Elemento.AGUA, 45);
+		 * listaMonstruos.add(Xenojiiva);
+		 * 
+		 * MonstruoGrande YianGaruga = new MonstruoGrande("Yian Garuga",
+		 * "Wyvern Pájaro", 1500f, 24420, 3, true, Elemento.HIELO, Elemento.AGUA, 46);
+		 * listaMonstruos.add(YianGaruga);
+		 * 
+		 * MonstruoGrande Zinogre = new MonstruoGrande("Zinogre", "Wyvern Colmillo",
+		 * 1800f, 24350, 6, true, Elemento.ELECTRICIDAD, Elemento.HIELO, 47);
+		 * listaMonstruos.add(Zinogre);
+		 * 
+		 * MonstruoGrande ZorahMagdaros = new MonstruoGrande("Zorah Magdaros",
+		 * "Dragón Anciano", 25764.59f, 24240, 4, false, Elemento.FUEGO, Elemento.AGUA,
+		 * 48); listaMonstruos.add(ZorahMagdaros);
+		 * 
+		 * //Insertar en la base de datos for (MonstruoGrande monstruo : listaMonstruos)
+		 * { monstruoGrandeBD.insertarMonstruoGrande(monstruo); }
+		 * 
+		 * // Imprimir la lista de objetos for (MonstruoGrande monstruo :
+		 * listaMonstruos) { System.out.println(monstruo); }
+		 */
+
+//_______________________________________________________________________________________________________________________________________________________________________			
+
+		/*
+		 * // Instancia de monstruoPequeñoBD MonstruoPequeñoBD monstruoPequeñoBD = new
+		 * MonstruoPequeñoBD(); List<MonstruoPequeño> listaMonstruosPequeños = new
+		 * ArrayList<>(); // Crear una lista de objetos MonstruoPequeño MonstruoPequeño
+		 * Anteka = new MonstruoPequeño("Anteka", "Herbívoro", 600f, 500, 6, false,
+		 * true, 49); listaMonstruosPequeños.add(Anteka); MonstruoPequeño Apceros = new
+		 * MonstruoPequeño("Apceros", "Herbívoro", 1000f, 700, 2, false, true, 50);
+		 * listaMonstruosPequeños.add(Apceros); MonstruoPequeño Aptonoth = new
+		 * MonstruoPequeño("Aptonoth", "Herbívoro", 1000f, 700, 1, false, true, 51);
+		 * listaMonstruosPequeños.add(Aptonoth); MonstruoPequeño Barnos = new
+		 * MonstruoPequeño("Barnos", "Carnívoro", 700f, 500, 4, true, false, 52);
+		 * listaMonstruosPequeños.add(Barnos); MonstruoPequeño Boaboa = new
+		 * MonstruoPequeño("Boaboa", "Lynian", 200f, 200, 5, true, false, 53);
+		 * listaMonstruosPequeños.add(Boaboa); MonstruoPequeño Gajalaka = new
+		 * MonstruoPequeño("Gajalaka", "Lynian", 200f, 200, 4, true, false, 54);
+		 * listaMonstruosPequeños.add(Gajalaka); MonstruoPequeño Gajau = new
+		 * MonstruoPequeño("Gajau", "Carnívoro", 300f, 300, 2, true, false, 55);
+		 * listaMonstruosPequeños.add(Gajau); MonstruoPequeño Gastodon = new
+		 * MonstruoPequeño("Gastodon", "Herbívoro", 600f, 800, 4, true, true, 56);
+		 * listaMonstruosPequeños.add(Gastodon); MonstruoPequeño Girros = new
+		 * MonstruoPequeño("Girros", "Carnívoro", 500f, 500, 3, true, true, 57);
+		 * listaMonstruosPequeños.add(Girros); MonstruoPequeño Grimalkine = new
+		 * MonstruoPequeño("Grimalkine", "Lynian", 200f, 200, 1, true, false, 58);
+		 * listaMonstruosPequeños.add(Grimalkine); MonstruoPequeño Hornetaur = new
+		 * MonstruoPequeño("Hornetaur", "Carnívoro", 100f, 200, 3, true, false, 59);
+		 * listaMonstruosPequeños.add(Hornetaur); MonstruoPequeño Jagras = new
+		 * MonstruoPequeño("Jagras", "Carnívoro", 500f, 500, 1, true, true, 60);
+		 * listaMonstruosPequeños.add(Jagras); MonstruoPequeño Kelbi = new
+		 * MonstruoPequeño("Kelbi", "Herbívoro", 400f, 200, 2, false, true, 61);
+		 * listaMonstruosPequeños.add(Kelbi); MonstruoPequeño Kertos = new
+		 * MonstruoPequeño("Kertos", "Carnívoro", 700f, 500, 5, true, false, 62);
+		 * listaMonstruosPequeños.add(Kertos); MonstruoPequeño Kestodon = new
+		 * MonstruoPequeño("Kestodon", "Herbívoro", 600f, 800, 1, false, true, 63);
+		 * listaMonstruosPequeños.add(Kestodon); MonstruoPequeño Mernos = new
+		 * MonstruoPequeño("Mernos", "Carnívoro", 700f, 500, 1, true, false, 64);
+		 * listaMonstruosPequeños.add(Mernos); MonstruoPequeño Musgorrino = new
+		 * MonstruoPequeño("Musgorrino", "Herbívoro", 200f, 300, 1, false, true, 65);
+		 * listaMonstruosPequeños.add(Musgorrino); MonstruoPequeño Noios = new
+		 * MonstruoPequeño("Noios", "Carnívoro", 700f, 500, 2, true, false, 66);
+		 * listaMonstruosPequeños.add(Noios); MonstruoPequeño Popo = new
+		 * MonstruoPequeño("Popo", "Herbívoro", 1200f, 1100, 5, false, true, 67);
+		 * listaMonstruosPequeños.add(Popo); MonstruoPequeño Raphinos = new
+		 * MonstruoPequeño("Raphinos", "Carnívoro", 700f, 500, 6, true, false, 68);
+		 * listaMonstruosPequeños.add(Raphinos); MonstruoPequeño Shamos = new
+		 * MonstruoPequeño("Shamos", "Carnívoro", 500f, 500, 6, true, true, 69);
+		 * listaMonstruosPequeños.add(Shamos); MonstruoPequeño Vespoid = new
+		 * MonstruoPequeño("Vespoid", "Carnívoro", 100f, 200, 3, true, false, 70);
+		 * listaMonstruosPequeños.add(Vespoid); MonstruoPequeño Wulg = new
+		 * MonstruoPequeño("Wulg", "Carnívoro", 200f, 400, 5, true, true, 71);
+		 * listaMonstruosPequeños.add(Wulg);
+		 * 
+		 * // Insertar los monstruos pequeños en la base de datos for (MonstruoPequeño
+		 * monstruoPequeño : listaMonstruosPequeños) {
+		 * monstruoPequeñoBD.insertarMonstruoPequeño(monstruoPequeño); }
+		 */
+//_______________________________________________________________________________________________________________________________________________________________________			
+
+		/*
 		MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
+		PuntoDebilBD puntoDebilBD = new PuntoDebilBD();
+
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(1, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(2, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(3, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(4, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(5, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(6, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(7, 4);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(8, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(9, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(10, 5);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(11, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(12, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(13, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(14, 5);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(15, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(16, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(17, 4);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(18, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(19, 4);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(20, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(21, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(22, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(23, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(24, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(25, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(26, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(27, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(28, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(29, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(30, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(31, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(32, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(33, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(34, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(35, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(36, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(37, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(38, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(39, 4);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(40, 5);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(41, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(42, 4);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(43, 4);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(44, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(45, 1);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(46, 2);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(47, 3);
+		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(48, 3);
+
+		*/
 		
-		// Crear una lista para almacenar los objetos MonstruoGrande
-		List<MonstruoGrande> listaMonstruos = new ArrayList<>();
+//_______________________________________________________________________________________________________________________________________________________________________
+	
+		
+			}
+		
 
-		// Crear y agregar los objetos MonstruoGrande a la lista
-		MonstruoGrande Alatreon = new MonstruoGrande("Alatreon", "Dragón Anciano", 2474.69f, 52500, 4, false,
-				Elemento.FUEGO, Elemento.HIELO, 1);
-		listaMonstruos.add(Alatreon);
-
-		MonstruoGrande Anjanath = new MonstruoGrande("Anjanath", "Wyvern Bruto", 1700f, 18239, 1, true, Elemento.FUEGO,
-				Elemento.AGUA, 2);
-		listaMonstruos.add(Anjanath);
-
-		MonstruoGrande Banbaro = new MonstruoGrande("Banbaro", "Wyvern Bruto", 2500f, 16240, 5, true, Elemento.HIELO,
-				Elemento.DRAGON, 3);
-		listaMonstruos.add(Banbaro);
-
-		MonstruoGrande Barioth = new MonstruoGrande("Barioth", "Wyvern Volador", 2200f, 19200, 5, true, Elemento.HIELO,
-				Elemento.FUEGO, 4);
-		listaMonstruos.add(Barioth);
-
-		MonstruoGrande Barroth = new MonstruoGrande("Barroth", "Wyvern Bruto", 2000f, 14210, 2, true,
-				Elemento.ELECTRICIDAD, Elemento.AGUA, 5);
-		listaMonstruos.add(Barroth);
-
-		MonstruoGrande Bazelgeuse = new MonstruoGrande("Bazelgeuse", "Wyvern Volador", 2000f, 25600, 3, true,
-				Elemento.FUEGO, Elemento.ELECTRICIDAD, 6);
-		listaMonstruos.add(Bazelgeuse);
-
-		MonstruoGrande Beotodus = new MonstruoGrande("Beotodus", "Wyvern Acuático", 1700f, 12296, 5, true,
-				Elemento.HIELO, Elemento.FUEGO, 7);
-		listaMonstruos.add(Beotodus);
-
-		MonstruoGrande Brachydios = new MonstruoGrande("Brachydios", "Wyvern Bruto", 1700f, 19136, 4, true,
-				Elemento.FUEGO, Elemento.HIELO, 8);
-		listaMonstruos.add(Brachydios);
-
-		MonstruoGrande Bégimo = new MonstruoGrande("Bégimo", "Dragón Anciano", 3423.65f, 35000, 4, false,
-				Elemento.FUEGO, Elemento.DRAGON, 9);
-		listaMonstruos.add(Bégimo);
-
-		MonstruoGrande Deviljho = new MonstruoGrande("Deviljho", "Wyvern Bruto", 2300f, 23040, 1, true, Elemento.HIELO,
-				Elemento.DRAGON, 10);
-		listaMonstruos.add(Deviljho);
-
-		MonstruoGrande Diablos = new MonstruoGrande("Diablos", "Wyvern Bruto", 2200f, 20800, 2, true, Elemento.FUEGO,
-				Elemento.HIELO, 11);
-		listaMonstruos.add(Diablos);
-
-		MonstruoGrande Dodogama = new MonstruoGrande("Dodogama", "Wyvern Colmillo", 1500f, 17400, 4, true,
-				Elemento.FUEGO, Elemento.ELECTRICIDAD, 12);
-		listaMonstruos.add(Dodogama);
-
-		MonstruoGrande Fatalis = new MonstruoGrande("Fatalis", "Dragón Anciano", 4137.17f, 66000, 4, false,
-				Elemento.AGUA, Elemento.DRAGON, 13);
-		listaMonstruos.add(Fatalis);
-
-		MonstruoGrande Glavenus = new MonstruoGrande("Glavenus", "Wyvern Bruto", 2500f, 19200, 2, true, Elemento.FUEGO,
-				Elemento.AGUA, 14);
-		listaMonstruos.add(Glavenus);
-
-		MonstruoGrande GranGirros = new MonstruoGrande("Gran Girros", "Wyvern Colmillo", 1100f, 13920, 3, true,
-				Elemento.ELECTRICIDAD, Elemento.AGUA, 15);
-		listaMonstruos.add(GranGirros);
-
-		MonstruoGrande GranJagras = new MonstruoGrande("Gran Jagras", "Wyvern Colmillo", 1000f, 12760, 1, true,
-				Elemento.AGUA, Elemento.FUEGO, 16);
-		listaMonstruos.add(GranJagras);
-
-		MonstruoGrande Jyuratodus = new MonstruoGrande("Jyuratodus", "Wyvern Acuático", 1500f, 16240, 2, true,
-				Elemento.AGUA, Elemento.ELECTRICIDAD, 17);
-		listaMonstruos.add(Jyuratodus);
-
-		MonstruoGrande Kirin = new MonstruoGrande("Kirin", "Dragón Anciano", 500f, 21440, 6, false,
-				Elemento.ELECTRICIDAD, Elemento.FUEGO, 18);
-		listaMonstruos.add(Kirin);
-
-		MonstruoGrande KuluYaKu = new MonstruoGrande("Kulu-Ya-Ku", "Wyvern Pájaro", 1200f, 15370, 1, true,
-				Elemento.FUEGO, Elemento.AGUA, 19);
-		listaMonstruos.add(KuluYaKu);
-
-		MonstruoGrande KulveTaroth = new MonstruoGrande("Kulve Taroth", "Dragón Anciano", 4573f, 54000, 4, false,
-				Elemento.FUEGO, Elemento.HIELO, 20);
-		listaMonstruos.add(KulveTaroth);
-
-		MonstruoGrande KushalaDaora = new MonstruoGrande("Kushala Daora", "Dragón Anciano", 2000f, 25472, 4, false,
-				Elemento.AGUA, Elemento.ELECTRICIDAD, 21);
-		listaMonstruos.add(KushalaDaora);
-
-		MonstruoGrande Lavasioth = new MonstruoGrande("Lavasioth", "Wyvern Acuático", 1800f, 25600, 4, true,
-				Elemento.FUEGO, Elemento.AGUA, 22);
-		listaMonstruos.add(Lavasioth);
-
-		MonstruoGrande Legiana = new MonstruoGrande("Legiana", "Wyvern Volador", 1800f, 19200, 6, true, Elemento.HIELO,
-				Elemento.ELECTRICIDAD, 23);
-		listaMonstruos.add(Legiana);
-
-		MonstruoGrande Leshen = new MonstruoGrande("Leshen", "Relicto", 633.81f, 67500, 1, false, Elemento.AGUA,
-				Elemento.FUEGO, 24);
-		listaMonstruos.add(Leshen);
-
-		MonstruoGrande Lunastra = new MonstruoGrande("Lunastra", "Dragón Anciano", 2000f, 30100, 4, false,
-				Elemento.FUEGO, Elemento.HIELO, 25);
-		listaMonstruos.add(Lunastra);
-
-		MonstruoGrande Namielle = new MonstruoGrande("Namielle", "Dragón Anciano", 2250f, 25600, 6, false,
-				Elemento.AGUA, Elemento.FUEGO, 26);
-		listaMonstruos.add(Namielle);
-
-		MonstruoGrande Nargacuga = new MonstruoGrande("Nargacuga", "Wyvern Volador", 2000f, 20160, 6, true,
-				Elemento.AGUA, Elemento.ELECTRICIDAD, 27);
-		listaMonstruos.add(Nargacuga);
-
-		MonstruoGrande Nergigante = new MonstruoGrande("Nergigante", "Dragón Anciano", 1900f, 23680, 4, false,
-				Elemento.DRAGON, Elemento.ELECTRICIDAD, 28);
-		listaMonstruos.add(Nergigante);
-
-		MonstruoGrande Odogaron = new MonstruoGrande("Odogaron", "Wyvern Colmillo", 1500f, 19200, 3, true,
-				Elemento.DRAGON, Elemento.HIELO, 29);
-		listaMonstruos.add(Odogaron);
-
-		MonstruoGrande Paolomu = new MonstruoGrande("Paolomu", "Wyvern Volador", 1200f, 17995, 6, true, Elemento.AGUA,
-				Elemento.FUEGO, 30);
-		listaMonstruos.add(Paolomu);
-
-		MonstruoGrande PukeiPukei = new MonstruoGrande("Pukei-Pukei", "Wyvern Pájaro", 1100f, 17995, 6, true,
-				Elemento.AGUA, Elemento.ELECTRICIDAD, 31);
-		listaMonstruos.add(PukeiPukei);
-
-		MonstruoGrande Radobaan = new MonstruoGrande("Radobaan", "Wyvern Bruto", 1800f, 18300, 3, true, Elemento.FUEGO,
-				Elemento.DRAGON, 32);
-		listaMonstruos.add(Radobaan);
-
-		MonstruoGrande Rajang = new MonstruoGrande("Rajang", "Bestia", 1000f, 40000, 5, true, Elemento.DRAGON,
-				Elemento.HIELO, 33);
-		listaMonstruos.add(Rajang);
-
-		MonstruoGrande Rathalos = new MonstruoGrande("Rathalos", "Wyvern Volador", 1700f, 20800, 1, true,
-				Elemento.FUEGO, Elemento.DRAGON, 34);
-		listaMonstruos.add(Rathalos);
-
-		MonstruoGrande Rathian = new MonstruoGrande("Rathian", "Wyvern Volador", 1700f, 18300, 1, true, Elemento.FUEGO,
-				Elemento.DRAGON, 35);
-		listaMonstruos.add(Rathian);
-
-		MonstruoGrande Safijiva = new MonstruoGrande("Safi'jiva", "Dragón Anciano", 4799.78f, 20000, 4, false,
-				Elemento.FUEGO, Elemento.DRAGON, 36);
-		listaMonstruos.add(Safijiva);
-
-		MonstruoGrande SharaIshvalda = new MonstruoGrande("Shara Ishvalda", "Dragón Anciano", 2910.91f, 37630, 4, false,
-				Elemento.DRAGON, Elemento.HIELO, 37);
-		listaMonstruos.add(SharaIshvalda);
-
-		MonstruoGrande Teostra = new MonstruoGrande("Teostra", "Dragón Anciano", 2000f, 27520, 4, false, Elemento.FUEGO,
-				Elemento.AGUA, 38);
-		listaMonstruos.add(Teostra);
-
-		MonstruoGrande Tigrex = new MonstruoGrande("Tigrex", "Wyvern Volador", 2500f, 19200, 3, true,
-				Elemento.ELECTRICIDAD, Elemento.FUEGO, 39);
-		listaMonstruos.add(Tigrex);
-
-		MonstruoGrande TobiKadachi = new MonstruoGrande("Tobi-Kadachi", "Wyvern Colmillo", 1200f, 16820, 1, true,
-				Elemento.ELECTRICIDAD, Elemento.AGUA, 40);
-		listaMonstruos.add(TobiKadachi);
-
-		MonstruoGrande TzitziYaKu = new MonstruoGrande("Tzitzi-Ya-Ku", "Wyvern Pájaro", 900f, 15370, 6, true,
-				Elemento.DRAGON, Elemento.ELECTRICIDAD, 41);
-		listaMonstruos.add(TzitziYaKu);
-
-		MonstruoGrande Uragaan = new MonstruoGrande("Uragaan", "Wyvern Bruto", 2200f, 27520, 4, true, Elemento.FUEGO,
-				Elemento.AGUA, 42);
-		listaMonstruos.add(Uragaan);
-
-		MonstruoGrande VaalHazak = new MonstruoGrande("Vaal Hazak", "Dragón Anciano", 2300f, 31070, 3, false,
-				Elemento.AGUA, Elemento.FUEGO, 43);
-		listaMonstruos.add(VaalHazak);
-
-		MonstruoGrande Velkhana = new MonstruoGrande("Velkhana", "Dragón Anciano", 2500f, 23040, 6, false,
-				Elemento.HIELO, Elemento.FUEGO, 44);
-		listaMonstruos.add(Velkhana);
-
-		MonstruoGrande Xenojiiva = new MonstruoGrande("Xeno'jiiva", "Dragón Anciano", 4509.10f, 25500, 4, false,
-				Elemento.DRAGON, Elemento.AGUA, 45);
-		listaMonstruos.add(Xenojiiva);
-
-		MonstruoGrande YianGaruga = new MonstruoGrande("Yian Garuga", "Wyvern Pájaro", 1500f, 24420, 3, true,
-				Elemento.HIELO, Elemento.AGUA, 46);
-		listaMonstruos.add(YianGaruga);
-
-		MonstruoGrande Zinogre = new MonstruoGrande("Zinogre", "Wyvern Colmillo", 1800f, 24350, 6, true,
-				Elemento.ELECTRICIDAD, Elemento.HIELO, 47);
-		listaMonstruos.add(Zinogre);
-
-		MonstruoGrande ZorahMagdaros = new MonstruoGrande("Zorah Magdaros", "Dragón Anciano", 25764.59f, 24240, 4,
-				false, Elemento.FUEGO, Elemento.AGUA, 48);
-		listaMonstruos.add(ZorahMagdaros);
-
-		//Insertar en la base de datos
-		for (MonstruoGrande monstruo : listaMonstruos) {
-		    monstruoGrandeBD.insertarMonstruoGrande(monstruo);
-		}
-
-		// Imprimir la lista de objetos 
-		for (MonstruoGrande monstruo : listaMonstruos) {
-			System.out.println(monstruo);
-		}
-*/
 	}
-}
+
+

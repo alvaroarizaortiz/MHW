@@ -18,7 +18,7 @@ public class MonstruoGrandeBD {
         try (Connection conn = BDUtil.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	
-            pstmt.setBoolean(1, monstruoGrande.isEsCapturable());
+            pstmt.setBoolean(1, monstruoGrande.getEsCapturable());
             pstmt.setString(2, monstruoGrande.getResistencias() != null ? monstruoGrande.getResistencias().name() : " ");
             pstmt.setString(3, monstruoGrande.getDebilidades() != null ? monstruoGrande.getDebilidades().name() : " ");
             pstmt.setInt(4, monstruoGrande.getId_Monstruo());
@@ -77,4 +77,21 @@ public class MonstruoGrandeBD {
             System.out.println("Error al eliminar el monstruo grande de la base de datos: " + e.getMessage());
         }
     }
+    
+    public void insertarRelacionMonstruoPuntoDebil(int idMonstruoGrande, int idPuntoDebil) {
+        String sql = "INSERT INTO monstruogrande_puntodebil (id_monstruogrande, id_puntodebil) VALUES (?, ?)";
+        
+        try (Connection conn = BDUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, idMonstruoGrande);
+            pstmt.setInt(2, idPuntoDebil);
+            pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("Error al insertar la relación entre monstruo grande y punto débil: " + e.getMessage());
+        }
+    }
+    
+    
 }
