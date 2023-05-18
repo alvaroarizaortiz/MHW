@@ -6,18 +6,16 @@ import enumeraciones.Elemento;
 
 public class Monstruo extends ElementoConNombre {
 	private String especie;
-	private int puntosSalud;
 	private float tamaño;
-	private ArrayList<Mapa> localizaciones;
+	private int puntosSalud;
+	private int id_Mapa;
 
-
-	public Monstruo(String nombre, String especie, int puntosSalud, float tamaño,
-			ArrayList<Mapa> localizaciones) {
+	public Monstruo(String nombre, String especie, float tamaño, int puntosSalud, int id_Mapa) {
 		super(nombre);
 		this.especie = especie;
-		this.puntosSalud = puntosSalud;
 		this.tamaño = tamaño;
-		this.localizaciones = localizaciones;
+		this.puntosSalud = puntosSalud;
+		this.id_Mapa = id_Mapa;
 	}
 
 	public String getEspecie() {
@@ -28,14 +26,6 @@ public class Monstruo extends ElementoConNombre {
 		this.especie = especie;
 	}
 
-	public int getPuntosSalud() {
-		return puntosSalud;
-	}
-
-	public void setPuntosSalud(int puntosSalud) {
-		this.puntosSalud = puntosSalud;
-	}
-
 	public float getTamaño() {
 		return tamaño;
 	}
@@ -44,20 +34,26 @@ public class Monstruo extends ElementoConNombre {
 		this.tamaño = tamaño;
 	}
 
-	public ArrayList<Mapa> getLocalizaciones() {
-		return localizaciones;
+	public int getPuntosSalud() {
+		return puntosSalud;
 	}
 
-	public void setLocalizaciones(ArrayList<Mapa> localizaciones) {
-		this.localizaciones = localizaciones;
+	public void setPuntosSalud(int puntosSalud) {
+		this.puntosSalud = puntosSalud;
 	}
 
+	public int getId_Mapa() {
+		return id_Mapa;
+	}
+
+	public void setId_Mapa(int id_Mapa) {
+		this.id_Mapa = id_Mapa;
+	}
 
 	@Override
 	public String toString() {
-		return "Monstruo [especie=" + especie + ", puntosSalud=" + puntosSalud + ", tamaño=" + tamaño
-				+ ", localizaciones=" + localizaciones 
-				 + ", puntosDebilesMonstruo=";
+		return "Monstruo [especie=" + especie + ", puntosSalud=" + puntosSalud + ", tamaño=" + tamaño + ", id_Mapa="
+				+ id_Mapa + "]";
 	}
 
 }

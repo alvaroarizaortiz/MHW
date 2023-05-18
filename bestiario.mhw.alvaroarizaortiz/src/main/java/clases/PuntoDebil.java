@@ -10,7 +10,7 @@ public class PuntoDebil extends ElementoConNombre {
 		this.resistenciaGolpes = resistenciaGolpes;
 	}
 
-	public boolean isEsRompible() {
+	public boolean getEsRompible() {
 		return esRompible;
 	}
 

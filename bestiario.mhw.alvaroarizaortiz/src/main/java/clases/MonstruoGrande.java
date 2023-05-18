@@ -9,16 +9,19 @@ public class MonstruoGrande extends Monstruo {
 	private boolean esCapturable;
 	private Elemento resistencias;
 	private Elemento debilidades;
+	private int id_Monstruo;
 	
-	public MonstruoGrande(String nombre, String especie, int puntosSalud, float tamaño, ArrayList<Mapa> localizaciones,
-			ArrayList<PuntoDebil> puntosDebilesMonstruo, boolean esCapturable, Elemento resistencias,
-			Elemento debilidades) {
-		super(nombre, especie, puntosSalud, tamaño, localizaciones);
+	public MonstruoGrande(String nombre, String especie, float tamaño, int puntosSalud, int id_Mapa,
+			boolean esCapturable, Elemento resistencias,
+			Elemento debilidades, int id_Monstruo) {
+		super(nombre, especie, tamaño, puntosSalud, id_Mapa);
 		this.puntosDebilesMonstruo = puntosDebilesMonstruo;
 		this.esCapturable = esCapturable;
 		this.resistencias = resistencias;
 		this.debilidades = debilidades;
+		this.id_Monstruo = id_Monstruo;
 	}
+
 
 	public ArrayList<PuntoDebil> getPuntosDebilesMonstruo() {
 		return puntosDebilesMonstruo;
@@ -52,12 +55,21 @@ public class MonstruoGrande extends Monstruo {
 		this.debilidades = debilidades;
 	}
 
+	public int getId_Monstruo() {
+		return id_Monstruo;
+	}
+
+	public void setId_Monstruo(int id_Monstruo) {
+		this.id_Monstruo = id_Monstruo;
+	}
+
 	@Override
 	public String toString() {
 		return "MonstruoGrande [puntosDebilesMonstruo=" + puntosDebilesMonstruo + ", esCapturable=" + esCapturable
-				+ ", resistencias=" + resistencias + ", debilidades=" + debilidades + "]";
+				+ ", resistencias=" + resistencias + ", debilidades=" + debilidades + ", id_Monstruo=" + id_Monstruo
+				+ "]";
 	}
-	
-	
+
+
 	
 }

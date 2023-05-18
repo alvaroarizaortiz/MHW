@@ -8,7 +8,6 @@ public class Mapa extends ElementoConNombre {
 	public Mapa(String nombre) {
 		super(nombre);
 		this.monstruosPresentes = monstruosPresentes;
-
 	}
 
 	public ArrayList<Monstruo> getMonstruosPresentes() {
