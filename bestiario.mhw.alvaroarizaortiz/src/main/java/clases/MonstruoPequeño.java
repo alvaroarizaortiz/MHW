@@ -9,12 +9,13 @@ public class MonstruoPequeño extends Monstruo {
 	private boolean esCabalgable;
 	private int id_Monstruo;
 
-	public MonstruoPequeño(String nombre, String especie, float tamaño, int puntosSalud, int id_Mapa, boolean esHostil,
-			boolean esCabalgable, int id_Monstruo) {
-		super(nombre, especie, tamaño, puntosSalud, id_Mapa);
+	public MonstruoPequeño(String nombre, String especie, float tamaño, int poderAtaque, int puntosSalud, int id_Mapa,
+			boolean esHostil, boolean esCabalgable, int id_Monstruo) {
+		super(nombre, especie, tamaño, poderAtaque, puntosSalud, id_Mapa);
 		this.esHostil = esHostil;
 		this.esCabalgable = esCabalgable;
 		this.id_Monstruo = id_Monstruo;
+
 	}
 
 	public boolean isEsHostil() {

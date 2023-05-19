@@ -3,25 +3,15 @@ package clases;
 import java.util.ArrayList;
 
 public class Cazador {
-	private int defensaCazador;
 	private int saludCazador;
-	private ArrayList<Armadura> armaduraEquipada;
+	private Armadura armaduraEquipada;
 	private Arma armaEquipada;
 
-	public Cazador(int defensaCazador, int saludCazador, ArrayList<Armadura> armaduraEquipada, Arma armaEquipada) {
+	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada) {
 		super();
-		this.defensaCazador = defensaCazador;
 		this.saludCazador = saludCazador;
 		this.armaduraEquipada = armaduraEquipada;
 		this.armaEquipada = armaEquipada;
-	}
-
-	public int getDefensaCazador() {
-		return defensaCazador;
-	}
-
-	public void setDefensaCazador(int defensaCazador) {
-		this.defensaCazador = defensaCazador;
 	}
 
 	public int getSaludCazador() {
@@ -32,11 +22,11 @@ public class Cazador {
 		this.saludCazador = saludCazador;
 	}
 
-	public ArrayList<Armadura> getArmaduraEquipada() {
+	public Armadura getArmaduraEquipada() {
 		return armaduraEquipada;
 	}
 
-	public void setArmaduraEquipada(ArrayList<Armadura> armaduraEquipada) {
+	public void setArmaduraEquipada(Armadura armaduraEquipada) {
 		this.armaduraEquipada = armaduraEquipada;
 	}
 
@@ -50,8 +40,8 @@ public class Cazador {
 
 	@Override
 	public String toString() {
-		return "Cazador [defensaCazador=" + defensaCazador + ", saludCazador=" + saludCazador + ", armaduraEquipada="
-				+ armaduraEquipada + ", armaEquipada=" + armaEquipada + "]";
+		return "Cazador [saludCazador=" + saludCazador + ", armaduraEquipada=" + armaduraEquipada + ", armaEquipada="
+				+ armaEquipada + "]";
 	}
 
 }

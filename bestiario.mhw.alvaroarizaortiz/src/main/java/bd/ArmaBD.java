@@ -76,4 +76,20 @@ public class ArmaBD {
 		}
 	}
 
+	public List<String> getNombresArmas() {
+		List<String> nombresArmas = new ArrayList<>();
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT nombre FROM arma");
+				ResultSet resultSet = statement.executeQuery()) {
+
+			while (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				nombresArmas.add(nombre);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return nombresArmas;
+	}
 }

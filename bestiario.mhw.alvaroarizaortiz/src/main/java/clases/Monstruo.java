@@ -7,15 +7,18 @@ import enumeraciones.Elemento;
 public class Monstruo extends ElementoConNombre {
 	private String especie;
 	private float tamaño;
+	private int poderAtaque;
 	private int puntosSalud;
 	private int id_Mapa;
 
-	public Monstruo(String nombre, String especie, float tamaño, int puntosSalud, int id_Mapa) {
+	public Monstruo(String nombre, String especie, float tamaño, int poderAtaque, int puntosSalud, int id_Mapa) {
 		super(nombre);
 		this.especie = especie;
 		this.tamaño = tamaño;
+		this.poderAtaque = poderAtaque;
 		this.puntosSalud = puntosSalud;
 		this.id_Mapa = id_Mapa;
+
 	}
 
 	public String getEspecie() {
@@ -32,6 +35,14 @@ public class Monstruo extends ElementoConNombre {
 
 	public void setTamaño(float tamaño) {
 		this.tamaño = tamaño;
+	}
+
+	public int getPoderAtaque() {
+		return poderAtaque;
+	}
+
+	public void setPoderAtaque(int poderAtaque) {
+		this.poderAtaque = poderAtaque;
 	}
 
 	public int getPuntosSalud() {
@@ -52,8 +63,8 @@ public class Monstruo extends ElementoConNombre {
 
 	@Override
 	public String toString() {
-		return "Monstruo [especie=" + especie + ", puntosSalud=" + puntosSalud + ", tamaño=" + tamaño + ", id_Mapa="
-				+ id_Mapa + "]";
+		return "Monstruo [especie=" + especie + ", tamaño=" + tamaño + ", poderAtaque=" + poderAtaque + ", puntosSalud="
+				+ puntosSalud + ", id_Mapa=" + id_Mapa + "]";
 	}
-
+	
 }

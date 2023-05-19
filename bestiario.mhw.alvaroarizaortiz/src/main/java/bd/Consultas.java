@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import clases.Arma;
+import clases.Armadura;
 import clases.Mapa;
 import clases.Monstruo;
 import clases.MonstruoGrande;
@@ -681,66 +682,100 @@ public class Consultas {
 //_______________________________________________________________________________________________________________________________________________________________________			
 
 		/*
-		MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
-		PuntoDebilBD puntoDebilBD = new PuntoDebilBD();
+		 * MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD(); PuntoDebilBD
+		 * puntoDebilBD = new PuntoDebilBD();
+		 * 
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(1, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(2, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(3, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(4, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(5, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(6, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(7, 4);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(8, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(9, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(10, 5);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(11, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(12, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(13, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(14, 5);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(15, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(16, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(17, 4);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(18, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(19, 4);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(20, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(21, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(22, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(23, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(24, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(25, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(26, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(27, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(28, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(29, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(30, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(31, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(32, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(33, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(34, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(35, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(36, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(37, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(38, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(39, 4);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(40, 5);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(41, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(42, 4);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(43, 4);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(44, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(45, 1);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(46, 2);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(47, 3);
+		 * monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(48, 3);
+		 * 
+		 */
 
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(1, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(2, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(3, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(4, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(5, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(6, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(7, 4);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(8, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(9, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(10, 5);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(11, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(12, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(13, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(14, 5);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(15, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(16, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(17, 4);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(18, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(19, 4);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(20, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(21, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(22, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(23, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(24, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(25, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(26, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(27, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(28, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(29, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(30, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(31, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(32, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(33, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(34, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(35, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(36, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(37, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(38, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(39, 4);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(40, 5);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(41, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(42, 4);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(43, 4);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(44, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(45, 1);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(46, 2);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(47, 3);
-		monstruoGrandeBD.insertarRelacionMonstruoPuntoDebil(48, 3);
-
-		*/
-		
 //_______________________________________________________________________________________________________________________________________________________________________
-	
-		
-			}
-		
-
+		/*
+		 * // Crear instancias de Armadura Armadura ArmaduraRathalos = new
+		 * Armadura("Armadura de Rathalos", 100, Elemento.FUEGO, Elemento.DRAGON);
+		 * Armadura ArmaduraPukei = new Armadura("Armadura de Pukei", 100,
+		 * Elemento.AGUA, Elemento.ELECTRICIDAD); Armadura ArmaduraLegiana = new
+		 * Armadura("Armadura de Legiana", 100, Elemento.HIELO, Elemento.FUEGO);
+		 * Armadura ArmaduraKirin = new Armadura("Armadura de Kirin", 100,
+		 * Elemento.ELECTRICIDAD, Elemento.HIELO); Armadura ArmaduraOdogaron = new
+		 * Armadura("Armadura de Odogaron", 100, Elemento.DRAGON, Elemento.AGUA);
+		 * Armadura ArmaduraEsporea = new Armadura("Armadura Espórea", 100,
+		 * Elemento.AGUA, Elemento.DRAGON); Armadura ArmaduraKaiser = new
+		 * Armadura("Armadura de Kaiser", 100, Elemento.FUEGO, Elemento.AGUA); Armadura
+		 * ArmaduraBarioth = new Armadura("Armadura de Barioth", 100,
+		 * Elemento.ELECTRICIDAD, Elemento.FUEGO); Armadura ArmaduraLingotes = new
+		 * Armadura("Armadura de Lingotes", 100, Elemento.HIELO, Elemento.ELECTRICIDAD);
+		 * Armadura ArmaduraDiablos = new Armadura("Armadura de Diablos", 100,
+		 * Elemento.DRAGON, Elemento.HIELO);
+		 * 
+		 * // Insertar las armaduras en la base de datos ArmaduraBD armaduraBD = new
+		 * ArmaduraBD(); armaduraBD.insertArmadura(ArmaduraRathalos);
+		 * armaduraBD.insertArmadura(ArmaduraPukei);
+		 * armaduraBD.insertArmadura(ArmaduraLegiana);
+		 * armaduraBD.insertArmadura(ArmaduraKirin);
+		 * armaduraBD.insertArmadura(ArmaduraOdogaron);
+		 * armaduraBD.insertArmadura(ArmaduraEsporea);
+		 * armaduraBD.insertArmadura(ArmaduraKaiser);
+		 * armaduraBD.insertArmadura(ArmaduraBarioth);
+		 * armaduraBD.insertArmadura(ArmaduraLingotes);
+		 * armaduraBD.insertArmadura(ArmaduraDiablos);
+		 * 
+		 * // Listar todas las armaduras existentes List<Armadura> armaduras =
+		 * armaduraBD.getAllArmaduras(); for (Armadura a : armaduras) {
+		 * System.out.println("Nombre: " + a.getNombre());
+		 * System.out.println("Poder de Defensa: " + a.getPoderDefensa());
+		 * System.out.println("Resistencias de la Armadura: " +
+		 * a.getResistenciaArmadura());
+		 * System.out.println("Debilidades de la Armadura: " +
+		 * a.getDebilidadArmadura()); System.out.println("-------------------------"); }
+		 */
+//_______________________________________________________________________________________________________________________________________________________________________        
 	}
-
-
+}

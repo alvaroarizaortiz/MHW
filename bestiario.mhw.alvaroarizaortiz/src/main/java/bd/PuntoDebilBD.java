@@ -74,7 +74,7 @@ public class PuntoDebilBD {
 		       PreparedStatement pstmtInsertRelacion = conn.prepareStatement(sqlInsertRelacion)) {
 
 		    // Insertar el monstruo en la tabla monstruogrande
-		    pstmtInsertMonstruo.setBoolean(1, monstruoGrande.getEsCapturable());
+		    pstmtInsertMonstruo.setBoolean(1, monstruoGrande.isEsCapturable());
 		    pstmtInsertMonstruo.setString(2, monstruoGrande.getResistencias().name());
 		    pstmtInsertMonstruo.setString(3, monstruoGrande.getDebilidades().name());
 		    pstmtInsertMonstruo.executeUpdate();

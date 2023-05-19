@@ -27,7 +27,7 @@ public class MonstruoPequeñoBD {
 
 	public List<MonstruoPequeño> listarMonstruosPequeños() {
 		List<MonstruoPequeño> listaMonstruosPequeños = new ArrayList<>();
-		String sql = "Select t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, id_mapa, t1.eshostil, t1.escabalgable, t1.id_monstruo from monstruoPequeño as t1\r\n"
+		String sql = "Select t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, t2.id_mapa, t2.poderAtaque, t1.eshostil, t1.escabalgable, t1.id_monstruo from monstruoPequeño as t1\r\n"
 				+ "Inner Join monstruo as t2 \r\n" + "on t1.id_monstruo = t2.id;";
 
 		try (Connection conn = BDUtil.getConnection();
@@ -41,12 +41,13 @@ public class MonstruoPequeñoBD {
 				int tamaño = rs.getInt("tamaño");
 				int puntosSalud = rs.getInt("puntosSalud");
 				int id_mapa = rs.getInt("id_Mapa");
+				int poderAtaque = rs.getInt("poderAtaque");
 				boolean esHostil = rs.getBoolean("esHostil");
 				boolean esCabalgable = rs.getBoolean("esCabalgable");
 				int id_Monstruo = rs.getInt("id_Monstruo");
 
 				MonstruoPequeño monstruoPequeño = new MonstruoPequeño(nombre, especie, tamaño, puntosSalud, id_mapa,
-						esHostil, esCabalgable, id_Monstruo);
+						poderAtaque, esHostil, esCabalgable, id_Monstruo);
 				listaMonstruosPequeños.add(monstruoPequeño);
 			}
 		} catch (SQLException e) {
