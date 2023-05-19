@@ -10,7 +10,8 @@ public class Monstruo extends ElementoConNombre {
 	private int poderAtaque;
 	private int puntosSalud;
 	private int id_Mapa;
-
+	private String imagePath;
+	
 	public Monstruo(String nombre, String especie, float tamaño, int poderAtaque, int puntosSalud, int id_Mapa) {
 		super(nombre);
 		this.especie = especie;
@@ -18,8 +19,17 @@ public class Monstruo extends ElementoConNombre {
 		this.poderAtaque = poderAtaque;
 		this.puntosSalud = puntosSalud;
 		this.id_Mapa = id_Mapa;
-
 	}
+	
+	 public Monstruo(String name, String especie, float tamaño, int poderAtaque, int puntosSalud, int id_Mapa, String imagePath) {
+	        super(name);
+	        this.especie = especie;
+	        this.tamaño = tamaño;
+	        this.poderAtaque = poderAtaque;
+	        this.puntosSalud = puntosSalud;
+	        this.id_Mapa = id_Mapa;
+	        this.imagePath = imagePath; 
+	    }
 
 	public String getEspecie() {
 		return especie;
@@ -61,10 +71,20 @@ public class Monstruo extends ElementoConNombre {
 		this.id_Mapa = id_Mapa;
 	}
 
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
 	@Override
 	public String toString() {
 		return "Monstruo [especie=" + especie + ", tamaño=" + tamaño + ", poderAtaque=" + poderAtaque + ", puntosSalud="
-				+ puntosSalud + ", id_Mapa=" + id_Mapa + "]";
+				+ puntosSalud + ", id_Mapa=" + id_Mapa + ", imagePath=" + imagePath + "]";
 	}
+
+	
 	
 }

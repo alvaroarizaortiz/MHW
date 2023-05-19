@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clases.Monstruo;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -16,10 +19,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import java.awt.CardLayout;
 
 public class Bestiario extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -32,99 +34,73 @@ public class Bestiario extends JDialog {
 		super(madre, modal);
 		setTitle("BESTIARIO");
 		setBounds(100, 100, 622, 463);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		getContentPane().setLayout(new CardLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("BESTIARIO");
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		lblNewLabel.setBounds(223, 39, 137, 43);
-		contentPanel.add(lblNewLabel);
+		JPanel Monstruo = new JPanel();
+		getContentPane().add(Monstruo, "name_50281680010900");
+		Monstruo.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Especie");
-		lblNewLabel_1.setBounds(353, 151, 46, 14);
-		contentPanel.add(lblNewLabel_1);
+		JLabel lbl_Bestiario = new JLabel("BESTIARIO");
+		lbl_Bestiario.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lbl_Bestiario.setBounds(237, 39, 107, 27);
+		Monstruo.add(lbl_Bestiario);
 		
-		JLabel lblNewLabel_2 = new JLabel("Tamaño");
-		lblNewLabel_2.setBounds(353, 202, 46, 14);
-		contentPanel.add(lblNewLabel_2);
+		JLabel lbll_NombreMonstruo = new JLabel("NombreMonstruo");
+		lbll_NombreMonstruo.setBounds(54, 133, 100, 14);
+		Monstruo.add(lbll_NombreMonstruo);
 		
-		JLabel lblNewLabel_3 = new JLabel("Localización");
-		lblNewLabel_3.setBounds(353, 253, 70, 14);
-		contentPanel.add(lblNewLabel_3);
+		JLabel lbl_ImagenMonstruo = new JLabel("ImagenMonstruo");
+		lbl_ImagenMonstruo.setBounds(34, 158, 190, 171);
+		Monstruo.add(lbl_ImagenMonstruo);
 		
-		JLabel lblNewLabel_4 = new JLabel("Salud");
-		lblNewLabel_4.setBounds(353, 300, 46, 14);
-		contentPanel.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Poder");
-		lblNewLabel_5.setBounds(353, 345, 46, 14);
-		contentPanel.add(lblNewLabel_5);
+		JLabel lbl_EspecieMonstruo = new JLabel("Especie");
+		lbl_EspecieMonstruo.setBounds(298, 133, 90, 14);
+		Monstruo.add(lbl_EspecieMonstruo);
 		
-		JLabel lblNewLabel_6_1 = new JLabel("");
-		lblNewLabel_6_1.setBounds(452, 202, 46, 14);
-		contentPanel.add(lblNewLabel_6_1);
+		JLabel lbl_RespuestaEspecieMonstruo = new JLabel("Respuesta especie");
+		lbl_RespuestaEspecieMonstruo.setBounds(441, 133, 115, 14);
+		Monstruo.add(lbl_RespuestaEspecieMonstruo);
 		
-		JLabel lblNewLabel_7 = new JLabel("");
-		lblNewLabel_7.setBackground(Color.GRAY);
-		lblNewLabel_7.setBounds(469, 151, 46, 14);
-		contentPanel.add(lblNewLabel_7);
+		JLabel lbl_TamañoMonstruo = new JLabel("Tamaño");
+		lbl_TamañoMonstruo.setBounds(298, 168, 46, 14);
+		Monstruo.add(lbl_TamañoMonstruo);
 		
-		JLabel lblNewLabel_6 = new JLabel("New label");
-		lblNewLabel_6.setBackground(new Color(0, 255, 0));
-		lblNewLabel_6.setBounds(441, 151, 46, 14);
-		contentPanel.add(lblNewLabel_6);
+		JLabel lbl_RespuestaTamañoMonstruo = new JLabel("Respuesta tamaño");
+		lbl_RespuestaTamañoMonstruo.setBounds(441, 168, 46, 14);
+		Monstruo.add(lbl_RespuestaTamañoMonstruo);
 		
-		JLabel lblNewLabel_8 = new JLabel("New label");
-		lblNewLabel_8.setBounds(441, 202, 46, 14);
-		contentPanel.add(lblNewLabel_8);
+		JLabel lbl_SaludMonstruo = new JLabel("Salud");
+		lbl_SaludMonstruo.setBounds(298, 201, 46, 14);
+		Monstruo.add(lbl_SaludMonstruo);
 		
-		JLabel lblNewLabel_8_1 = new JLabel("New label");
-		lblNewLabel_8_1.setBounds(441, 253, 46, 14);
-		contentPanel.add(lblNewLabel_8_1);
+		JLabel lbl_respuestaSaludMonstruo = new JLabel("Respuesta salud");
+		lbl_respuestaSaludMonstruo.setBounds(441, 201, 46, 14);
+		Monstruo.add(lbl_respuestaSaludMonstruo);
 		
-		JLabel lblNewLabel_8_1_1 = new JLabel("New label");
-		lblNewLabel_8_1_1.setBounds(441, 300, 46, 14);
-		contentPanel.add(lblNewLabel_8_1_1);
+		JLabel lbl_AtaqueMonstruo = new JLabel("Ataque");
+		lbl_AtaqueMonstruo.setBounds(298, 226, 46, 14);
+		Monstruo.add(lbl_AtaqueMonstruo);
 		
-		JLabel lblNewLabel_8_1_1_1 = new JLabel("New label");
-		lblNewLabel_8_1_1_1.setBounds(441, 345, 46, 14);
-		contentPanel.add(lblNewLabel_8_1_1_1);
+		JLabel lbl_RespuestaAtaqueMonstruo = new JLabel("Respuesta ataque");
+		lbl_RespuestaAtaqueMonstruo.setBounds(441, 226, 46, 14);
+		Monstruo.add(lbl_RespuestaAtaqueMonstruo);
 		
-		JLabel lblNewLabel_9 = new JLabel("New label");
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_9.setBounds(52, 117, 142, 25);
-		contentPanel.add(lblNewLabel_9);
+		JLabel lbl_LocalizacionMonstruo = new JLabel("Localización");
+		lbl_LocalizacionMonstruo.setBounds(298, 251, 46, 14);
+		Monstruo.add(lbl_LocalizacionMonstruo);
 		
-		JLabel lblNewLabel_10 = new JLabel("New label");
-		lblNewLabel_10.setBounds(52, 174, 184, 173);
-		ImageIcon icono = new ImageIcon(getClass().getResource("/images/alatreon.png"));
-		Image imagen = icono.getImage();
-		Image imagenEscalada = imagen.getScaledInstance(lblNewLabel_10.getWidth(), lblNewLabel_10.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon imagenEscalada2 = new ImageIcon(imagenEscalada);
-		lblNewLabel_10.setIcon(imagenEscalada2);
+		JLabel lbl_RespuestaLocalizacionMonstruo = new JLabel("Respuesta localizacion");
+		lbl_RespuestaLocalizacionMonstruo.setBounds(441, 251, 46, 14);
+		Monstruo.add(lbl_RespuestaLocalizacionMonstruo);
 		
-		contentPanel.add(lblNewLabel_10);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("PATRAS");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("PALANTE");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		JButton btn_Siguiente = new JButton("Siguiente");
+		btn_Siguiente.setBounds(337, 365, 89, 23);
+		Monstruo.add(btn_Siguiente);
+		
+		JButton btn_Anterior = new JButton("Anterior");
+		btn_Anterior.setBounds(171, 365, 89, 23);
+		Monstruo.add(btn_Anterior);
+		
 	}
 }
