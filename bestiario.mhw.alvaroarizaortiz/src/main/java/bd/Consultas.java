@@ -1,6 +1,6 @@
 package bd;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import clases.Arma;
@@ -9,7 +9,7 @@ import clases.Mapa;
 import clases.Monstruo;
 import clases.MonstruoGrande;
 import clases.MonstruoPequeño;
-import clases.PuntoDebil;
+
 import enumeraciones.Elemento;
 
 public class Consultas {
