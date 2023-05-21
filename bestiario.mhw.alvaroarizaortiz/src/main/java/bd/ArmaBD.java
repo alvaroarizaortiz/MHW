@@ -16,12 +16,14 @@ public class ArmaBD {
 	public void insertArma(Arma arma) {
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement statement = conn.prepareStatement(
-						"INSERT INTO arma (nombre, poderAtaque, elementoAtaque, tipoArma) VALUES (?, ?, ?, ?)")) {
+						"INSERT INTO arma (nombre, poderAtaque, elementoAtaque, tipoArma, imagen, descripcion) VALUES (?, ?, ?, ?, ?, ?)")) {
 
 			statement.setString(1, arma.getNombre());
 			statement.setInt(2, arma.getPoderAtaque());
 			statement.setString(3, arma.getElementoAtaque().name());
 			statement.setString(4, arma.getTipoArma());
+			statement.setString(5, arma.getImagePath());
+			statement.setString(6, arma.getDescripcion());
 
 			int rowsAffected = statement.executeUpdate();
 			if (rowsAffected > 0) {
@@ -48,8 +50,10 @@ public class ArmaBD {
 				String elementoAtaqueString = resultSet.getString("elementoAtaque");
 				Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
 				String tipoArma = resultSet.getString("tipoArma");
+				String imagen = resultSet.getString("imagen");
+				String descripcion = resultSet.getString("descripcion");
 
-				Arma arma = new Arma(nombre, poderAtaque, elementoAtaque, tipoArma);
+				Arma arma = new Arma(nombre, tipoArma, poderAtaque, elementoAtaque, imagen, descripcion);
 				armas.add(arma);
 			}
 		} catch (SQLException e) {
@@ -92,4 +96,32 @@ public class ArmaBD {
 
 		return nombresArmas;
 	}
+	
+	public Arma getArmaPorNombre(String nombreArma) {
+	    Arma arma = null;
+	    try (Connection conn = BDUtil.getConnection();
+	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM arma WHERE nombre = ?")) {
+
+	        statement.setString(1, nombreArma);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {
+	            String nombre = resultSet.getString("nombre");
+	            int poderAtaque = resultSet.getInt("poderAtaque");
+	            String elementoAtaqueString = resultSet.getString("elementoAtaque");
+	            Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
+	            String tipoArma = resultSet.getString("tipoArma");
+	            String imagen = resultSet.getString("imagen");
+	            String descripcion = resultSet.getString("descripcion");
+
+	            arma = new Arma(nombre, tipoArma, poderAtaque, elementoAtaque, imagen, descripcion);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return arma;
+	}
+
+
 }

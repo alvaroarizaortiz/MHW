@@ -40,7 +40,12 @@ public class MainInterface extends JFrame {
 	 */
 	public MainInterface() {
 		Bestiario bestiario = new Bestiario(this, true);
-		
+		bestiario.setVisible(false);
+		BestiarioPequeño bestiariopequeño = new BestiarioPequeño(this, true);
+		bestiariopequeño.setVisible(false);
+		ArmaArmadura armaarmadura = new ArmaArmadura(this, true);
+		armaarmadura.setVisible(false);
+
 		setTitle("Bestiario de Monster Hunter World");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -49,48 +54,39 @@ public class MainInterface extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-	
-		JButton btnNewButton = new JButton("Bestiario");
-		btnNewButton.addActionListener(new ActionListener() {
+
+		JButton btn_BestiarioMonstruosGrandes = new JButton("Bestiario de Monstruos Grandes");
+		btn_BestiarioMonstruosGrandes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			bestiario.setVisible(true);	
+				bestiario.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(152, 122, 89, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Peleitas");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btn_BestiarioMonstruosGrandes.setBounds(129, 92, 191, 83);
+		contentPane.add(btn_BestiarioMonstruosGrandes);
+
+		JButton btn_BestiarioMonstruosPequeños = new JButton("Bestiario de Monstruos Pequeños");
+		btn_BestiarioMonstruosPequeños.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				bestiariopequeño.setVisible(true);
 			}
 		});
-		btnNewButton_1.setBounds(491, 122, 89, 23);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Armas y armaduras");
-		btnNewButton_2.setBounds(152, 313, 172, 23);
-		contentPane.add(btnNewButton_2);
-		
+		btn_BestiarioMonstruosPequeños.setBounds(129, 289, 180, 83);
+		contentPane.add(btn_BestiarioMonstruosPequeños);
+
+		JButton btn_ArmaArmadura = new JButton("Armas y armaduras");
+		btn_ArmaArmadura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				armaarmadura.setVisible(true);
+			}
+		});
+
+		btn_ArmaArmadura.setBounds(472, 92, 172, 116);
+		contentPane.add(btn_ArmaArmadura);
+
 		JButton btnNewButton_3 = new JButton("Salir del programuzo");
 		btnNewButton_3.setBounds(491, 313, 155, 23);
 		contentPane.add(btnNewButton_3);
-		
-		// JCOMBOBOX DE ARMAS NO PERDER
-		/*JComboBox comboBox = new JComboBox();
-		comboBox.setToolTipText("Armas");
-		comboBox.setBounds(194, 118, 165, 20);
-		ArmaBD armaBD = new ArmaBD();
-		List<String> todasLasArmas = armaBD.getNombresArmas();
-		for (int i=0; i < todasLasArmas.size(); i++) {
-			comboBox.addItem(todasLasArmas.get(i));
-		}
-		
-		contentPane.add(comboBox);
-		
-		JLabel lblNewLabel = new JLabel("Armas");
-		lblNewLabel.setBounds(252, 93, 46, 14);
-		contentPane.add(lblNewLabel);
-		*/
+
+	
 	}
 }

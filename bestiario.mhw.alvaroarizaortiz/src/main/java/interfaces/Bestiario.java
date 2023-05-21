@@ -28,12 +28,12 @@ import java.awt.CardLayout;
 public class Bestiario extends JDialog {
 	MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
 	List<MonstruoGrande> monstruos = monstruoGrandeBD.listarMonstruosGrandes();
+
 	private int indexMonstruo = 0;
 	private JLabel lbl_NombreMonstruo;
 	private JLabel lbl_ImagenMonstruo;
 	private JLabel lbl_RespuestaEspecieMonstruo;
 	private JLabel lbl_RespuestaTamañoMonstruo;
-	private JLabel lbl_RespuestaSaludMonstruo;
 	private JLabel lbl_RespuestaAtaqueMonstruo;
 	private JLabel lbl_respuestaSaludMonstruo;
 	private JLabel lbl_RespuestaLocalizacionMonstruo;
@@ -41,32 +41,25 @@ public class Bestiario extends JDialog {
 	private JLabel lbl_RespuestaResistenciaMonstruo;
 	private JLabel lbl_RepuestaDebilidadMonstruo;
 	private JLabel lbl_RespuestaPuntoDebilMonstruo;
-	
-	 public void mostrarMonstruo(MonstruoGrande monstruo) {
-		 	String rutaImagen = "/images/" + monstruo.getImagePath();
-		 	URL urlImagen = getClass().getResource(rutaImagen);
-		 	ImageIcon imageIcon = new ImageIcon(new ImageIcon(urlImagen).getImage().getScaledInstance(190, 171, Image.SCALE_DEFAULT));
-		    lbl_ImagenMonstruo.setIcon(imageIcon);
-	        lbl_NombreMonstruo.setText(monstruo.getNombre());
-	        lbl_RespuestaEspecieMonstruo.setText(monstruo.getEspecie());
-	        lbl_RespuestaTamañoMonstruo.setText(String.valueOf(monstruo.getTamaño()));
-	        lbl_respuestaSaludMonstruo.setText(String.valueOf(monstruo.getPuntosSalud()));
-	        lbl_RespuestaAtaqueMonstruo.setText(String.valueOf(monstruo.getPoderAtaque()));
-	        lbl_RespuestaLocalizacionMonstruo.setText(String.valueOf(monstruo.getId_Mapa()));
-	        lbl_RespuestaCapturaMonstruo.setText(monstruo.isEsCapturable() ? "Sí" : "No");
-	        lbl_RespuestaResistenciaMonstruo.setText(monstruo.getResistencias().toString());
-	        lbl_RepuestaDebilidadMonstruo.setText(monstruo.getDebilidades().toString());
-	        lbl_RespuestaPuntoDebilMonstruo.setText(monstruo.getPuntoDebil());
-	 }
 
-	/**
-	 * Launch the application.
-	 */
+	public void mostrarMonstruo(MonstruoGrande monstruo) {
+		String rutaImagen = "/images/" + monstruo.getImagePath();
+		URL urlImagen = getClass().getResource(rutaImagen);
+		ImageIcon imageIcon = new ImageIcon(
+				new ImageIcon(urlImagen).getImage().getScaledInstance(190, 171, Image.SCALE_DEFAULT));
+		lbl_ImagenMonstruo.setIcon(imageIcon);
+		lbl_NombreMonstruo.setText(monstruo.getNombre());
+		lbl_RespuestaEspecieMonstruo.setText(monstruo.getEspecie());
+		lbl_RespuestaTamañoMonstruo.setText(String.valueOf(monstruo.getTamaño()));
+		lbl_respuestaSaludMonstruo.setText(String.valueOf(monstruo.getPuntosSalud()));
+		lbl_RespuestaAtaqueMonstruo.setText(String.valueOf(monstruo.getPoderAtaque()));
+		lbl_RespuestaLocalizacionMonstruo.setText(String.valueOf(monstruo.getNombreMapa()));
+		lbl_RespuestaCapturaMonstruo.setText(monstruo.isEsCapturable() ? "Sí" : "No");
+		lbl_RespuestaResistenciaMonstruo.setText(monstruo.getResistencias().toString());
+		lbl_RepuestaDebilidadMonstruo.setText(monstruo.getDebilidades().toString());
+		lbl_RespuestaPuntoDebilMonstruo.setText(monstruo.getPuntoDebil());
+	}
 
-	/**
-	 * Create the dialog.
-	 */
-	    
 	public Bestiario(MainInterface madre, boolean modal) {
 		super(madre, modal);
 		setTitle("BESTIARIO");
@@ -163,16 +156,16 @@ public class Bestiario extends JDialog {
 		Monstruo.add(lbl_RespuestaPuntoDebilMonstruo);
 
 		if (!monstruos.isEmpty()) {
-		    mostrarMonstruo(monstruos.get(indexMonstruo));
+			mostrarMonstruo(monstruos.get(indexMonstruo));
 		}
-		  
+
 		JButton btn_Anterior = new JButton("Anterior");
 		btn_Anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if (indexMonstruo > 0) {
-	                    indexMonstruo--;
-	                    mostrarMonstruo(monstruos.get(indexMonstruo));
-	                }
+				if (indexMonstruo > 0) {
+					indexMonstruo--;
+					mostrarMonstruo(monstruos.get(indexMonstruo));
+				}
 			}
 		});
 		btn_Anterior.setBounds(166, 465, 89, 23);
@@ -181,17 +174,16 @@ public class Bestiario extends JDialog {
 		JButton btn_Siguiente = new JButton("Siguiente");
 		btn_Siguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if (indexMonstruo < monstruos.size() - 1) {
-	                    indexMonstruo++;
-	                    mostrarMonstruo(monstruos.get(indexMonstruo));
-	                }
+				if (indexMonstruo < monstruos.size() - 1) {
+					indexMonstruo++;
+					mostrarMonstruo(monstruos.get(indexMonstruo));
+				}
 			}
 		});
+
 		btn_Siguiente.setBounds(452, 465, 89, 23);
 		Monstruo.add(btn_Siguiente);
-		
-		
+
 	}
-	
-	
+
 }

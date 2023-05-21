@@ -13,61 +13,63 @@ import utils.BDUtil;
 
 public class MonstruoBD {
 
-	 public void insertarMonstruo(Monstruo monstruo, int id_mapa) {
-	        String sql = "INSERT INTO Monstruo(nombre, especie, tamaño, puntosSalud, id_mapa, poderAtaque) VALUES (?, ?, ?, ?, ?, ?)";
-	        
-	        try (Connection conn = BDUtil.getConnection();
-	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	            
-	            pstmt.setString(1, monstruo.getNombre());
-	            pstmt.setString(2, monstruo.getEspecie());
-	            pstmt.setFloat(3, monstruo.getTamaño());
-	            pstmt.setInt(4, monstruo.getPuntosSalud());
-	            pstmt.setInt(5, id_mapa);
-	            pstmt.setInt(6, monstruo.getPoderAtaque());
-	            pstmt.executeUpdate();
-	            
-	        } catch (SQLException e) {
-	            System.out.println(e.getMessage());
-	        }
-	}
-	
-	 public List<Monstruo> listarMonstruos() {
-		    List<Monstruo> listaMonstruos = new ArrayList<>();
-		    String sql = "SELECT * FROM Monstruo";
+	public void insertarMonstruo(Monstruo monstruo, int id_mapa) {
+		String sql = "INSERT INTO Monstruo(nombre, especie, tamaño, puntosSalud, poderAtaque, id_mapa, imagen ) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-		    try (Connection conn = BDUtil.getConnection();
-		         PreparedStatement pstmt = conn.prepareStatement(sql);
-		         ResultSet rs = pstmt.executeQuery()) {
+		try (Connection conn = BDUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-		        while (rs.next()) {
-		            String nombre = rs.getString("nombre");
-		            String especie = rs.getString("especie");
-		            int tamaño = rs.getInt("tamaño");
-		            int puntosSalud = rs.getInt("puntosSalud");
-		            int id_mapa = rs.getInt("id_mapa");
-		            int poderAtaque = rs.getInt("poderataque");
-		            Monstruo monstruo = new Monstruo(nombre, especie, tamaño, puntosSalud, id_mapa, poderAtaque);
-		            listaMonstruos.add(monstruo);
-		        }
+			pstmt.setString(1, monstruo.getNombre());
+			pstmt.setString(2, monstruo.getEspecie());
+			pstmt.setFloat(3, monstruo.getTamaño());
+			pstmt.setInt(4, monstruo.getPuntosSalud());
+			pstmt.setInt(5, monstruo.getPoderAtaque());
+			pstmt.setInt(6, id_mapa);
+			pstmt.setString(7, monstruo.getImagePath());
 
-		    } catch (SQLException e) {
-		        System.out.println(e.getMessage());
-		    }
-		    return listaMonstruos;
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
-
-	    public void eliminarMonstruo(int id) {
-	        String sql = "DELETE FROM Monstruo WHERE id = ?";
-	        
-	        try (Connection conn = BDUtil.getConnection();
-	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	            
-	            pstmt.setInt(1, id);
-	            pstmt.executeUpdate();
-	            
-	        } catch (SQLException e) {
-	            System.out.println(e.getMessage());
-	        }
-	    }
 	}
+
+	public List<Monstruo> listarMonstruos() {
+		List<Monstruo> listaMonstruos = new ArrayList<>();
+		String sql = "SELECT * FROM Monstruo";
+
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+
+			while (rs.next()) {
+				String nombre = rs.getString("nombre");
+				String especie = rs.getString("especie");
+				int tamaño = rs.getInt("tamaño");
+				int puntosSalud = rs.getInt("puntosSalud");
+				int poderAtaque = rs.getInt("poderataque");
+				String nombreMapa = rs.getString("nombre_mapa");
+				String imagePath = rs.getString("imagen");
+				Monstruo monstruo = new Monstruo(nombre, especie, tamaño, puntosSalud, poderAtaque, nombreMapa,
+						imagePath);
+				listaMonstruos.add(monstruo);
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return listaMonstruos;
+	}
+
+	public void eliminarMonstruo(int id) {
+		String sql = "DELETE FROM Monstruo WHERE id = ?";
+
+		try (Connection conn = BDUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+}
