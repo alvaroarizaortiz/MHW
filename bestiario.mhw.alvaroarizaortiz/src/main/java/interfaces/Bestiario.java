@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.CardLayout;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 public class Bestiario extends JDialog {
 	MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
@@ -41,12 +43,13 @@ public class Bestiario extends JDialog {
 	private JLabel lbl_RespuestaResistenciaMonstruo;
 	private JLabel lbl_RepuestaDebilidadMonstruo;
 	private JLabel lbl_RespuestaPuntoDebilMonstruo;
+	private JTextArea textArea_DescripcionMonstruo;
 
 	public void mostrarMonstruo(MonstruoGrande monstruo) {
 		String rutaImagen = "/images/" + monstruo.getImagePath();
 		URL urlImagen = getClass().getResource(rutaImagen);
 		ImageIcon imageIcon = new ImageIcon(
-				new ImageIcon(urlImagen).getImage().getScaledInstance(190, 171, Image.SCALE_DEFAULT));
+				new ImageIcon(urlImagen).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
 		lbl_ImagenMonstruo.setIcon(imageIcon);
 		lbl_NombreMonstruo.setText(monstruo.getNombre());
 		lbl_RespuestaEspecieMonstruo.setText(monstruo.getEspecie());
@@ -58,12 +61,13 @@ public class Bestiario extends JDialog {
 		lbl_RespuestaResistenciaMonstruo.setText(monstruo.getResistencias().toString());
 		lbl_RepuestaDebilidadMonstruo.setText(monstruo.getDebilidades().toString());
 		lbl_RespuestaPuntoDebilMonstruo.setText(monstruo.getPuntoDebil());
+		textArea_DescripcionMonstruo.setText(monstruo.getDescripcion());
 	}
 
 	public Bestiario(MainInterface madre, boolean modal) {
 		super(madre, modal);
 		setTitle("BESTIARIO");
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 1000, 1000);
 		getContentPane().setLayout(new CardLayout(0, 0));
 
 		JPanel Monstruo = new JPanel();
@@ -79,8 +83,8 @@ public class Bestiario extends JDialog {
 		lbl_NombreMonstruo.setBounds(83, 133, 100, 14);
 		Monstruo.add(lbl_NombreMonstruo);
 
-		lbl_ImagenMonstruo = new JLabel("ImagenMonstruo");
-		lbl_ImagenMonstruo.setBounds(32, 202, 190, 171);
+		lbl_ImagenMonstruo = new JLabel("");
+		lbl_ImagenMonstruo.setBounds(261, 516, 400, 400);
 		Monstruo.add(lbl_ImagenMonstruo);
 
 		JLabel lbl_EspecieMonstruo = new JLabel("Especie");
@@ -155,6 +159,14 @@ public class Bestiario extends JDialog {
 		lbl_RespuestaPuntoDebilMonstruo.setBounds(441, 376, 100, 14);
 		Monstruo.add(lbl_RespuestaPuntoDebilMonstruo);
 
+		textArea_DescripcionMonstruo = new JTextArea();
+		textArea_DescripcionMonstruo.setBackground(Color.LIGHT_GRAY);
+		textArea_DescripcionMonstruo.setLineWrap(true);
+		textArea_DescripcionMonstruo.setWrapStyleWord(true);
+		textArea_DescripcionMonstruo.setEditable(false);
+		textArea_DescripcionMonstruo.setBounds(635, 133, 287, 224);
+		Monstruo.add(textArea_DescripcionMonstruo);
+
 		if (!monstruos.isEmpty()) {
 			mostrarMonstruo(monstruos.get(indexMonstruo));
 		}
@@ -183,7 +195,5 @@ public class Bestiario extends JDialog {
 
 		btn_Siguiente.setBounds(452, 465, 89, 23);
 		Monstruo.add(btn_Siguiente);
-
 	}
-
 }

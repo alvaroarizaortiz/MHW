@@ -32,11 +32,9 @@ public class MonstruoGrandeBD {
 
 	public List<MonstruoGrande> listarMonstruosGrandes() {
 		List<MonstruoGrande> listaMonstruosGrandes = new ArrayList<>();
-		String sql = "SELECT t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, m.nombre AS nombre_mapa, t2.poderAtaque, t2.imagen, t1.escapturable, t1.resistencias, t1.debilidades, t1.id_monstruo, t1.puntoDebil " +
-                "FROM monstruoGrande AS t1 " +
-                "INNER JOIN monstruo AS t2 ON t1.id_monstruo = t2.id " +
-                "INNER JOIN mapa AS m ON t2.id_mapa = m.id " +
-                "ORDER BY t2.nombre;";
+		String sql = "SELECT t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, m.nombre AS nombre_mapa, t2.poderAtaque, t2.imagen, t2.descripcion, t1.escapturable, t1.resistencias, t1.debilidades, t1.id_monstruo, t1.puntoDebil "
+				+ "FROM monstruoGrande AS t1 " + "INNER JOIN monstruo AS t2 ON t1.id_monstruo = t2.id "
+				+ "INNER JOIN mapa AS m ON t2.id_mapa = m.id " + "ORDER BY t2.nombre;";
 
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -50,6 +48,7 @@ public class MonstruoGrandeBD {
 				int puntosSalud = rs.getInt("puntossalud");
 				String nombreMapa = rs.getString("nombre_mapa");
 				String imagePath = rs.getString("imagen");
+				String descripcion = rs.getString("descripcion");
 				String puntoDebil = rs.getString("puntoDebil");
 				boolean esCapturable = rs.getBoolean("escapturable");
 
@@ -61,8 +60,9 @@ public class MonstruoGrandeBD {
 
 				int id_Monstruo = rs.getInt("id_monstruo");
 
-				MonstruoGrande monstruo = new MonstruoGrande(name, especie, tamaño, poderAtaque, puntosSalud, nombreMapa,
-						imagePath, puntoDebil, esCapturable, resistencias, debilidades, id_Monstruo);
+				MonstruoGrande monstruo = new MonstruoGrande(name, especie, tamaño, poderAtaque, puntosSalud,
+						nombreMapa, imagePath, descripcion, puntoDebil, esCapturable, resistencias, debilidades,
+						id_Monstruo);
 				listaMonstruosGrandes.add(monstruo);
 			}
 		} catch (SQLException e) {

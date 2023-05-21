@@ -11,9 +11,9 @@ public class MonstruoGrande extends Monstruo {
 	private Elemento debilidades;
 	private int id_Monstruo;
 	public MonstruoGrande(String nombre, String especie, int tamaño, int poderAtaque, int puntosSalud,
-			String nombreMapa, String imagePath, String puntoDebil, boolean esCapturable, Elemento resistencias,
+			String nombreMapa, String imagePath, String descripcion, String puntoDebil, boolean esCapturable, Elemento resistencias,
 			Elemento debilidades, int id_Monstruo) {
-		super(nombre, especie, tamaño, poderAtaque, puntosSalud, nombreMapa, imagePath);
+		super(nombre, especie, tamaño, poderAtaque, puntosSalud, nombreMapa, imagePath, descripcion);
 		this.puntoDebil = puntoDebil;
 		this.esCapturable = esCapturable;
 		this.resistencias = resistencias;

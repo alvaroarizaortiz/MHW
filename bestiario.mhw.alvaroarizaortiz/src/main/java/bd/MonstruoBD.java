@@ -14,7 +14,7 @@ import utils.BDUtil;
 public class MonstruoBD {
 
 	public void insertarMonstruo(Monstruo monstruo, int id_mapa) {
-		String sql = "INSERT INTO Monstruo(nombre, especie, tamaño, puntosSalud, poderAtaque, id_mapa, imagen ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO Monstruo(nombre, especie, tamaño, puntosSalud, poderAtaque, id_mapa, imagen ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection conn = BDUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -25,6 +25,7 @@ public class MonstruoBD {
 			pstmt.setInt(5, monstruo.getPoderAtaque());
 			pstmt.setInt(6, id_mapa);
 			pstmt.setString(7, monstruo.getImagePath());
+			pstmt.setString(8, monstruo.getDescripcion());
 
 			pstmt.executeUpdate();
 
@@ -49,8 +50,9 @@ public class MonstruoBD {
 				int poderAtaque = rs.getInt("poderataque");
 				String nombreMapa = rs.getString("nombre_mapa");
 				String imagePath = rs.getString("imagen");
+				String descripcion = rs.getString("descripcion");
 				Monstruo monstruo = new Monstruo(nombre, especie, tamaño, puntosSalud, poderAtaque, nombreMapa,
-						imagePath);
+						imagePath, descripcion);
 				listaMonstruos.add(monstruo);
 			}
 

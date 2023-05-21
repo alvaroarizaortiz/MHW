@@ -27,7 +27,7 @@ public class MonstruoPequeñoBD {
 
 	public List<MonstruoPequeño> listarMonstruosPequeños() {
 		List<MonstruoPequeño> listaMonstruosPequeños = new ArrayList<>();
-		String sql = "SELECT t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, m.nombre AS nombre_mapa, t2.poderAtaque, t2.imagen, t1.esHostil, t1.esCabalgable, t1.id_monstruo " +
+		String sql = "SELECT t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, m.nombre AS nombre_mapa, t2.poderAtaque, t2.imagen, t2.descripcion, t1.esHostil, t1.esCabalgable, t1.id_monstruo " +
                 "FROM monstruoPequeño AS t1 " +
                 "INNER JOIN monstruo AS t2 ON t1.id_monstruo = t2.id " +
                 "INNER JOIN mapa AS m ON t2.id_mapa = m.id " +
@@ -46,12 +46,13 @@ public class MonstruoPequeñoBD {
 				int poderAtaque = rs.getInt("poderAtaque");
 				String nombreMapa = rs.getString("nombre_mapa");
 				String imagePath = rs.getString("imagen");
+				String descripcion = rs.getString("descripcion");
 				boolean esHostil = rs.getBoolean("esHostil");
 				boolean esCabalgable = rs.getBoolean("esCabalgable");
 				int id_Monstruo = rs.getInt("id_Monstruo");
 
 				MonstruoPequeño monstruoPequeño = new MonstruoPequeño(nombre, especie, tamaño, puntosSalud, 
-						poderAtaque, nombreMapa, imagePath, esHostil, esCabalgable, id_Monstruo);
+						poderAtaque, nombreMapa, imagePath, descripcion, esHostil, esCabalgable, id_Monstruo);
 				listaMonstruosPequeños.add(monstruoPequeño);
 			}
 		} catch (SQLException e) {

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import clases.Arma;
 import clases.Armadura;
 import enumeraciones.Elemento;
 import utils.BDUtil;
@@ -53,7 +54,8 @@ public class ArmaduraBD {
 				String imagen = resultSet.getString("imagen");
 				String descripcion = resultSet.getString("descripcion");
 
-				Armadura armadura = new Armadura(nombre, poderDefensa, resistenciaArmadura, debilidadArmadura, imagen, descripcion);
+				Armadura armadura = new Armadura(nombre, poderDefensa, resistenciaArmadura, debilidadArmadura, imagen,
+						descripcion);
 				armaduras.add(armadura);
 			}
 		} catch (SQLException e) {
@@ -96,4 +98,32 @@ public class ArmaduraBD {
 
 		return nombresArmaduras;
 	}
+
+	public Armadura getArmaduraPorNombre(String nombreArmadura) {
+		Armadura armadura = null;
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT * FROM armadura WHERE nombre = ?")) {
+
+			statement.setString(1, nombreArmadura);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				int poderDefensa = resultSet.getInt("poderDefensa");
+				String resistenciaArmaduraString = resultSet.getString("resistenciaArmadura");
+				Elemento resistenciaArmadura = Elemento.valueOf(resistenciaArmaduraString);
+				String debilidadArmaduraString = resultSet.getString("debilidadArmadura");
+				Elemento debilidadArmadura = Elemento.valueOf(debilidadArmaduraString);
+				String imagen = resultSet.getString("imagen");
+				String descripcion = resultSet.getString("descripcion");
+				armadura = new Armadura(nombre, poderDefensa, resistenciaArmadura, debilidadArmadura, imagen,
+						descripcion);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return armadura;
+	}
+
 }
