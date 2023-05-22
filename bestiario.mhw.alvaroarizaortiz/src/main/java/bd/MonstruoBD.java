@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import clases.Arma;
 import clases.Mapa;
 import clases.Monstruo;
+import enumeraciones.Elemento;
 import utils.BDUtil;
 
 public class MonstruoBD {
@@ -73,5 +75,22 @@ public class MonstruoBD {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public List<String> getNombresMonstruos() {
+		List<String> nombresMonstruos = new ArrayList<>();
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT nombre FROM monstruo");
+				ResultSet resultSet = statement.executeQuery()) {
+
+			while (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				nombresMonstruos.add(nombre);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return nombresMonstruos;
 	}
 }

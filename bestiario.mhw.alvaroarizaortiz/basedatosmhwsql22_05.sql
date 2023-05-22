@@ -92,7 +92,7 @@ CREATE TABLE `cazador` (
   KEY `idArma` (`idArma`),
   CONSTRAINT `cazador_ibfk_1` FOREIGN KEY (`idArma`) REFERENCES `arma` (`id`),
   CONSTRAINT `fk_cazador_armadura` FOREIGN KEY (`idArmadura`) REFERENCES `armadura` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `cazador` (
 
 LOCK TABLES `cazador` WRITE;
 /*!40000 ALTER TABLE `cazador` DISABLE KEYS */;
-INSERT INTO `cazador` VALUES (1,4,1,5000),(2,8,3,5000),(3,12,5,5000),(4,16,7,5000),(5,22,9,5000);
+INSERT INTO `cazador` VALUES (7,4,3,5000),(8,4,7,5000),(9,5,3,5000);
 /*!40000 ALTER TABLE `cazador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `combate` (
   `turno` int(11) NOT NULL,
   `idCazador` int(11) DEFAULT NULL,
   `idMonstruo` int(11) DEFAULT NULL,
-  `ganador` tinyint(1) NOT NULL,
+  `ganador` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idCazador` (`idCazador`),
   KEY `idMonstruo` (`idMonstruo`),
@@ -257,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-21 20:18:58
+-- Dump completed on 2023-05-22 19:55:30

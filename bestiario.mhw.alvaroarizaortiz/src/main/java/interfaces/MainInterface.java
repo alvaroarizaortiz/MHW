@@ -18,6 +18,10 @@ import java.awt.event.ActionEvent;
 public class MainInterface extends JFrame {
 
 	private JPanel contentPane;
+	private Bestiario bestiario;
+	private BestiarioPequeño bestiariopequeño;
+	private ArmaArmadura armaarmadura;
+	private CombateInterface combate;
 
 	/**
 	 * Launch the application.
@@ -39,12 +43,14 @@ public class MainInterface extends JFrame {
 	 * Create the frame.
 	 */
 	public MainInterface() {
-		Bestiario bestiario = new Bestiario(this, true);
+		bestiario = new Bestiario(this, true);
 		bestiario.setVisible(false);
-		BestiarioPequeño bestiariopequeño = new BestiarioPequeño(this, true);
+		bestiariopequeño = new BestiarioPequeño(this, true);
 		bestiariopequeño.setVisible(false);
-		ArmaArmadura armaarmadura = new ArmaArmadura(this, true);
+		armaarmadura = new ArmaArmadura(this, true);
 		armaarmadura.setVisible(false);
+		combate = new CombateInterface(this, true);
+		combate.setVisible(false);
 
 		setTitle("Bestiario de Monster Hunter World");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +67,7 @@ public class MainInterface extends JFrame {
 				bestiario.setVisible(true);
 			}
 		});
-		btn_BestiarioMonstruosGrandes.setBounds(129, 92, 191, 83);
+		btn_BestiarioMonstruosGrandes.setBounds(172, 59, 191, 83);
 		contentPane.add(btn_BestiarioMonstruosGrandes);
 
 		JButton btn_BestiarioMonstruosPequeños = new JButton("Bestiario de Monstruos Pequeños");
@@ -70,7 +76,7 @@ public class MainInterface extends JFrame {
 				bestiariopequeño.setVisible(true);
 			}
 		});
-		btn_BestiarioMonstruosPequeños.setBounds(129, 289, 180, 83);
+		btn_BestiarioMonstruosPequeños.setBounds(28, 186, 180, 83);
 		contentPane.add(btn_BestiarioMonstruosPequeños);
 
 		JButton btn_ArmaArmadura = new JButton("Armas y armaduras");
@@ -80,13 +86,20 @@ public class MainInterface extends JFrame {
 			}
 		});
 
-		btn_ArmaArmadura.setBounds(472, 92, 172, 116);
+		btn_ArmaArmadura.setBounds(524, 42, 172, 116);
 		contentPane.add(btn_ArmaArmadura);
 
-		JButton btnNewButton_3 = new JButton("Salir del programuzo");
-		btnNewButton_3.setBounds(491, 313, 155, 23);
-		contentPane.add(btnNewButton_3);
-
-	
+		JButton btn_SalirPrograma = new JButton("Salir del programuzo");
+		btn_SalirPrograma.setBounds(561, 497, 155, 23);
+		contentPane.add(btn_SalirPrograma);
+		
+		JButton btn_Combate = new JButton("Combate");
+		btn_Combate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				combate.setVisible(true);
+			}
+		});
+		btn_Combate.setBounds(319, 221, 220, 105);
+		contentPane.add(btn_Combate);
 	}
 }

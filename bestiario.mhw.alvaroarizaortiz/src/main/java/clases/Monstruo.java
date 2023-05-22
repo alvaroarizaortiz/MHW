@@ -23,6 +23,15 @@ public class Monstruo extends ElementoConNombre {
 		this.imagePath = imagePath;
 		this.descripcion = descripcion;
 	}
+	
+	public Monstruo(String nombre, int poderAtaque, int puntosSalud, String imagePath) {
+		super(nombre);
+		this.poderAtaque = poderAtaque;
+		this.puntosSalud = puntosSalud;
+		this.imagePath = imagePath;
+	}
+
+
 	public String getEspecie() {
 		return especie;
 	}

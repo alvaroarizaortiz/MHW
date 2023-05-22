@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import clases.Monstruo;
 import clases.MonstruoGrande;
 import enumeraciones.Elemento;
 import utils.BDUtil;
@@ -84,4 +85,43 @@ public class MonstruoGrandeBD {
 		}
 	}
 
+	public Monstruo getMonstruoPorNombre(String nombreMonstruo) {
+		Monstruo monstruo = null;
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo WHERE nombre = ?")) {
+
+			statement.setString(1, nombreMonstruo);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				int puntosSalud = resultSet.getInt("puntosSalud");
+				int poderAtaque = resultSet.getInt("poderataque");
+				String imagePath = resultSet.getString("imagen");
+
+				monstruo = new Monstruo(nombre, puntosSalud, poderAtaque, imagePath);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return monstruo;
+	}
+	
+	public List<String> getNombresMonstruos() {
+		List<String> nombresMonstruos = new ArrayList<>();
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT nombre FROM monstruo");
+				ResultSet resultSet = statement.executeQuery()) {
+
+			while (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				nombresMonstruos.add(nombre);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return nombresMonstruos;
+	}
 }

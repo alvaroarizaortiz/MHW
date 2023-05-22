@@ -1,12 +1,19 @@
 package clases;
 
-import java.util.ArrayList;
-
 public class Cazador {
 	private int saludCazador;
 	private Armadura armaduraEquipada;
 	private Arma armaEquipada;
+	private int id;
 
+	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada, int id) {
+		super();
+		this.saludCazador = saludCazador;
+		this.armaduraEquipada = armaduraEquipada;
+		this.armaEquipada = armaEquipada;
+		this.id = id;
+	}
+	
 	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada) {
 		super();
 		this.saludCazador = saludCazador;
@@ -38,10 +45,18 @@ public class Cazador {
 		this.armaEquipada = armaEquipada;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Cazador [saludCazador=" + saludCazador + ", armaduraEquipada=" + armaduraEquipada + ", armaEquipada="
-				+ armaEquipada + "]";
+				+ armaEquipada + ", id=" + id + "]";
 	}
 
 }
