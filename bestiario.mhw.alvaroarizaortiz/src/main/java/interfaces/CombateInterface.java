@@ -21,7 +21,6 @@ import clases.Armadura;
 import clases.Cazador;
 import clases.Monstruo;
 import clases.MonstruoGrande;
-import clases.Combate;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -30,9 +29,11 @@ import java.net.URL;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 public class CombateInterface extends JDialog {
 	// AQUÍ ARRIBA ESTÁN TODAS LAS INSTANCIAS Y VARIABLES DECLARADAS.
+	private PantallaCombate pantallacombate;
 	private final JPanel contentPanel = new JPanel();
 	MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
 	private ArmaBD armaBD = new ArmaBD();
@@ -58,8 +59,11 @@ public class CombateInterface extends JDialog {
 	private JLabel lbl_RespuestaresistenciaArmadura;
 	private JLabel lbl_RespuestadebilidadArmadura;
 	private JLabel lbl_ArmaduraImagen;
+	private JTextField textField_RespuestaNombreCazador;
 
 	public CombateInterface(MainInterface madre, boolean modal) {
+		pantallacombate = new PantallaCombate();
+		pantallacombate.setVisible(false);
 		setBounds(100, 100, 1000, 1000);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -125,7 +129,7 @@ public class CombateInterface extends JDialog {
 		panel_Cazador.add(lbl_RespuestaelementoataqueArma);
 
 		lbl_ArmaImagen = new JLabel();
-		lbl_ArmaImagen.setBounds(368, 349, 171, 173);
+		lbl_ArmaImagen.setBounds(383, 313, 171, 173);
 		panel_Cazador.add(lbl_ArmaImagen);
 
 		JLabel lbl_PoderDefensaArmadura = new JLabel("Poder de defensa");
@@ -166,11 +170,12 @@ public class CombateInterface extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				String nombreArmaSeleccionada = (String) comboBox_Armas.getSelectedItem();
 				String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
+				String nombreCazador = textField_RespuestaNombreCazador.getText();
 
 				Arma arma = armaBD.getArmaPorNombre(nombreArmaSeleccionada);
 				Armadura armadura = armaduraBD.getArmaduraPorNombre(nombreArmaduraSeleccionada);
 
-				Cazador cazador = new Cazador(5000, armadura, arma);
+				Cazador cazador = new Cazador(5000, armadura, arma, nombreCazador);
 				CazadorBD cazadorBD = new CazadorBD();
 				cazadorBD.insertCazador(cazador);
 
@@ -288,13 +293,32 @@ public class CombateInterface extends JDialog {
 		JButton btn_Combate = new JButton("A LA BATALLA");
 		btn_Combate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Combate combate = new Combate(cazador, monstruo);
+				pantallacombate.setVisible(true);
 			}
 		});
 		btn_Combate.setBounds(424, 643, 151, 48);
 		contentPanel.add(btn_Combate);
 
-		// ESTA ES LA ÚNICA FORMA REAL QUE HE DESCUBIERTO DE HACER QUE LOS COMBOBOX EMPIECEN INICIALIZADOS.
+		JComboBox comboBox_CargarCazador = new JComboBox();
+		CazadorBD cazadorBD = new CazadorBD();
+		List<Cazador> cazadores = cazadorBD.getAllCazadores();
+		for (Cazador cazador : cazadores) {
+			comboBox_CargarCazador.addItem(cazador);
+		}
+		comboBox_CargarCazador.setBounds(25, 45, 406, 22);
+		panel_Cazador.add(comboBox_CargarCazador);
+
+		JLabel lbl_NombreCazador = new JLabel("New label");
+		lbl_NombreCazador.setBounds(41, 336, 46, 14);
+		panel_Cazador.add(lbl_NombreCazador);
+
+		textField_RespuestaNombreCazador = new JTextField();
+		textField_RespuestaNombreCazador.setBounds(158, 333, 108, 20);
+		panel_Cazador.add(textField_RespuestaNombreCazador);
+		textField_RespuestaNombreCazador.setColumns(10);
+
+		// ESTA ES LA ÚNICA FORMA REAL QUE HE DESCUBIERTO DE HACER QUE LOS COMBOBOX
+		// EMPIECEN INICIALIZADOS.
 		// PONER LOS CONSTRUCTORES AL FINAL SIN LA ETIQUETA DEL COMBOBOX.
 
 		String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
@@ -336,6 +360,6 @@ public class CombateInterface extends JDialog {
 			lbl_ArmaImagen.setIcon(icon);
 
 		}
-	}
 
+	}
 }

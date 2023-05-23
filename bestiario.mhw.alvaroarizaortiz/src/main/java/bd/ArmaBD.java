@@ -123,5 +123,30 @@ public class ArmaBD {
 	    return arma;
 	}
 
+	public Arma getArmaPorId(int idArma) {
+	    Arma arma = null;
+	    try (Connection conn = BDUtil.getConnection();
+	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM arma WHERE id = ?")) {
+
+	        statement.setInt(1, idArma);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {
+	            String nombre = resultSet.getString("nombre");
+	            int poderAtaque = resultSet.getInt("poderAtaque");
+	            String elementoAtaqueString = resultSet.getString("elementoAtaque");
+	            Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
+	            String tipoArma = resultSet.getString("tipoArma");
+	            String imagen = resultSet.getString("imagen");
+	            String descripcion = resultSet.getString("descripcion");
+
+	            arma = new Arma(nombre, tipoArma, poderAtaque, elementoAtaque, imagen, descripcion);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return arma;
+	}
 
 }

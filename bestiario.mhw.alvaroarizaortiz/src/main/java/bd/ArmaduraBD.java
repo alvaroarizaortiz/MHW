@@ -125,5 +125,32 @@ public class ArmaduraBD {
 
 		return armadura;
 	}
+	
+	public Armadura getArmaduraPorID(int idArmadura) {
+		Armadura armadura = null;
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT * FROM armadura WHERE id = ?")) {
+
+			statement.setInt(1, idArmadura);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				int poderDefensa = resultSet.getInt("poderDefensa");
+				String resistenciaArmaduraString = resultSet.getString("resistenciaArmadura");
+				Elemento resistenciaArmadura = Elemento.valueOf(resistenciaArmaduraString);
+				String debilidadArmaduraString = resultSet.getString("debilidadArmadura");
+				Elemento debilidadArmadura = Elemento.valueOf(debilidadArmaduraString);
+				String imagen = resultSet.getString("imagen");
+				String descripcion = resultSet.getString("descripcion");
+				armadura = new Armadura(nombre, poderDefensa, resistenciaArmadura, debilidadArmadura, imagen,
+						descripcion);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return armadura;
+	}
 
 }

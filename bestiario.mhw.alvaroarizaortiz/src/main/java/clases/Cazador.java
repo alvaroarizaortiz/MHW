@@ -5,7 +5,9 @@ public class Cazador {
 	private Armadura armaduraEquipada;
 	private Arma armaEquipada;
 	private int id;
+	private String nombre;
 
+	
 	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada, int id) {
 		super();
 		this.saludCazador = saludCazador;
@@ -13,12 +15,20 @@ public class Cazador {
 		this.armaEquipada = armaEquipada;
 		this.id = id;
 	}
-	
+
 	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada) {
 		super();
 		this.saludCazador = saludCazador;
 		this.armaduraEquipada = armaduraEquipada;
 		this.armaEquipada = armaEquipada;
+	}
+
+	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada, String nombre) {
+		super();
+		this.saludCazador = saludCazador;
+		this.armaduraEquipada = armaduraEquipada;
+		this.armaEquipada = armaEquipada;
+		this.nombre = nombre;
 	}
 
 	public int getSaludCazador() {
@@ -53,10 +63,17 @@ public class Cazador {
 		this.id = id;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	@Override
 	public String toString() {
-		return "Cazador [saludCazador=" + saludCazador + ", armaduraEquipada=" + armaduraEquipada + ", armaEquipada="
-				+ armaEquipada + ", id=" + id + "]";
+		 return String.format(" %s | Salud: %d |  %s |  %s", nombre, saludCazador, armaduraEquipada.getNombre(), armaEquipada.getNombre());
 	}
 
 }
