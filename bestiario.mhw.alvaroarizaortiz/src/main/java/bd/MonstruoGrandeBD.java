@@ -88,7 +88,7 @@ public class MonstruoGrandeBD {
 	public Monstruo getMonstruoPorNombre(String nombreMonstruo) {
 		Monstruo monstruo = null;
 		try (Connection conn = BDUtil.getConnection();
-				PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo WHERE nombre = ?")) {
+				PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruoWHERE nombre = ?")) {
 
 			statement.setString(1, nombreMonstruo);
 			ResultSet resultSet = statement.executeQuery();
@@ -107,6 +107,34 @@ public class MonstruoGrandeBD {
 
 		return monstruo;
 	}
+	
+	public MonstruoGrande getMonstruoGrandePorNombre(String nombre) {
+	    Monstruo monstruo = null;
+	    try (Connection conn = BDUtil.getConnection();
+	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo WHERE nombre = ?")) {
+
+	        statement.setString(1, nombre);
+	        ResultSet resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {
+	            String nombreMonstruo = resultSet.getString("nombre");
+	            int puntosSalud = resultSet.getInt("puntosSalud");
+	            int poderAtaque = resultSet.getInt("poderAtaque");
+	            String imagePath = resultSet.getString("imagen");
+
+	            monstruo = new Monstruo(nombreMonstruo, puntosSalud, poderAtaque, imagePath);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    if (monstruo != null) {
+	        return new MonstruoGrande(monstruo.getNombre(), monstruo.getPuntosSalud(), monstruo.getPoderAtaque(), monstruo.getImagePath());
+	    } else {
+	        return null;
+	    }
+	}
+	 
 	
 	public List<String> getNombresMonstruos() {
 		List<String> nombresMonstruos = new ArrayList<>();

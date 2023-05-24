@@ -39,15 +39,13 @@ public class CombateInterface extends JDialog {
 	private ArmaBD armaBD = new ArmaBD();
 	private ArmaduraBD armaduraBD = new ArmaduraBD();
 	List<MonstruoGrande> monstruos = monstruoGrandeBD.listarMonstruosGrandes();
-	Cazador cazador;
-	Monstruo monstruo;
-	private Cazador combatienteCazador;
-	private Monstruo combatienteMonstruo;
+	private Cazador cazador;
+	private MonstruoGrande monstruoGrande;
 
 	// LAS JLABEL, COMBOBOX, BOTONES QUE SON NECESARIOS DECLARAR ARRIBA. LAS QUE NO
 	// INTERACTUAN CON LA BASE DE DATOS NO ESTÁN AQUÍ YA QUE NO ES NECESARIO.
-	private JComboBox comboBox_Armas;
-	private JComboBox comboBox_Armaduras;
+	private JComboBox<String> comboBox_Armas;
+	private JComboBox<String> comboBox_Armaduras;
 	private JLabel lbl_ImagenMonstruo;
 	private JLabel lbl_RespuestaAtaqueMonstruo;
 	private JLabel lbl_respuestaSaludMonstruo;
@@ -62,7 +60,7 @@ public class CombateInterface extends JDialog {
 	private JTextField textField_RespuestaNombreCazador;
 
 	public CombateInterface(MainInterface madre, boolean modal) {
-		pantallacombate = new PantallaCombate();
+		pantallacombate = new PantallaCombate(cazador, monstruoGrande);
 		pantallacombate.setVisible(false);
 		setBounds(100, 100, 1000, 1000);
 		getContentPane().setLayout(new BorderLayout());
@@ -183,7 +181,7 @@ public class CombateInterface extends JDialog {
 		});
 
 		// COMBOBOX DE ARMAS PARA PODER ELEGIR EL ARMA DEL INVENTARIO PARA EL CAZADOR.
-		comboBox_Armas = new JComboBox();
+		comboBox_Armas = new JComboBox<String>();
 		List<String> nombresArmas = armaBD.getNombresArmas();
 		for (String nombre : nombresArmas) {
 			comboBox_Armas.addItem(nombre);
@@ -215,7 +213,7 @@ public class CombateInterface extends JDialog {
 
 		// COMBOBOX DE ARMADURAS PARA PODER ELEGIR LA ARMADURA DEL INVENTARIO PARA EL
 		// CAZADOR.
-		comboBox_Armaduras = new JComboBox();
+		comboBox_Armaduras = new JComboBox<String>();
 		List<String> nombresArmaduras = armaduraBD.getNombresArmaduras();
 		for (String nombre : nombresArmaduras) {
 			comboBox_Armaduras.addItem(nombre);
@@ -245,10 +243,12 @@ public class CombateInterface extends JDialog {
 		comboBox_Armaduras.setBounds(159, 78, 166, 22);
 		panel_Cazador.add(comboBox_Armaduras);
 
-		JComboBox comboBox_Monstruo = new JComboBox();
-		List<String> nombresMonstruos = monstruoGrandeBD.getNombresMonstruos();
-		for (String nombre : nombresMonstruos) {
-			comboBox_Monstruo.addItem(nombre);
+		JComboBox<String> comboBox_Monstruo = new JComboBox<>();
+		List<MonstruoGrande> monstruosGrandes = monstruoGrandeBD.listarMonstruosGrandes();
+
+		for (MonstruoGrande monstruoGrande : monstruosGrandes) {
+			String nombreMonstruo = monstruoGrande.getNombre();
+			comboBox_Monstruo.addItem(nombreMonstruo);
 		}
 
 		comboBox_Monstruo.setBounds(704, 111, 189, 22);
@@ -257,14 +257,25 @@ public class CombateInterface extends JDialog {
 		comboBox_Monstruo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
-				monstruo = monstruoGrandeBD.getMonstruoPorNombre(nombreMonstruoSeleccionado);
-				String rutaImagen = "/images/" + monstruo.getImagePath();
-				URL urlImagen = getClass().getResource(rutaImagen);
-				ImageIcon imageIcon = new ImageIcon(
-						new ImageIcon(urlImagen).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
-				lbl_respuestaSaludMonstruo.setText(String.valueOf(monstruo.getPuntosSalud()));
-				lbl_RespuestaAtaqueMonstruo.setText(String.valueOf(monstruo.getPoderAtaque()));
-				lbl_ImagenMonstruo.setIcon(imageIcon);
+				MonstruoGrande monstruoGrandeSeleccionado = null;
+
+				for (MonstruoGrande monstruoGrande : monstruosGrandes) {
+					if (monstruoGrande.getNombre().equals(nombreMonstruoSeleccionado)) {
+						monstruoGrandeSeleccionado = monstruoGrande;
+						break;
+					}
+				}
+
+				if (monstruoGrandeSeleccionado != null) {
+
+					String rutaImagen = "/images/" + monstruoGrandeSeleccionado.getImagePath();
+					URL urlImagen = getClass().getResource(rutaImagen);
+					ImageIcon imageIcon = new ImageIcon(
+							new ImageIcon(urlImagen).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
+					lbl_respuestaSaludMonstruo.setText(String.valueOf(monstruoGrandeSeleccionado.getPuntosSalud()));
+					lbl_RespuestaAtaqueMonstruo.setText(String.valueOf(monstruoGrandeSeleccionado.getPoderAtaque()));
+					lbl_ImagenMonstruo.setIcon(imageIcon);
+				}
 			}
 		});
 
@@ -293,18 +304,39 @@ public class CombateInterface extends JDialog {
 		JButton btn_Combate = new JButton("A LA BATALLA");
 		btn_Combate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				String nombreArmaSeleccionada = (String) comboBox_Armas.getSelectedItem();
+				String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
+				String nombreCazador = textField_RespuestaNombreCazador.getText();
+
+				Arma arma = armaBD.getArmaPorNombre(nombreArmaSeleccionada);
+				Armadura armadura = armaduraBD.getArmaduraPorNombre(nombreArmaduraSeleccionada);
+
+				cazador = new Cazador(5000, armadura, arma, nombreCazador);
+
+				String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
+				monstruoGrande = monstruoGrandeBD.getMonstruoGrandePorNombre(nombreMonstruoSeleccionado);
+
+				pantallacombate = new PantallaCombate(cazador, monstruoGrande);
 				pantallacombate.setVisible(true);
 			}
 		});
 		btn_Combate.setBounds(424, 643, 151, 48);
 		contentPanel.add(btn_Combate);
 
-		JComboBox comboBox_CargarCazador = new JComboBox();
+		JComboBox<Cazador> comboBox_CargarCazador = new JComboBox<Cazador>();
+		comboBox_CargarCazador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
 		CazadorBD cazadorBD = new CazadorBD();
 		List<Cazador> cazadores = cazadorBD.getAllCazadores();
+		comboBox_CargarCazador.removeAllItems();
 		for (Cazador cazador : cazadores) {
 			comboBox_CargarCazador.addItem(cazador);
 		}
+		
 		comboBox_CargarCazador.setBounds(25, 45, 406, 22);
 		panel_Cazador.add(comboBox_CargarCazador);
 
@@ -326,7 +358,6 @@ public class CombateInterface extends JDialog {
 		lbl_Respuestapoderdefensarmadura.setText(String.valueOf(armadura.getPoderDefensa()));
 		lbl_RespuestaresistenciaArmadura.setText(armadura.getResistenciaArmadura().toString());
 		lbl_RespuestadebilidadArmadura.setText(armadura.getDebilidadArmadura().toString());
-
 		URL location1 = this.getClass().getResource("/images/" + armadura.getImagePath());
 		if (location1 != null) {
 			ImageIcon icon = new ImageIcon(location1);
@@ -337,14 +368,25 @@ public class CombateInterface extends JDialog {
 		}
 
 		String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
-		Monstruo monstruo = monstruoGrandeBD.getMonstruoPorNombre(nombreMonstruoSeleccionado);
-		String rutaImagen = "/images/" + monstruo.getImagePath();
-		URL urlImagen = getClass().getResource(rutaImagen);
-		ImageIcon imageIcon = new ImageIcon(
-				new ImageIcon(urlImagen).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
-		lbl_respuestaSaludMonstruo.setText(String.valueOf(monstruo.getPuntosSalud()));
-		lbl_RespuestaAtaqueMonstruo.setText(String.valueOf(monstruo.getPoderAtaque()));
-		lbl_ImagenMonstruo.setIcon(imageIcon);
+		MonstruoGrande monstruoGrandeSeleccionado = null;
+
+		for (MonstruoGrande monstruoGrande : monstruosGrandes) {
+			if (monstruoGrande.getNombre().equals(nombreMonstruoSeleccionado)) {
+				monstruoGrandeSeleccionado = monstruoGrande;
+				break;
+			}
+		}
+
+		if (monstruoGrandeSeleccionado != null) {
+
+			String rutaImagen = "/images/" + monstruoGrandeSeleccionado.getImagePath();
+			URL urlImagen = getClass().getResource(rutaImagen);
+			ImageIcon imageIcon = new ImageIcon(
+					new ImageIcon(urlImagen).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
+			lbl_respuestaSaludMonstruo.setText(String.valueOf(monstruoGrandeSeleccionado.getPuntosSalud()));
+			lbl_RespuestaAtaqueMonstruo.setText(String.valueOf(monstruoGrandeSeleccionado.getPoderAtaque()));
+			lbl_ImagenMonstruo.setIcon(imageIcon);
+		}
 
 		String nombreArmaSeleccionada = (String) comboBox_Armas.getSelectedItem();
 		Arma arma = armaBD.getArmaPorNombre(nombreArmaSeleccionada);
