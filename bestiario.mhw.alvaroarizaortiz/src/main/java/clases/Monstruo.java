@@ -12,6 +12,7 @@ public class Monstruo extends ElementoConNombre {
 	private String nombreMapa;
 	private String imagePath;
 	private String descripcion;
+	
 	public Monstruo(String nombre, String especie, int tamaño, int poderAtaque, int puntosSalud, String nombreMapa,
 			String imagePath, String descripcion) {
 		super(nombre);

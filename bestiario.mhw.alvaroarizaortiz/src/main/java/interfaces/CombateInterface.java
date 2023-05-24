@@ -46,6 +46,7 @@ public class CombateInterface extends JDialog {
 	// INTERACTUAN CON LA BASE DE DATOS NO ESTÁN AQUÍ YA QUE NO ES NECESARIO.
 	private JComboBox<String> comboBox_Armas;
 	private JComboBox<String> comboBox_Armaduras;
+	private JComboBox<Cazador> comboBox_CargarCazador;
 	private JLabel lbl_ImagenMonstruo;
 	private JLabel lbl_RespuestaAtaqueMonstruo;
 	private JLabel lbl_respuestaSaludMonstruo;
@@ -176,7 +177,12 @@ public class CombateInterface extends JDialog {
 				Cazador cazador = new Cazador(5000, armadura, arma, nombreCazador);
 				CazadorBD cazadorBD = new CazadorBD();
 				cazadorBD.insertCazador(cazador);
-
+				
+				comboBox_CargarCazador.removeAllItems();
+				List<Cazador> cazadores = cazadorBD.getAllCazadores();
+				for (Cazador cazadorbox : cazadores) {
+					comboBox_CargarCazador.addItem(cazadorbox);
+				}
 			}
 		});
 
@@ -267,7 +273,9 @@ public class CombateInterface extends JDialog {
 				}
 
 				if (monstruoGrandeSeleccionado != null) {
-
+					 System.out.println("Monstruo seleccionado: " + monstruoGrandeSeleccionado.getNombre());
+			            System.out.println("Salud del monstruo: " + monstruoGrandeSeleccionado.getPuntosSaludActual());
+			        
 					String rutaImagen = "/images/" + monstruoGrandeSeleccionado.getImagePath();
 					URL urlImagen = getClass().getResource(rutaImagen);
 					ImageIcon imageIcon = new ImageIcon(
@@ -303,28 +311,32 @@ public class CombateInterface extends JDialog {
 
 		JButton btn_Combate = new JButton("A LA BATALLA");
 		btn_Combate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		    public void actionPerformed(ActionEvent e) {
+		        // Obtener el monstruo seleccionado del JComboBox
+		        String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
+		        monstruoGrande = monstruoGrandeBD.getMonstruoGrandePorNombre(nombreMonstruoSeleccionado);
+		        System.out.println("Salud del monstruo antes de la batalla: " + monstruoGrande.getPuntosSaludActual());
+		        
+		        // Verificar si se ha seleccionado un cazador
+		        cazador = (Cazador) comboBox_CargarCazador.getSelectedItem();
+		        if (cazador == null) {
+		            System.out.println("No se ha especificado un cazador");
+		            return;
+		        }
+		        
+		        // Reiniciar los turnos del cazador cada combate
+		        cazador.resetearTurnos();
+		        // Crear la instancia de PantallaCombate y mostrarla
+		        pantallacombate = new PantallaCombate(cazador, monstruoGrande);
+		        pantallacombate.setVisible(true);
+		        
 
-				String nombreArmaSeleccionada = (String) comboBox_Armas.getSelectedItem();
-				String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
-				String nombreCazador = textField_RespuestaNombreCazador.getText();
-
-				Arma arma = armaBD.getArmaPorNombre(nombreArmaSeleccionada);
-				Armadura armadura = armaduraBD.getArmaduraPorNombre(nombreArmaduraSeleccionada);
-
-				cazador = new Cazador(5000, armadura, arma, nombreCazador);
-
-				String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
-				monstruoGrande = monstruoGrandeBD.getMonstruoGrandePorNombre(nombreMonstruoSeleccionado);
-
-				pantallacombate = new PantallaCombate(cazador, monstruoGrande);
-				pantallacombate.setVisible(true);
-			}
+		    }
 		});
 		btn_Combate.setBounds(424, 643, 151, 48);
 		contentPanel.add(btn_Combate);
 
-		JComboBox<Cazador> comboBox_CargarCazador = new JComboBox<Cazador>();
+		comboBox_CargarCazador = new JComboBox<Cazador>();
 		comboBox_CargarCazador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -336,7 +348,7 @@ public class CombateInterface extends JDialog {
 		for (Cazador cazador : cazadores) {
 			comboBox_CargarCazador.addItem(cazador);
 		}
-		
+
 		comboBox_CargarCazador.setBounds(25, 45, 406, 22);
 		panel_Cazador.add(comboBox_CargarCazador);
 

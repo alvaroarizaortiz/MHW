@@ -98,7 +98,7 @@ public class MonstruoGrandeBD {
 				int puntosSalud = resultSet.getInt("puntosSalud");
 				int poderAtaque = resultSet.getInt("poderataque");
 				String imagePath = resultSet.getString("imagen");
-
+				
 				monstruo = new Monstruo(nombre, puntosSalud, poderAtaque, imagePath);
 			}
 		} catch (SQLException e) {
@@ -109,9 +109,14 @@ public class MonstruoGrandeBD {
 	}
 	
 	public MonstruoGrande getMonstruoGrandePorNombre(String nombre) {
-	    Monstruo monstruo = null;
+	    MonstruoGrande monstruo = null;
 	    try (Connection conn = BDUtil.getConnection();
-	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo WHERE nombre = ?")) {
+	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo as t1 "
+	         		+ "INNER JOIN monstruogrande as t2 "
+	         		+ "ON t1.id = t2.id_monstruo "
+	         		+ "WHERE t1.nombre = ? ;")) {
+	    	
+	    	
 
 	        statement.setString(1, nombre);
 	        ResultSet resultSet = statement.executeQuery();
@@ -121,15 +126,21 @@ public class MonstruoGrandeBD {
 	            int puntosSalud = resultSet.getInt("puntosSalud");
 	            int poderAtaque = resultSet.getInt("poderAtaque");
 	            String imagePath = resultSet.getString("imagen");
+	            String debilidades = resultSet.getString("debilidades");
+				Elemento debilidadElemento = Elemento.valueOf(debilidades);
+				String resistencias = resultSet.getString("resistencias");
+				Elemento resistenciaElemento = Elemento.valueOf(resistencias);
 
-	            monstruo = new Monstruo(nombreMonstruo, puntosSalud, poderAtaque, imagePath);
+	            
+            	
+	            monstruo = new MonstruoGrande(nombreMonstruo, poderAtaque, puntosSalud, imagePath ,resistenciaElemento,debilidadElemento);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
 
 	    if (monstruo != null) {
-	        return new MonstruoGrande(monstruo.getNombre(), monstruo.getPuntosSalud(), monstruo.getPoderAtaque(), monstruo.getImagePath());
+	        return new MonstruoGrande(monstruo.getNombre(), monstruo.getPuntosSalud(), monstruo.getPoderAtaque(), monstruo.getImagePath(), monstruo.getResistencias(), monstruo.getDebilidades());
 	    } else {
 	        return null;
 	    }

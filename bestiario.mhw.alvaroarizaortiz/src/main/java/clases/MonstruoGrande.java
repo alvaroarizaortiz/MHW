@@ -10,7 +10,7 @@ public class MonstruoGrande extends Monstruo {
 	private Elemento resistencias;
 	private Elemento debilidades;
 	private int id_Monstruo;
-	private int puntosSaludActual;
+	private double puntosSaludActual;
 
 	public MonstruoGrande(String nombre, String especie, int tamaño, int poderAtaque, int puntosSalud,
 			String nombreMapa, String imagePath, String descripcion, String puntoDebil, boolean esCapturable,
@@ -21,11 +21,21 @@ public class MonstruoGrande extends Monstruo {
 		this.resistencias = resistencias;
 		this.debilidades = debilidades;
 		this.id_Monstruo = id_Monstruo;
+		this.puntosSaludActual = puntosSalud;
 	}
 
 	public MonstruoGrande(String nombre, int puntosSalud, int poderAtaque, String imagePath) {
 		super(nombre, puntosSalud, poderAtaque, imagePath);
+		this.puntosSaludActual = puntosSalud;
 	}
+	
+	public MonstruoGrande(String nombre, int puntosSalud, int poderAtaque, String imagePath, Elemento resistencias, Elemento debilidades) {
+		super(nombre, puntosSalud, poderAtaque, imagePath);
+		this.puntosSaludActual = puntosSalud;
+		this.resistencias = resistencias;
+		this.debilidades = debilidades;
+	}
+
 
 	public String getPuntoDebil() {
 		return puntoDebil;
@@ -67,18 +77,20 @@ public class MonstruoGrande extends Monstruo {
 		this.id_Monstruo = id_Monstruo;
 	}
 
-	public int getPuntosSaludActual() {
+	public double getPuntosSaludActual() {
 		return puntosSaludActual;
 	}
 
-	public void setPuntosSaludActual(int puntosSaludActual) {
+	public void setPuntosSaludActual(double puntosSaludActual) {
 		this.puntosSaludActual = puntosSaludActual;
 	}
 
 	public void recibirDaño(double daño) {
 		this.puntosSaludActual -= daño;
-		if (this.puntosSaludActual < 0)
+		if (this.puntosSaludActual < 0) {
 			this.puntosSaludActual = 0;
+		}
+
 	}
 
 	@Override
