@@ -1,5 +1,6 @@
 package clases;
 
+// Clase abstracta que proporciona nombre a las clases que la heredan
 public abstract class ElementoConNombre {
 	private String nombre;
 

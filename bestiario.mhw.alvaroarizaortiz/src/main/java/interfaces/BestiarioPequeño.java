@@ -41,7 +41,7 @@ public class BestiarioPequeño extends JDialog {
 		String rutaImagen = "/images/" + monstruoPequeño.getImagePath();
 		URL urlImagen = getClass().getResource(rutaImagen);
 		ImageIcon imageIcon = new ImageIcon(
-				new ImageIcon(urlImagen).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
+				new ImageIcon(urlImagen).getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
 		lbl_ImagenMonstruo.setIcon(imageIcon);
 		lbl_NombreMonstruo.setText(monstruoPequeño.getNombre());
 		lbl_RespuestaEspecieMonstruo.setText(monstruoPequeño.getEspecie());
@@ -52,13 +52,13 @@ public class BestiarioPequeño extends JDialog {
 		lbl_RespuestaHostilMonstruo.setText(monstruoPequeño.isEsHostil() ? "Sí" : "No");
 		lbl_RespuestaMontarMonstruo.setText(monstruoPequeño.isEsCabalgable() ? "Sí" : "No");
 		textArea_DescripcionMonstruo.setText(monstruoPequeño.getDescripcion());
-		
+
 	}
 
 	public BestiarioPequeño(MainInterface madre, boolean modal) {
 		super(madre, modal);
 		setTitle("BESTIARIO");
-		setBounds(100, 100, 1000, 1000);
+		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(new CardLayout(0, 0));
 
 		JPanel panelMonstruoPequeño = new JPanel();
@@ -71,67 +71,67 @@ public class BestiarioPequeño extends JDialog {
 		panelMonstruoPequeño.add(lbl_BestiarioMonstruoPequeño);
 
 		lbl_NombreMonstruo = new JLabel("NombreMonstruo");
-		lbl_NombreMonstruo.setBounds(83, 133, 100, 14);
+		lbl_NombreMonstruo.setBounds(85, 77, 100, 14);
 		panelMonstruoPequeño.add(lbl_NombreMonstruo);
 
 		lbl_ImagenMonstruo = new JLabel("");
-		lbl_ImagenMonstruo.setBounds(257, 550, 400, 400);
+		lbl_ImagenMonstruo.setBounds(18, 100, 250, 250);
 		panelMonstruoPequeño.add(lbl_ImagenMonstruo);
 
 		JLabel lbl_EspecieMonstruo = new JLabel("Especie");
-		lbl_EspecieMonstruo.setBounds(298, 133, 90, 14);
+		lbl_EspecieMonstruo.setBounds(355, 158, 90, 14);
 		panelMonstruoPequeño.add(lbl_EspecieMonstruo);
 
 		lbl_RespuestaEspecieMonstruo = new JLabel("Respuesta especie");
-		lbl_RespuestaEspecieMonstruo.setBounds(441, 133, 115, 14);
+		lbl_RespuestaEspecieMonstruo.setBounds(498, 158, 115, 14);
 		panelMonstruoPequeño.add(lbl_RespuestaEspecieMonstruo);
 
 		JLabel lbl_TamañoMonstruo = new JLabel("Tamaño");
-		lbl_TamañoMonstruo.setBounds(298, 168, 46, 14);
+		lbl_TamañoMonstruo.setBounds(355, 193, 46, 14);
 		panelMonstruoPequeño.add(lbl_TamañoMonstruo);
 
 		lbl_RespuestaTamañoMonstruo = new JLabel("Respuesta tamaño");
-		lbl_RespuestaTamañoMonstruo.setBounds(441, 168, 115, 14);
+		lbl_RespuestaTamañoMonstruo.setBounds(498, 193, 115, 14);
 		panelMonstruoPequeño.add(lbl_RespuestaTamañoMonstruo);
 
 		JLabel lbl_SaludMonstruo = new JLabel("Salud");
-		lbl_SaludMonstruo.setBounds(298, 201, 46, 14);
+		lbl_SaludMonstruo.setBounds(355, 226, 46, 14);
 		panelMonstruoPequeño.add(lbl_SaludMonstruo);
 
 		lbl_respuestaSaludMonstruo = new JLabel("Respuesta salud");
-		lbl_respuestaSaludMonstruo.setBounds(441, 201, 100, 14);
+		lbl_respuestaSaludMonstruo.setBounds(498, 226, 100, 14);
 		panelMonstruoPequeño.add(lbl_respuestaSaludMonstruo);
 
 		JLabel lbl_AtaqueMonstruo = new JLabel("Ataque");
-		lbl_AtaqueMonstruo.setBounds(298, 226, 46, 14);
+		lbl_AtaqueMonstruo.setBounds(355, 251, 46, 14);
 		panelMonstruoPequeño.add(lbl_AtaqueMonstruo);
 
 		lbl_RespuestaAtaqueMonstruo = new JLabel("Respuesta ataque");
-		lbl_RespuestaAtaqueMonstruo.setBounds(441, 226, 100, 14);
+		lbl_RespuestaAtaqueMonstruo.setBounds(498, 251, 100, 14);
 		panelMonstruoPequeño.add(lbl_RespuestaAtaqueMonstruo);
 
 		JLabel lbl_LocalizacionMonstruo = new JLabel("Localización");
-		lbl_LocalizacionMonstruo.setBounds(298, 251, 90, 14);
+		lbl_LocalizacionMonstruo.setBounds(355, 276, 90, 14);
 		panelMonstruoPequeño.add(lbl_LocalizacionMonstruo);
 
 		lbl_RespuestaLocalizacionMonstruo = new JLabel("Respuesta localizacion");
-		lbl_RespuestaLocalizacionMonstruo.setBounds(441, 251, 115, 14);
+		lbl_RespuestaLocalizacionMonstruo.setBounds(498, 276, 115, 14);
 		panelMonstruoPequeño.add(lbl_RespuestaLocalizacionMonstruo);
 
 		JLabel lbl_HostilMonstruo = new JLabel("¿Es hostil?");
-		lbl_HostilMonstruo.setBounds(298, 280, 46, 14);
+		lbl_HostilMonstruo.setBounds(355, 305, 65, 14);
 		panelMonstruoPequeño.add(lbl_HostilMonstruo);
 
 		lbl_RespuestaHostilMonstruo = new JLabel("Respuesta hostil");
-		lbl_RespuestaHostilMonstruo.setBounds(441, 280, 115, 14);
+		lbl_RespuestaHostilMonstruo.setBounds(498, 305, 115, 14);
 		panelMonstruoPequeño.add(lbl_RespuestaHostilMonstruo);
 
 		JLabel lbl_MontarMonstruo = new JLabel("¿Se puede montar?");
-		lbl_MontarMonstruo.setBounds(257, 311, 131, 14);
+		lbl_MontarMonstruo.setBounds(325, 336, 131, 14);
 		panelMonstruoPequeño.add(lbl_MontarMonstruo);
 
 		lbl_RespuestaMontarMonstruo = new JLabel("Respuesta montar monstruo");
-		lbl_RespuestaMontarMonstruo.setBounds(441, 311, 156, 14);
+		lbl_RespuestaMontarMonstruo.setBounds(498, 336, 156, 14);
 		panelMonstruoPequeño.add(lbl_RespuestaMontarMonstruo);
 
 		textArea_DescripcionMonstruo = new JTextArea();
@@ -139,9 +139,9 @@ public class BestiarioPequeño extends JDialog {
 		textArea_DescripcionMonstruo.setLineWrap(true);
 		textArea_DescripcionMonstruo.setWrapStyleWord(true);
 		textArea_DescripcionMonstruo.setEditable(false);
-		textArea_DescripcionMonstruo.setBounds(650, 128, 274, 251);
+		textArea_DescripcionMonstruo.setBounds(18, 358, 274, 125);
 		panelMonstruoPequeño.add(textArea_DescripcionMonstruo);
-		
+
 		if (!monstruos.isEmpty()) {
 			mostrarMonstruo(monstruos.get(indexMonstruo));
 		}
@@ -155,7 +155,7 @@ public class BestiarioPequeño extends JDialog {
 				}
 			}
 		});
-		btn_Anterior.setBounds(217, 440, 89, 23);
+		btn_Anterior.setBounds(353, 440, 89, 23);
 		panelMonstruoPequeño.add(btn_Anterior);
 
 		JButton btn_Siguiente = new JButton("Siguiente");

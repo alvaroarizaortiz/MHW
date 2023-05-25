@@ -13,6 +13,8 @@ import enumeraciones.Elemento;
 import utils.BDUtil;
 
 public class ArmaduraBD {
+
+	// Conexión con base de datos para insertar una armadura
 	public void insertArmadura(Armadura armadura) {
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement statement = conn.prepareStatement(
@@ -36,6 +38,8 @@ public class ArmaduraBD {
 		}
 	}
 
+	// Conexión con base de datos para sacar una lista con todas las armaduras y
+	// todos sus atributos
 	public List<Armadura> getAllArmaduras() {
 		List<Armadura> armaduras = new ArrayList<>();
 
@@ -65,6 +69,7 @@ public class ArmaduraBD {
 		return armaduras;
 	}
 
+	// Conexión con base de datos para borrar una armadura
 	public void deleteArmadura(Armadura armadura) {
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement statement = conn.prepareStatement("DELETE FROM armadura WHERE nombre = ?")) {
@@ -82,6 +87,8 @@ public class ArmaduraBD {
 		}
 	}
 
+	// Conexión con base de datos para sacar los nombres de las armaduras en una
+	// lista
 	public List<String> getNombresArmaduras() {
 		List<String> nombresArmaduras = new ArrayList<>();
 		try (Connection conn = BDUtil.getConnection();
@@ -99,6 +106,8 @@ public class ArmaduraBD {
 		return nombresArmaduras;
 	}
 
+	// Conexión con base de datos para sacar la armadura con sus atributos pero solo por
+	// el nombre, algo que me ayuda con los ComboBox en la parte de interfaz
 	public Armadura getArmaduraPorNombre(String nombreArmadura) {
 		Armadura armadura = null;
 		try (Connection conn = BDUtil.getConnection();
@@ -125,7 +134,9 @@ public class ArmaduraBD {
 
 		return armadura;
 	}
-	
+
+	// Conexión con base de datos para sacar la armadura con sus atributos pero solo por
+	// el ID, algo que me ayuda con los ComboBox en la parte de interfaz.
 	public Armadura getArmaduraPorID(int idArmadura) {
 		Armadura armadura = null;
 		try (Connection conn = BDUtil.getConnection();

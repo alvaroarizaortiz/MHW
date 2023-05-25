@@ -3,11 +3,11 @@ package clases;
 import java.util.ArrayList;
 
 public class Mapa extends ElementoConNombre {
-	private ArrayList<Monstruo> monstruosPresentes;
+	private ArrayList<Monstruo> monstruosPresentes; // Lista de monstruos presentes en el mapa
 
+	// Constructor de mapa
 	public Mapa(String nombre) {
 		super(nombre);
-		this.monstruosPresentes = monstruosPresentes;
 	}
 
 	public ArrayList<Monstruo> getMonstruosPresentes() {
@@ -28,6 +28,7 @@ public class Mapa extends ElementoConNombre {
 		monstruosPresentes.remove(monstruo);
 	}
 
+	// toString mapa
 	@Override
 	public String toString() {
 		return "Mapa [monstruosPresentes=" + monstruosPresentes + "]";

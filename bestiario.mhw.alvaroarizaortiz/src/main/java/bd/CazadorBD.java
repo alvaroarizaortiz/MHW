@@ -14,6 +14,7 @@ import enumeraciones.Elemento;
 import utils.BDUtil;
 
 public class CazadorBD {
+	// Conexión con base de datos que obtiene el ID de un elemento en una tabla por su nombre
 	public int getIdNombre(String tableName, String name) {
 		int id = -1;
 		try (Connection conn = BDUtil.getConnection();
@@ -30,6 +31,7 @@ public class CazadorBD {
 		return id;
 	}
 
+	// Conexión con base de datos para insertar un cazador
 	public void insertCazador(Cazador cazador) {
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement statement = conn
@@ -52,16 +54,8 @@ public class CazadorBD {
 		}
 	}
 
-	public void deleteTablaCazador() {
-		try (Connection conn = BDUtil.getConnection();
-				PreparedStatement statement = conn.prepareStatement("DELETE FROM cazador")) {
-
-		} catch (SQLException e) {
-			System.out.println("Ocurrió un error al intentar eliminar los cazadores creados");
-			e.printStackTrace();
-		}
-	}
-
+	
+	// Conexión con base de datos para sacar una lista de todos los cazadores insertados
 	public List<Cazador> getAllCazadores() {
 		List<Cazador> cazadores = new ArrayList<>();
 

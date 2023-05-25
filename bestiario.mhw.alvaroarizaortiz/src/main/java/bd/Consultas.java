@@ -1,6 +1,5 @@
 package bd;
 
-
 import java.util.List;
 
 import clases.Arma;
@@ -16,8 +15,10 @@ public class Consultas {
 
 	public static void main(String[] args) {
 
+		//CLASE CREADA PARA HACER LAS CONSULTAS Y AÑADIR, BORRAR, LLAMAR A FUNCIONES DE LISTA ETC EN LA BASE DE DATOS. ESTÁ COMENTADA COMPLETAMENTE, ADEMÁS HE IDO HACIENDO CAMBIOS
+		
 		// Crear una instancia de la clase MapaBD
-		MapaBD mapaBD = new MapaBD();
+		// MapaBD mapaBD = new MapaBD();
 
 		// Insertar un nuevo mapa en la Base de Datos
 		// Mapa nuevoMapa = new Mapa("Nombre del mapa a insertar");
@@ -32,7 +33,7 @@ public class Consultas {
 //_______________________________________________________________________________________________________________________________________________________________________
 
 		// Crear una instancia de la clase ArmaBD
-		ArmaBD armaBD = new ArmaBD();
+		// ArmaBD armaBD = new ArmaBD();
 
 		// Crear una lista de armas a añadir
 		// List<Arma> armas = new ArrayList<>();

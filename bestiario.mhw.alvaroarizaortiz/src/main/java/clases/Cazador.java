@@ -1,29 +1,31 @@
 package clases;
 
 import java.util.concurrent.ThreadLocalRandom;
-
 import enumeraciones.Elemento;
 import excepciones.AttackException;
 
 public class Cazador {
-	private int saludCazador;
-	private Armadura armaduraEquipada;
-	private Arma armaEquipada;
-	private int id;
-	private String nombre;
-	private int saludActualCazador;
-	private int turnoAtaqueFuerte = 3;
-	private int turnoEsquivar = 2;
-	private int turnoAtaqueCritico = 5;
-	private int turnoAtaqueMultiple = 5;
-	private int turnoAtaqueDefender = 3;
-	private boolean ataqueFuerteDisponible = true;
-	private boolean esquivarDisponible = true;
-	private boolean ataqueCriticoDisponible = true;
-	private boolean ataqueMultipleDisponible = true;
-	private boolean ataqueDefenderDisponible = true;
-	private int turno = 0;
+	private int saludCazador; // Salud total del cazador
+	private Armadura armaduraEquipada; // Armadura que el cazador tiene equipada
+	private Arma armaEquipada; // Arma que el cazador tiene equipada
+	private int id; // Identificador cazador
+	private String nombre; // Nombre del cazador
+	private int saludActualCazador; // Salud actual del cazador (será menor que saludCazador debido a los daños excepto en el primer turno)
+	private double dañoUltimoTurno = 0; // Daño que el cazador hizo en el último turno
+	private int turnoAtaqueFuerte = 3; // Contador para el ataque fuerte, solo disponible cada 3 turnos
+	private int turnoEsquivar = 2; // Contador para esquivar, solo disponible cada 2 turnos. Inicializa en 2 y va restando hasta 0. Luego vuelve a 2
+	private int turnoAtaqueCritico = 5; // Contador para el ataque crítico, solo disponible cada 5 turnos. Inicializa en 5 y va restando hasta 0. Luego vuelve a 5
+	private int turnoAtaqueMultiple = 5; // Contador para el ataque múltiple, solo disponible cada 5 turnos. Inicializa en 5 y va restando hasta 0. Luego vuelve a 5
+	private int turnoAtaqueDefender = 3; // // Contador para defender. Inicializa en 3 y va restando hasta 0. Luego vuelve a 3
+	private boolean ataqueFuerteDisponible = true; // Indica si el ataque fuerte está disponible. Inicia en true para que esté disponible el primer turno del combate.
+	private boolean esquivarDisponible = true; // Indica si esquivar está disponible. Inicia en true para que esté disponible el primer turno del combate
+	private boolean ataqueCriticoDisponible = true; // Indica si el ataque crítico está disponible. Inicia en true para que esté disponible el primer turno del combate
+	private boolean ataqueMultipleDisponible = true; // Indica si el ataque múltiple está disponible. Inicia en true para que esté disponible el primer turno del combate
+	private boolean ataqueDefenderDisponible = true; // Indica si defender está disponible. Inicia en true para que esté disponible el primer turno del combate
+	private boolean dañoAtaqueArmaReducido = false; // Indica si el daño del ataque del arma ha sido reducido. Inicia en false para que el daño del arma no empiece reducido
+	private int turno = 0; // Contador de turnos
 
+	//Constructor usado durante la realización del proyecto. Sobre todo en base de datos.
 	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada, int id) {
 		super();
 		this.saludCazador = saludCazador;
@@ -33,21 +35,17 @@ public class Cazador {
 		this.saludActualCazador = saludCazador;
 	}
 
-	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada) {
-		super();
-		this.saludCazador = saludCazador;
-		this.armaduraEquipada = armaduraEquipada;
-		this.armaEquipada = armaEquipada;
-	}
-
+	//Constructor usado durante la realización del proyecto. Es el que se usa en general - incluido interfaz.
 	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada, String nombre) {
 		super();
 		this.saludCazador = saludCazador;
 		this.armaduraEquipada = armaduraEquipada;
 		this.armaEquipada = armaEquipada;
 		this.nombre = nombre;
+		this.saludActualCazador = saludCazador;
 	}
 
+	 // Métodos getters y setters para las variables de estado
 	public int getSaludCazador() {
 		return saludCazador;
 	}
@@ -88,13 +86,41 @@ public class Cazador {
 		this.nombre = nombre;
 	}
 
-	// Método de ataque normal
+	// Importante para que los puntos de salud del cazador vaya bajando durante el transcurso del combate.
+	public int getSaludActualCazador() {
+		return saludActualCazador;
+	}
+
+	public void setSaludActualCazador(int saludActualCazador) {
+		this.saludActualCazador = saludActualCazador;
+	}
+
+	// Importante para recibir los daños que hace cada turno el cazador y sacarlos por pantalla a través de un área de texto.
+	public double getDañoUltimoTurno() {
+		return dañoUltimoTurno;
+	}
+
+	public void setDañoUltimoTurno(double dañoUltimoTurno) {
+		this.dañoUltimoTurno = dañoUltimoTurno;
+	}
+ 
+	// Importante para que el cazador tenga siempre 5000 puntos de salud al terminar un combate. 
+	// Terminar un combate implica que la salud del monstruo o del cazador ha llegado a 0 y que el propio programa ha cerrado la pantalla de combate.
+	public void resetearSaludCazador() {
+		saludActualCazador = saludCazador;
+	}
+
+	// TODOS LOS ATAQUES ESTÁN SUJETOS A LA TABLA DE RESISTENCIAS Y DEBILIDADES ELEMENTALES.
+	
+	// Método de ataque normal. Ataque estandar que utiliza el daño del arma (sujeto a los debuffs del monstruo)
 	public void ataque(MonstruoGrande monstruo) {
 		this.turno++;
 		double daño = this.armaEquipada.getPoderAtaque();
 		double dañoFinal = calcularDaño(monstruo, daño);
+
+		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
-		System.out.println(monstruo.getPuntosSaludActual());
+		System.out.println("La salud actual del monstruo es " + monstruo.getPuntosSaludActual());
 
 		if (monstruo.getPuntosSaludActual() <= 0) {
 			resetearTurnos();
@@ -105,9 +131,10 @@ public class Cazador {
 		resetearAtaqueCritico();
 		resetearAtaqueMultiple();
 		resetearAtaqueDefender();
+
 	}
 
-	// Método de ataque fuerte
+	// Método de ataque fuerte. Se puede usar cada tres turnos y hace el daño de un ataque normal multiplicado por 2
 	public void ataqueFuerte(MonstruoGrande monstruo) throws AttackException {
 		if (!ataqueFuerteDisponible) {
 			throw new AttackException(
@@ -116,6 +143,7 @@ public class Cazador {
 
 		int daño = this.armaEquipada.getPoderAtaque() * 2;
 		double dañoFinal = calcularDaño(monstruo, daño);
+		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
 		System.out.println(monstruo.getPuntosSaludActual());
 
@@ -137,7 +165,7 @@ public class Cazador {
 		resetearAtaqueDefender();
 	}
 
-	// Método para esquivar
+	// Método para esquivar. Se puede usar cada 2 turnos. Esquiva totalmente el ataque del monstruo si este iba a hacer daño
 	public void esquivar(MonstruoGrande monstruo) throws AttackException {
 		if (!esquivarDisponible) {
 			throw new AttackException(
@@ -157,7 +185,7 @@ public class Cazador {
 		resetearAtaqueDefender();
 	}
 
-	// Método para el ataque crítico de la Gran Espada
+	// Método para el ataque crítico de la Gran Espada. Se puede usar cada 5 turnos. Hace un daño aleatorio entre 2 y 4 veces el daño del arma
 	public void ataqueCritico(MonstruoGrande monstruo) throws AttackException {
 		if (!ataqueCriticoDisponible) {
 			throw new AttackException(
@@ -170,10 +198,11 @@ public class Cazador {
 		resetearAtaqueCritico();
 		resetearAtaqueMultiple();
 		resetearAtaqueDefender();
-		// El daño crítico es entre 2 y 4 veces el daño del arma.
+		// El daño crítico es entre 2 y 4 veces el daño del arma
 		int critMultiplier = ThreadLocalRandom.current().nextInt(2, 5);
 		int daño = armaEquipada.getPoderAtaque() * critMultiplier;
 		double dañoFinal = calcularDaño(monstruo, daño);
+		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
 		System.out.println(monstruo.getPuntosSaludActual());
 
@@ -183,6 +212,7 @@ public class Cazador {
 
 	}
 
+	// Método para el ataque disparo multiple del Arco.  Se puede usar cada 5 turnos. Dispara entre 2 y 5 flechas
 	public void disparoMultiple(MonstruoGrande monstruo) throws AttackException {
 		if (!ataqueMultipleDisponible) {
 			throw new AttackException(
@@ -195,10 +225,11 @@ public class Cazador {
 		resetearAtaqueCritico();
 		resetearAtaqueMultiple();
 		resetearAtaqueDefender();
-		// Dispara entre 2 y 4 flechas.
-		int arrowCount = ThreadLocalRandom.current().nextInt(2, 5);
+		// Dispara entre 2 y 5 flechas.
+		int arrowCount = ThreadLocalRandom.current().nextInt(2, 6);
 		int daño = armaEquipada.getPoderAtaque() * arrowCount;
 		double dañoFinal = calcularDaño(monstruo, daño);
+		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
 		System.out.println(monstruo.getPuntosSaludActual());
 
@@ -208,6 +239,7 @@ public class Cazador {
 
 	}
 
+	// Método para el movimiento defender. Disponible cada 3 turnos. Reduce el daño del monstruo si iba a atacar entre un 50 y 100% aleatorio
 	public int defender(MonstruoGrande monstruo) throws AttackException {
 		if (!ataqueDefenderDisponible) {
 			throw new AttackException(
@@ -230,7 +262,7 @@ public class Cazador {
 
 	}
 
-	// Elijo qué método especial usar en función del tipo de arma.
+	// Elijo qué método especial usar en función del tipo de arma. Gran espada usa ataque crítico, arco usa disparo múltiple y la lanza usa defender
 	public void ataqueEspecial(MonstruoGrande monstruo) throws AttackException {
 		if (armaEquipada.getTipoArma().equals("Gran Espada")) {
 			ataqueCritico(monstruo);
@@ -244,90 +276,98 @@ public class Cazador {
 		}
 	}
 
-	// Método para calcular el daño en función de debilidades y resistencias
-	// elementales.
+	// Método para calcular el daño en función de debilidades y resistencias elementales. A saber:
+	// Si la debilidad del monstruo es igual al elemento del arma, esta hace su daño *1.5
+	// Si la resistencia del monstruo es igual al elemento del arma, esta hace su daño *0.5
 	public double calcularDaño(MonstruoGrande monstruo, double dañoBase) {
 		Elemento debilidadMonstruo = monstruo.getDebilidades();
 		Elemento resistenciaMonstruo = monstruo.getResistencias();
-		Elemento debilidadArmadura = armaduraEquipada.getDebilidadArmadura();
-		Elemento resistenciaArmadura = armaduraEquipada.getResistenciaArmadura();
 		Elemento elementoArma = armaEquipada.getElementoAtaque();
 
 		double daño = dañoBase;
 
 		// Comprueba si el monstruo es débil o resistente al elemento del arma
-		if (debilidadMonstruo == elementoArma) {
+		if (debilidadMonstruo.equals(elementoArma)) {
 			daño *= 1.5;
-		} else if (resistenciaMonstruo == elementoArma) {
+		} else if (resistenciaMonstruo.equals(elementoArma)) {
 			daño *= 0.5;
 		}
-		
-		// Comprueba si la armadura es débil o resistente al elemento del monstruo
-//		if (debilidadArmadura == resistenciaMonstruo) {
-//			daño *= 1.5;
-//		} else if (resistenciaArmadura == debilidadMonstruo) {
-//			daño *= 0.5;
-//		}
+
 		return daño;
 	}
 
+	// Método que reduce el porcentaje señalado en la Clase Arma para el ataque del arma equipada por el cazador
+	public void reducirAtaqueArma(int porcentaje) {
+		// Reducir el poder de ataque del arma equipada
+		if (armaEquipada != null) {
+			armaEquipada.reducirAtaque(porcentaje);
+
+		}
+
+		dañoAtaqueArmaReducido = true;
+	}
+
+	// Hacia abajo todos los métodos "resetear" que funcionan con un contador que resta hasta 0 y los resetea hasta la cantidad de turnos de cada ataque
+	
 	public void resetearAtaqueFuerte() {
 		if (turnoAtaqueFuerte <= 0) {
 			turnoAtaqueFuerte = 3;
 			ataqueFuerteDisponible = true;
-		}else {
+		} else {
 			turnoAtaqueFuerte--;
 		}
-		
+
 	}
 
 	public void resetearEsquivar() {
 		if (turnoEsquivar <= 0) {
 			turnoEsquivar = 2;
 			esquivarDisponible = true;
-		}else {
+		} else {
 			turnoEsquivar--;
 		}
-		
+
 	}
 
 	public void resetearAtaqueCritico() {
 		if (turnoAtaqueCritico <= 0) {
 			turnoAtaqueCritico = 5;
 			ataqueCriticoDisponible = true;
-		}else {
+		} else {
 			turnoAtaqueCritico--;
 		}
-		
+
 	}
 
 	public void resetearAtaqueMultiple() {
 		if (turnoAtaqueMultiple <= 0) {
 			turnoAtaqueMultiple = 5;
 			ataqueMultipleDisponible = true;
-		}else {
+		} else {
 			turnoAtaqueMultiple--;
 		}
-		
+
 	}
 
 	public void resetearAtaqueDefender() {
 		if (turnoAtaqueDefender <= 0) {
 			turnoAtaqueDefender = 3;
 			ataqueDefenderDisponible = true;
-		}else {
+		} else {
 			turnoAtaqueDefender--;
 		}
-		
+
 	}
 
+	// Este método resetea todo cuando acaba un combate
+	// Terminar un combate implica que la salud del monstruo o del cazador ha llegado a 0 y que el propio programa ha cerrado la pantalla de combate
 	public void resetearTurnos() {
 		this.turno = 0;
 		this.turnoAtaqueFuerte = 3;
 		this.turnoEsquivar = 2;
 		this.turnoAtaqueCritico = 5;
 		this.turnoAtaqueMultiple = 5;
-		this.turnoAtaqueDefender = 3;	
+		this.turnoAtaqueDefender = 3;
 		ataqueFuerteDisponible = true;
 		ataqueMultipleDisponible = true;
 		ataqueDefenderDisponible = true;
@@ -335,6 +375,17 @@ public class Cazador {
 		esquivarDisponible = true;
 	}
 
+	// Método por el que el cazador recibe daño. Como puede haber decimales he decidido redondear a uno solo.
+	// Si la salud cae por debajo de 0 se mostrará unicamente 0
+	public void recibirDaño(double daño) {
+		this.saludActualCazador -= Math.round(daño);
+		if (this.saludActualCazador < 0) {
+			this.saludActualCazador = 0;
+		}
+		System.out.println("Salud actual del cazador es " + this.saludActualCazador);
+	}
+
+	// toString formateado del Cazador
 	@Override
 	public String toString() {
 		return String.format(" %s | Salud: %d |  %s |  %s", nombre, saludCazador, armaduraEquipada.getNombre(),

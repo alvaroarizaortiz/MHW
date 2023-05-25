@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class MainInterface extends JFrame {
 
@@ -52,9 +53,10 @@ public class MainInterface extends JFrame {
 		combate = new CombateInterface(this, true);
 		combate.setVisible(false);
 
-		setTitle("Bestiario de Monster Hunter World");
+		setTitle(
+				"Bienvenidos al Bestiario + Combate de Monster Hunter World (pensé en un título más largo pero así está bien)");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -67,7 +69,7 @@ public class MainInterface extends JFrame {
 				bestiario.setVisible(true);
 			}
 		});
-		btn_BestiarioMonstruosGrandes.setBounds(172, 59, 191, 83);
+		btn_BestiarioMonstruosGrandes.setBounds(110, 43, 191, 83);
 		contentPane.add(btn_BestiarioMonstruosGrandes);
 
 		JButton btn_BestiarioMonstruosPequeños = new JButton("Bestiario de Monstruos Pequeños");
@@ -76,7 +78,7 @@ public class MainInterface extends JFrame {
 				bestiariopequeño.setVisible(true);
 			}
 		});
-		btn_BestiarioMonstruosPequeños.setBounds(28, 186, 180, 83);
+		btn_BestiarioMonstruosPequeños.setBounds(110, 323, 191, 83);
 		contentPane.add(btn_BestiarioMonstruosPequeños);
 
 		JButton btn_ArmaArmadura = new JButton("Armas y armaduras");
@@ -86,20 +88,16 @@ public class MainInterface extends JFrame {
 			}
 		});
 
-		btn_ArmaArmadura.setBounds(524, 42, 172, 116);
+		btn_ArmaArmadura.setBounds(471, 43, 191, 83);
 		contentPane.add(btn_ArmaArmadura);
 
-		JButton btn_SalirPrograma = new JButton("Salir del programuzo");
-		btn_SalirPrograma.setBounds(561, 497, 155, 23);
-		contentPane.add(btn_SalirPrograma);
-		
 		JButton btn_Combate = new JButton("Combate");
 		btn_Combate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				combate.setVisible(true);
 			}
 		});
-		btn_Combate.setBounds(319, 221, 220, 105);
+		btn_Combate.setBounds(471, 323, 191, 83);
 		contentPane.add(btn_Combate);
 	}
 }

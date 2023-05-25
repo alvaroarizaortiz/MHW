@@ -13,14 +13,15 @@ import enumeraciones.Elemento;
 import utils.BDUtil;
 
 public class MonstruoGrandeBD {
+	
+	// Inserta un monstruo grande en la base de datos
 	public void insertarMonstruoGrande(MonstruoGrande monstruoGrande) {
-		String sql = "INSERT INTO monstruoGrande ( escapturable, resistencias, debilidades, id_Monstruo, puntodebil) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO monstruoGrande (escapturable, resistencias, debilidades, id_Monstruo, puntodebil) VALUES (?, ?, ?, ?, ?)";
 
 		try (Connection conn = BDUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			pstmt.setBoolean(1, monstruoGrande.isEsCapturable());
-			pstmt.setString(2,
-					monstruoGrande.getResistencias() != null ? monstruoGrande.getResistencias().name() : " ");
+			pstmt.setString(2, monstruoGrande.getResistencias() != null ? monstruoGrande.getResistencias().name() : " ");
 			pstmt.setString(3, monstruoGrande.getDebilidades() != null ? monstruoGrande.getDebilidades().name() : " ");
 			pstmt.setInt(4, monstruoGrande.getId_Monstruo());
 			pstmt.setString(5, monstruoGrande.getPuntoDebil());
@@ -31,11 +32,14 @@ public class MonstruoGrandeBD {
 		}
 	}
 
+	// Obtiene una lista de todos los monstruos grandes en la base de datos
 	public List<MonstruoGrande> listarMonstruosGrandes() {
 		List<MonstruoGrande> listaMonstruosGrandes = new ArrayList<>();
 		String sql = "SELECT t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, m.nombre AS nombre_mapa, t2.poderAtaque, t2.imagen, t2.descripcion, t1.escapturable, t1.resistencias, t1.debilidades, t1.id_monstruo, t1.puntoDebil "
-				+ "FROM monstruoGrande AS t1 " + "INNER JOIN monstruo AS t2 ON t1.id_monstruo = t2.id "
-				+ "INNER JOIN mapa AS m ON t2.id_mapa = m.id " + "ORDER BY t2.nombre;";
+				+ "FROM monstruoGrande AS t1 "
+				+ "INNER JOIN monstruo AS t2 ON t1.id_monstruo = t2.id "
+				+ "INNER JOIN mapa AS m ON t2.id_mapa = m.id "
+				+ "ORDER BY t2.nombre;";
 
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -73,6 +77,7 @@ public class MonstruoGrandeBD {
 		return listaMonstruosGrandes;
 	}
 
+	// Elimina un monstruo grande de la base de datos por su nombre
 	public void eliminarMonstruoGrande(String nombre) {
 		String sql = "DELETE FROM monstruoGrande WHERE nombre = ?";
 
@@ -85,10 +90,11 @@ public class MonstruoGrandeBD {
 		}
 	}
 
+	// Obtiene un objeto de tipo Monstruo por su nombre
 	public Monstruo getMonstruoPorNombre(String nombreMonstruo) {
 		Monstruo monstruo = null;
 		try (Connection conn = BDUtil.getConnection();
-				PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruoWHERE nombre = ?")) {
+				PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo WHERE nombre = ?")) {
 
 			statement.setString(1, nombreMonstruo);
 			ResultSet resultSet = statement.executeQuery();
@@ -96,11 +102,11 @@ public class MonstruoGrandeBD {
 			if (resultSet.next()) {
 				String nombre = resultSet.getString("nombre");
 				int puntosSalud = resultSet.getInt("puntosSalud");
-				int poderAtaque = resultSet.getInt("poderataque");
+				int poderAtaque = resultSet.getInt("poderAtaque");
 				String imagePath = resultSet.getString("imagen");
 				
 				monstruo = new Monstruo(nombre, puntosSalud, poderAtaque, imagePath);
-			}
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -108,17 +114,16 @@ public class MonstruoGrandeBD {
 		return monstruo;
 	}
 	
+	// Obtiene un objeto de tipo MonstruoGrande por su nombre
 	public MonstruoGrande getMonstruoGrandePorNombre(String nombre) {
 	    MonstruoGrande monstruo = null;
 	    try (Connection conn = BDUtil.getConnection();
-	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo as t1 "
-	         		+ "INNER JOIN monstruogrande as t2 "
+	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM monstruo AS t1 "
+	         		+ "INNER JOIN monstruoGrande AS t2 "
 	         		+ "ON t1.id = t2.id_monstruo "
-	         		+ "WHERE t1.nombre = ? ;")) {
+	         		+ "WHERE t1.nombre = ?")) {
 	    	
-	    	
-
-	        statement.setString(1, nombre);
+	    	statement.setString(1, nombre);
 	        ResultSet resultSet = statement.executeQuery();
 
 	        if (resultSet.next()) {
@@ -133,7 +138,7 @@ public class MonstruoGrandeBD {
 
 	            
             	
-	            monstruo = new MonstruoGrande(nombreMonstruo, poderAtaque, puntosSalud, imagePath ,resistenciaElemento,debilidadElemento);
+	            monstruo = new MonstruoGrande(nombreMonstruo, puntosSalud, poderAtaque, imagePath, resistenciaElemento, debilidadElemento);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -145,8 +150,8 @@ public class MonstruoGrandeBD {
 	        return null;
 	    }
 	}
-	 
 	
+	// Obtiene una lista de los nombres de todos los monstruos en la base de datos
 	public List<String> getNombresMonstruos() {
 		List<String> nombresMonstruos = new ArrayList<>();
 		try (Connection conn = BDUtil.getConnection();
@@ -164,3 +169,4 @@ public class MonstruoGrandeBD {
 		return nombresMonstruos;
 	}
 }
+

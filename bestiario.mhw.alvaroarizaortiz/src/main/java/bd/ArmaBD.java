@@ -13,6 +13,7 @@ import utils.BDUtil;
 
 public class ArmaBD {
 
+	// Conexión con base de datos para insertar un arma.
 	public void insertArma(Arma arma) {
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement statement = conn.prepareStatement(
@@ -36,6 +37,8 @@ public class ArmaBD {
 		}
 	}
 
+	// Conexión con base de datos para sacar una lista con todas las armas que se
+	// han introducido en base de datos.
 	public List<Arma> getAllArmas() {
 		List<Arma> armas = new ArrayList<>();
 
@@ -63,6 +66,8 @@ public class ArmaBD {
 		return armas;
 	}
 
+	// Conexión con base de datos para borrar un arma que ya hubiera o hubiese sido
+	// insertada.
 	public void deleteArma(Arma arma) {
 		try (Connection conn = BDUtil.getConnection();
 				PreparedStatement statement = conn.prepareStatement("DELETE FROM arma WHERE nombre = ?")) {
@@ -80,6 +85,8 @@ public class ArmaBD {
 		}
 	}
 
+	// Conexión con base de datos para sacar solo los nombres de las armas en una
+	// lista.
 	public List<String> getNombresArmas() {
 		List<String> nombresArmas = new ArrayList<>();
 		try (Connection conn = BDUtil.getConnection();
@@ -96,57 +103,61 @@ public class ArmaBD {
 
 		return nombresArmas;
 	}
-	
+
+	// Conexión con base de datos para sacar el arma con sus atributos pero solo por
+	// el nombre, algo que me ayuda con los ComboBox en la parte de interfaz.
 	public Arma getArmaPorNombre(String nombreArma) {
-	    Arma arma = null;
-	    try (Connection conn = BDUtil.getConnection();
-	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM arma WHERE nombre = ?")) {
+		Arma arma = null;
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT * FROM arma WHERE nombre = ?")) {
 
-	        statement.setString(1, nombreArma);
-	        ResultSet resultSet = statement.executeQuery();
+			statement.setString(1, nombreArma);
+			ResultSet resultSet = statement.executeQuery();
 
-	        if (resultSet.next()) {
-	            String nombre = resultSet.getString("nombre");
-	            int poderAtaque = resultSet.getInt("poderAtaque");
-	            String elementoAtaqueString = resultSet.getString("elementoAtaque");
-	            Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
-	            String tipoArma = resultSet.getString("tipoArma");
-	            String imagen = resultSet.getString("imagen");
-	            String descripcion = resultSet.getString("descripcion");
+			if (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				int poderAtaque = resultSet.getInt("poderAtaque");
+				String elementoAtaqueString = resultSet.getString("elementoAtaque");
+				Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
+				String tipoArma = resultSet.getString("tipoArma");
+				String imagen = resultSet.getString("imagen");
+				String descripcion = resultSet.getString("descripcion");
 
-	            arma = new Arma(nombre, tipoArma, poderAtaque, elementoAtaque, imagen, descripcion);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+				arma = new Arma(nombre, tipoArma, poderAtaque, elementoAtaque, imagen, descripcion);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    return arma;
+		return arma;
 	}
 
+	// Conexión con base de datos para sacar el arma con sus atributos pero solo por
+	// el ID, algo que me ayuda con los ComboBox en la parte de interfaz.
 	public Arma getArmaPorId(int idArma) {
-	    Arma arma = null;
-	    try (Connection conn = BDUtil.getConnection();
-	         PreparedStatement statement = conn.prepareStatement("SELECT * FROM arma WHERE id = ?")) {
+		Arma arma = null;
+		try (Connection conn = BDUtil.getConnection();
+				PreparedStatement statement = conn.prepareStatement("SELECT * FROM arma WHERE id = ?")) {
 
-	        statement.setInt(1, idArma);
-	        ResultSet resultSet = statement.executeQuery();
+			statement.setInt(1, idArma);
+			ResultSet resultSet = statement.executeQuery();
 
-	        if (resultSet.next()) {
-	            String nombre = resultSet.getString("nombre");
-	            int poderAtaque = resultSet.getInt("poderAtaque");
-	            String elementoAtaqueString = resultSet.getString("elementoAtaque");
-	            Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
-	            String tipoArma = resultSet.getString("tipoArma");
-	            String imagen = resultSet.getString("imagen");
-	            String descripcion = resultSet.getString("descripcion");
+			if (resultSet.next()) {
+				String nombre = resultSet.getString("nombre");
+				int poderAtaque = resultSet.getInt("poderAtaque");
+				String elementoAtaqueString = resultSet.getString("elementoAtaque");
+				Elemento elementoAtaque = Elemento.valueOf(elementoAtaqueString);
+				String tipoArma = resultSet.getString("tipoArma");
+				String imagen = resultSet.getString("imagen");
+				String descripcion = resultSet.getString("descripcion");
 
-	            arma = new Arma(nombre, tipoArma, poderAtaque, elementoAtaque, imagen, descripcion);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+				arma = new Arma(nombre, tipoArma, poderAtaque, elementoAtaque, imagen, descripcion);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    return arma;
+		return arma;
 	}
 
 }

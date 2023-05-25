@@ -10,8 +10,10 @@ import clases.MonstruoPequeño;
 import utils.BDUtil;
 
 public class MonstruoPequeñoBD {
+	
+	// Inserta un monstruo pequeño en la base de datos
 	public void insertarMonstruoPequeño(MonstruoPequeño monstruoPequeño) {
-		String sql = "INSERT INTO monstruoPequeño ( eshostil, escabalgable, id_Monstruo) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO monstruoPequeño (eshostil, escabalgable, id_Monstruo) VALUES (?, ?, ?)";
 
 		try (Connection conn = BDUtil.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -25,6 +27,7 @@ public class MonstruoPequeñoBD {
 		}
 	}
 
+	// Obtiene una lista de todos los monstruos pequeños en la base de datos
 	public List<MonstruoPequeño> listarMonstruosPequeños() {
 		List<MonstruoPequeño> listaMonstruosPequeños = new ArrayList<>();
 		String sql = "SELECT t2.nombre, t2.especie, t2.tamaño, t2.puntossalud, m.nombre AS nombre_mapa, t2.poderAtaque, t2.imagen, t2.descripcion, t1.esHostil, t1.esCabalgable, t1.id_monstruo " +
@@ -62,6 +65,7 @@ public class MonstruoPequeñoBD {
 		return listaMonstruosPequeños;
 	}
 
+	// Elimina un monstruo pequeño de la base de datos por su nombre
 	public void eliminarMonstruoGrande(String nombre) {
 		String sql = "DELETE FROM monstruoPequeño WHERE nombre = ?";
 
