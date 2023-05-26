@@ -8,6 +8,8 @@ public class Arma extends ElementoConNombre {
 	private Elemento elementoAtaque; // elemento del arma equipada (enum): FUEGO, AGUA, ELECTRICIDAD, HIELO, DRAGON
 	private String imagePath; // ruta de imagen del arma
 	private String descripcion; // descripción del arma
+	private double poderAtaqueOriginal; // para resetear el daño del arma entre combates debido a la disminución de daño por parte del rugido de monstruo
+	
 
 	// Constructor en uso
 	public Arma(String nombre, String tipoArma, int poderAtaque, Elemento elementoAtaque, String imagePath,
@@ -18,8 +20,11 @@ public class Arma extends ElementoConNombre {
 		this.elementoAtaque = elementoAtaque;
 		this.imagePath = imagePath;
 		this.descripcion = descripcion;
+		this.poderAtaque = poderAtaque;
+		this.poderAtaqueOriginal = poderAtaque;
 	}
 
+	
 	// Getters y setters del arma
 	public String getTipoArma() {
 		return tipoArma;
@@ -71,6 +76,11 @@ public class Arma extends ElementoConNombre {
 		if (this.poderAtaque < 0) {
 			this.poderAtaque = 0;
 		}
+	}
+	
+	// Método que resetea el ataque entre combates
+	public void resetearAtaque() {
+	    this.poderAtaque = (int) this.poderAtaqueOriginal;
 	}
 
 	// toString arma

@@ -23,6 +23,8 @@ public class PantallaCombate extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lbl_NombreMonstruo;
 	private JLabel lbl_ImagenMonstruo;
+	private JLabel lbl_ContadorTurnos;
+	private int contadorTurnos = 0;
 
 	public PantallaCombate(Cazador cazador, MonstruoGrande monstruo) {
 		setTitle("Sin lugar a dudas, una de las batallas más épicas que he visto nunca.exe");
@@ -37,30 +39,44 @@ public class PantallaCombate extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if (cazador != null && monstruo != null) {
 					cazador.ataque(monstruo);
+					double dañoCazador = cazador.getDañoUltimoTurno(); // Guardar el daño del cazador en una variable
 					monstruo.ataqueAleatorio(cazador);
 					textArea_AtaquesCazador.setText("El cazador ha realizado un ataque normal y ha efectuado "
-							+ cazador.getDañoUltimoTurno() + " de daño al monstruo.\n");
-					textArea_AtaquesMonstruo
-							.setText("El monstruo ha realizado un ataque: " + monstruo.getAtaqueRealizado()
-									+ " y ha efectuado " + monstruo.getDañoUltimoTurno() + " de daño al cazador.\n");
+							+ dañoCazador + " de daño al monstruo.\n");
+					String mensaje;
+					String tipoAtaque = monstruo.getAtaqueRealizado();
+					double daño = monstruo.getDañoUltimoTurno();
+
+					if (tipoAtaque.equals("Rugido intimidante")) {
+						mensaje = "El monstruo ha realizado un rugido intimidante. ¡El poder de ataque del cazador ha disminuido un 3%!";
+					} else if (tipoAtaque.equals("Defensa")) {
+						mensaje = "El monstruo se ha defendido del ataque del cazador.";
+					} else {
+						mensaje = String.format("El monstruo ha realizado un ataque: %s y ha efectuado %.2f de daño al cazador.", tipoAtaque, daño);
+					}
+
+					textArea_AtaquesMonstruo.setText(mensaje);
+
 					lbl_SaludCazador.setText("Salud del cazador: " + cazador.getSaludActualCazador());
 					lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruo.getPuntosSaludActual());
 
 					// Verificar si el combate ha terminado
 					if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
-						String mensaje;
+						String mensajeFin;
 						if (cazador.getSaludActualCazador() <= 0) {
-							mensaje = "¡El combate ha terminado! El monstruo ha ganado.";
+							mensajeFin = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos + " turnos";
 						} else {
-							mensaje = "¡El combate ha terminado! El cazador ha ganado.";
+							mensajeFin = "¡El combate ha terminado! El cazador ha ganado en " + contadorTurnos + " turnos";
 						}
-						JOptionPane.showMessageDialog(null, mensaje, "Fin del combate",
+						JOptionPane.showMessageDialog(null, mensajeFin, "Fin del combate",
 								JOptionPane.INFORMATION_MESSAGE);
 						dispose(); // Cerrar la ventana de combate
 					}
 				} else {
 					System.out.println("No se ha especificado un cazador o monstruo");
 				}
+				contadorTurnos++;
+				lbl_ContadorTurnos.setText("Turno: " + contadorTurnos);
 			}
 		});
 		btn_Ataque.setBounds(45, 362, 113, 23);
@@ -85,20 +101,22 @@ public class PantallaCombate extends JDialog {
 						if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
 							String mensaje;
 							if (cazador.getSaludActualCazador() <= 0) {
-								mensaje = "¡El combate ha terminado! El monstruo ha ganado.";
+								mensaje = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos + " turnos";
 							} else {
-								mensaje = "¡El combate ha terminado! El cazador ha ganado.";
+								mensaje = "¡El combate ha terminado! El cazador ha ganado en " + contadorTurnos + " turnos";
 							}
 							JOptionPane.showMessageDialog(null, mensaje, "Fin del combate",
 									JOptionPane.INFORMATION_MESSAGE);
 							dispose(); // Cerrar la ventana de combate
 						}
 					} catch (AttackException ex) {
-						System.out.println(ex.getMessage());
+						textArea_AtaquesCazador.setText(ex.getMessage());
 					}
 				} else {
 					System.out.println("No se ha especificado un cazador o monstruo");
 				}
+				contadorTurnos++;
+				lbl_ContadorTurnos.setText("Turno: " + contadorTurnos);
 			}
 		});
 		btn_AtaqueFuerte.setBounds(181, 362, 113, 23);
@@ -124,20 +142,22 @@ public class PantallaCombate extends JDialog {
 						if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
 							String mensaje;
 							if (cazador.getSaludActualCazador() <= 0) {
-								mensaje = "¡El combate ha terminado! El monstruo ha ganado.";
+								mensaje = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos + " turnos";
 							} else {
-								mensaje = "¡El combate ha terminado! El cazador ha ganado.";
+								mensaje = "¡El combate ha terminado! El cazador ha ganado en " + contadorTurnos + " turnos";
 							}
 							JOptionPane.showMessageDialog(null, mensaje, "Fin del combate",
 									JOptionPane.INFORMATION_MESSAGE);
 							dispose(); // Cerrar la ventana de combate
 						}
 					} catch (AttackException ex) {
-						System.out.println(ex.getMessage());
+						textArea_AtaquesCazador.setText(ex.getMessage());
 					}
 				} else {
 					System.out.println("No se ha especificado un cazador o monstruo");
 				}
+				contadorTurnos++;
+				lbl_ContadorTurnos.setText("Turno: " + contadorTurnos);
 			}
 		});
 		btn_AccionArmaEspecial.setBounds(45, 396, 113, 23);
@@ -162,20 +182,22 @@ public class PantallaCombate extends JDialog {
 						if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
 							String mensaje;
 							if (cazador.getSaludActualCazador() <= 0) {
-								mensaje = "¡El combate ha terminado! El monstruo ha ganado.";
+								mensaje = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos + " turnos";
 							} else {
-								mensaje = "¡El combate ha terminado! El cazador ha ganado.";
+								mensaje = "¡El combate ha terminado! El cazador ha ganado en " + contadorTurnos + " turnos";
 							}
 							JOptionPane.showMessageDialog(null, mensaje, "Fin del combate",
 									JOptionPane.INFORMATION_MESSAGE);
 							dispose(); // Cerrar la ventana de combate
 						}
 					} catch (AttackException ex) {
-						System.out.println(ex.getMessage());
+						textArea_AtaquesCazador.setText(ex.getMessage());
 					}
 				} else {
 					System.out.println("No se ha especificado un cazador o monstruo");
 				}
+				contadorTurnos++;
+				lbl_ContadorTurnos.setText("Turno: " + contadorTurnos);
 			}
 		});
 		btn_Esquivar.setBounds(181, 396, 113, 23);
@@ -212,6 +234,11 @@ public class PantallaCombate extends JDialog {
 		lbl_ImagenMonstruo = new JLabel("New label");
 		lbl_ImagenMonstruo.setBounds(505, 64, 200, 200);
 		contentPanel.add(lbl_ImagenMonstruo);
+		
+		lbl_ContadorTurnos = new JLabel("Turnos: " + contadorTurnos); 
+		lbl_ContadorTurnos.setFont(new Font("Arial", Font.ITALIC, 13));
+		lbl_ContadorTurnos.setBounds(314, 105, 113, 14); 
+		contentPanel.add(lbl_ContadorTurnos);
 
 	}
 }

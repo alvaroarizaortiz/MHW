@@ -117,7 +117,6 @@ public class Cazador {
 		this.turno++;
 		double daño = this.armaEquipada.getPoderAtaque();
 		double dañoFinal = calcularDaño(monstruo, daño);
-
 		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
 		System.out.println("La salud actual del monstruo es " + monstruo.getPuntosSaludActual());
@@ -358,6 +357,7 @@ public class Cazador {
 		}
 
 	}
+	
 
 	// Este método resetea todo cuando acaba un combate
 	// Terminar un combate implica que la salud del monstruo o del cazador ha llegado a 0 y que el propio programa ha cerrado la pantalla de combate
@@ -368,11 +368,13 @@ public class Cazador {
 		this.turnoAtaqueCritico = 5;
 		this.turnoAtaqueMultiple = 5;
 		this.turnoAtaqueDefender = 3;
+		this.armaEquipada.resetearAtaque();
 		ataqueFuerteDisponible = true;
 		ataqueMultipleDisponible = true;
 		ataqueDefenderDisponible = true;
 		ataqueCriticoDisponible = true;
 		esquivarDisponible = true;
+		
 	}
 
 	// Método por el que el cazador recibe daño. Como puede haber decimales he decidido redondear a uno solo.

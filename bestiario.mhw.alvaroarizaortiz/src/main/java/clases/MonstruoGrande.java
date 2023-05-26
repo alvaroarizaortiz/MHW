@@ -135,7 +135,8 @@ public class MonstruoGrande extends Monstruo {
         double daño = this.getPoderAtaque();
         double dañoFinal = cazador.calcularDaño(this, daño);
         cazador.recibirDaño(dañoFinal);
-
+        this.setDañoUltimoTurno(dañoFinal);
+        
         if (cazador.getSaludCazador() <= 0) {
             resetearTurnos();
         }
@@ -157,6 +158,7 @@ public class MonstruoGrande extends Monstruo {
         double daño = this.getPoderAtaque() * 1.5; // Aumenta el daño base en un 50%
         double dañoFinal = cazador.calcularDaño(this, daño);
         cazador.recibirDaño(dañoFinal);
+        this.setDañoUltimoTurno(dañoFinal);
 
         if (cazador.getSaludCazador() <= 0) {
             resetearTurnos();
@@ -176,7 +178,7 @@ public class MonstruoGrande extends Monstruo {
         this.rugidoDisponible = false;
         this.turno++;
         // El rugido reduce el ataque del arma del cazador en un 2% cada vez que se usa.
-        cazador.reducirAtaqueArma(3);
+        cazador.getArmaEquipada().reducirAtaque(3);
 
         if (cazador.getSaludCazador() <= 0) {
             resetearTurnos();
@@ -202,45 +204,52 @@ public class MonstruoGrande extends Monstruo {
         resetearAtaqueFuerte();
     }
 
-    // Función para que el monstruo realice un ataque aleatorio entre los cuatro que hay disponibles
-    public void ataqueAleatorio(Cazador cazador) {
-        boolean ataqueRealizado = false;
-        double dañoMonstruo = 0.0; // Variable para almacenar el daño del monstruo
-        while (!ataqueRealizado) {
-            int ataque = random.nextInt(4);
-            try {
-                switch (ataque) {
-                    case 0:
-                        ataqueBasico(cazador);
-                        setAtaqueRealizado("Ataque básico");
-                        dañoMonstruo = cazador.getDañoUltimoTurno(); // Almacena el daño hecho por el monstruo
-                        ataqueRealizado = true;
-                        break;
-                    case 1:
-                        rugidoIntimidante(cazador);
-                        setAtaqueRealizado("Rugido intimidante");
-                        dañoMonstruo = cazador.getDañoUltimoTurno(); // Almacena el daño hecho por el monstruo
-                        ataqueRealizado = true;
-                        break;
-                    case 2:
-                        ataqueFuerte(cazador);
-                        setAtaqueRealizado("Ataque fuerte");
-                        dañoMonstruo = cazador.getDañoUltimoTurno(); // Almacena el daño hecho por el monstruo
-                        ataqueRealizado = true;
-                        break;
-                    case 3:
-                        defender();
-                        setAtaqueRealizado("Defensa");
-                        dañoMonstruo = cazador.getDañoUltimoTurno(); // Almacena el daño hecho por el monstruo
-                        ataqueRealizado = true;
-                        break;
-                }
-            } catch (AttackException e) {
-                // Ignorar excepción y volver a intentar seleccionar un ataque
-            }
-        }
-       cazador.setDañoUltimoTurno(dañoMonstruo); // Actualiza el daño hecho por el monstruo en el cazador
-    }
+	// Función para que el monstruo realice un ataque aleatorio entre los cuatro que
+	// hay disponibles
+	public void ataqueAleatorio(Cazador cazador) {
+		boolean ataqueRealizado = false;
+		double dañoMonstruo = 0.0; // Inicialmente no hay daño
+		while (!ataqueRealizado) {
+			int ataque = random.nextInt(4);
+			try {
+				switch (ataque) {
+				case 0:
+					ataqueBasico(cazador);
+					setAtaqueRealizado("Ataque básico");
+					dañoMonstruo = getDañoUltimoTurno();
+					ataqueRealizado = true;
+					break;
+				case 1:
+					rugidoIntimidante(cazador);
+					setAtaqueRealizado("Rugido intimidante");
+					// No hay daño en este caso, así que el dañoMonstruo permanece como 0
+					ataqueRealizado = true;
+					break;
+				case 2:
+					ataqueFuerte(cazador);
+					setAtaqueRealizado("Ataque fuerte");
+					dañoMonstruo = getDañoUltimoTurno();
+					ataqueRealizado = true;
+					break;
+				case 3:
+					defender();
+					setAtaqueRealizado("Defensa");
+					// No hay daño en este caso, así que el dañoMonstruo permanece como 0
+					ataqueRealizado = true;
+					break;
+				}
+			} catch (AttackException e) {
+				// Ignorar excepción y volver a intentar seleccionar un ataque
+			}
+		}
+		// Solo actualizar el daño del último turno si hubo daño
+		if (dañoMonstruo > 0) {
+			cazador.setDañoUltimoTurno(dañoMonstruo);
+		} else {
+			cazador.setDañoUltimoTurno(0);
+		}
+	}
+
     
     // Método para calcular el daño en función de debilidades y resistencias elementales. A saber:
  	// Si la debilidad de la armadura es igual al elemento que resiste el monstruo, este hace 1.5* de daño al cazador
@@ -261,7 +270,7 @@ public class MonstruoGrande extends Monstruo {
 		return daño;
 	}
     
-    // Método que usa el booleano de defender para comprobar si está defendiendose. En caso afirmativo se activa el porcentaje, luego se cambia a false.
+ // Método que usa el booleano de defender para comprobar si está defendiendose. En caso afirmativo se activa el porcentaje, luego se cambia a false.
     public void recibirDaño(double daño) {
         if (defendiendo) {
             daño *= Math.random() * 0.75; // El daño recibido se reduce en un porcentaje aleatorio entre 25% a 100%
