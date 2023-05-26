@@ -94,4 +94,6 @@ public class MonstruoBD {
 
 		return nombresMonstruos;
 	}
+	
+	
 }

@@ -113,6 +113,7 @@ public class MonstruoGrandeBD {
 
 		return monstruo;
 	}
+
 	
 	// Obtiene un objeto de tipo MonstruoGrande por su nombre
 	public MonstruoGrande getMonstruoGrandePorNombre(String nombre) {

@@ -130,10 +130,13 @@ public class MonstruoGrande extends Monstruo {
 	//  TODOS LOS ATAQUES ESTÁN SUJETOS A LA TABLA DE RESISTENCIAS Y DEBILIDADES ELEMENTALES.
 	
 	// Método de ataque normal. 
-    public void ataqueBasico(Cazador cazador) {
+    public void ataqueBasico(Cazador cazador, boolean esquivando) {
         this.turno++;
         double daño = this.getPoderAtaque();
-        double dañoFinal = cazador.calcularDaño(this, daño);
+        if(esquivando) {
+        	daño = 0;
+        }
+        double dañoFinal = this.calcularDañoMonstruo(cazador, daño);
         cazador.recibirDaño(dañoFinal);
         this.setDañoUltimoTurno(dañoFinal);
         
@@ -141,13 +144,14 @@ public class MonstruoGrande extends Monstruo {
             resetearTurnos();
         }
 
+        resetearDefensa();
         resetearRugido();
         resetearAtaqueFuerte();
-        resetearDefensa();
+        
     }
 
     //  Método de ataque fuerte. Se puede usar cada tres turnos y hace el daño de un ataque normal multiplicado por 1.5
-    public void ataqueFuerte(Cazador cazador) throws AttackException {
+    public void ataqueFuerte(Cazador cazador, boolean esquivando) throws AttackException {
         if (!ataqueFuerteDisponible) {
             throw new AttackException(
                     "El Monstruo no puede realizar el ataque fuerte. El ataque fuerte solo está disponible cada 2 turnos.");
@@ -156,7 +160,10 @@ public class MonstruoGrande extends Monstruo {
         this.ataqueFuerteDisponible = false;
         this.turno++;
         double daño = this.getPoderAtaque() * 1.5; // Aumenta el daño base en un 50%
-        double dañoFinal = cazador.calcularDaño(this, daño);
+        if(esquivando) {
+        	daño = 0;
+        }
+        double dañoFinal = this.calcularDañoMonstruo(cazador, daño);
         cazador.recibirDaño(dañoFinal);
         this.setDañoUltimoTurno(dañoFinal);
 
@@ -164,9 +171,10 @@ public class MonstruoGrande extends Monstruo {
             resetearTurnos();
         }
 
+        resetearDefensa();
         resetearRugido();
         resetearAtaqueFuerte();
-        resetearDefensa();
+        
     }
 
     // Método de rugido del monstruo. Se puede usar cada tres turnos y baja un 2% de ataque (permanente) al cazador hasta el final del combate.
@@ -184,9 +192,10 @@ public class MonstruoGrande extends Monstruo {
             resetearTurnos();
         }
 
+        resetearDefensa();
         resetearRugido();
         resetearAtaqueFuerte();
-        resetearDefensa();
+       
     }
 
     // Método de defensa del monstruo. Se puede usar cada dos turnos y el monstruo se defiende de todo el ataque que recibe.
@@ -195,18 +204,19 @@ public class MonstruoGrande extends Monstruo {
             throw new AttackException("El Monstruo no puede defender. La defensa solo está disponible cada 2 turnos.");
         }
 
-        this.defensaDisponible = false;
         this.defendiendo = true;
         this.turno++;
 
         resetearDefensa();
         resetearRugido();
         resetearAtaqueFuerte();
+        
+        
     }
 
 	// Función para que el monstruo realice un ataque aleatorio entre los cuatro que
 	// hay disponibles
-	public void ataqueAleatorio(Cazador cazador) {
+	public void ataqueAleatorio(Cazador cazador, boolean esquivando) {
 		boolean ataqueRealizado = false;
 		double dañoMonstruo = 0.0; // Inicialmente no hay daño
 		while (!ataqueRealizado) {
@@ -214,10 +224,12 @@ public class MonstruoGrande extends Monstruo {
 			try {
 				switch (ataque) {
 				case 0:
-					ataqueBasico(cazador);
-					setAtaqueRealizado("Ataque básico");
-					dañoMonstruo = getDañoUltimoTurno();
-					ataqueRealizado = true;
+					if(!esquivando){
+						ataqueBasico(cazador, esquivando);
+						setAtaqueRealizado("Ataque básico");
+						dañoMonstruo = getDañoUltimoTurno();
+						ataqueRealizado = true;
+					}
 					break;
 				case 1:
 					rugidoIntimidante(cazador);
@@ -226,10 +238,12 @@ public class MonstruoGrande extends Monstruo {
 					ataqueRealizado = true;
 					break;
 				case 2:
-					ataqueFuerte(cazador);
-					setAtaqueRealizado("Ataque fuerte");
-					dañoMonstruo = getDañoUltimoTurno();
-					ataqueRealizado = true;
+					if(!esquivando) {
+						ataqueFuerte(cazador, esquivando);
+						setAtaqueRealizado("Ataque fuerte");
+						dañoMonstruo = getDañoUltimoTurno();
+						ataqueRealizado = true;
+					}
 					break;
 				case 3:
 					defender();
@@ -254,33 +268,34 @@ public class MonstruoGrande extends Monstruo {
     // Método para calcular el daño en función de debilidades y resistencias elementales. A saber:
  	// Si la debilidad de la armadura es igual al elemento que resiste el monstruo, este hace 1.5* de daño al cazador
  	// Si la resistencia de la armadura es igual al elemento que resiste el monstruo, este hace 0.5* de daño al cazador
-    public double calcularDaño(Cazador cazador, double dañoBase) {
-		Elemento resistenciaMonstruo = this.getResistencias();
-		Elemento debilidadArmadura = cazador.getArmaduraEquipada().getDebilidadArmadura();
-		Elemento resistenciaArmadura = cazador.getArmaduraEquipada().getResistenciaArmadura();
+	public double calcularDañoMonstruo(Cazador cazador, double dañoBase) {
+	    Elemento resistenciaMonstruo = this.getResistencias();
+	    Elemento debilidadArmadura = cazador.getArmaduraEquipada().getDebilidadArmadura();
+	    Elemento resistenciaArmadura = cazador.getArmaduraEquipada().getResistenciaArmadura();
 
-		double daño = dañoBase;
+	    double daño = dañoBase;
 
-		// Comprueba si la armadura es débil o resistente al elemento del monstruo
-		if (debilidadArmadura.equals(resistenciaMonstruo)) {
-			daño *= 1.5;
-		} else if (resistenciaArmadura.equals(resistenciaMonstruo)) {
-			daño *= 0.5;
-		}
-		return daño;
+	 // Comprueba si la armadura del cazador es débil o resistente al elemento del monstruo
+	    if (debilidadArmadura.equals(resistenciaMonstruo)) {
+	        daño *= 1.5;
+	    } else if (resistenciaArmadura.equals(resistenciaMonstruo)) {
+	        daño *= 0.5;
+	    }
+	    return daño;
 	}
     
- // Método que usa el booleano de defender para comprobar si está defendiendose. En caso afirmativo se activa el porcentaje, luego se cambia a false.
+	// Método que usa el booleano de defender para comprobar si está defendiendose. En caso afirmativo se activa el porcentaje, luego se cambia a false.
     public void recibirDaño(double daño) {
         if (defendiendo) {
-            daño *= Math.random() * 0.75; // El daño recibido se reduce en un porcentaje aleatorio entre 25% a 100%
-            // cuando el monstruo se está defendiendo
+            daño = 0; // El daño recibido se reduce en 0 cuando el monstruo se está defendiendo
             defendiendo = false;
         }
         this.puntosSaludActual -= Math.round(daño);
         if (this.puntosSaludActual < 0) {
             this.puntosSaludActual = 0;
         }
+        
+        resetearDefensa();
     }
 
     // Hacia abajo todos los métodos "resetear" que funcionan con un contador que resta hasta 0 y los resetea hasta la cantidad de turnos de cada ataque
@@ -305,7 +320,7 @@ public class MonstruoGrande extends Monstruo {
     public void resetearDefensa() {
         if (turnoDefender <= 0) {
             turnoDefender = 2;
-            defensaDisponible = true;
+            defendiendo = false;
         } else {
             turnoDefender--;
         }
