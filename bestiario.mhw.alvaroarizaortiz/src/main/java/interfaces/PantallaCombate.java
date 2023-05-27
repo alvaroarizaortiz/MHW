@@ -26,43 +26,57 @@ public class PantallaCombate extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lbl_NombreMonstruo;
 	private JLabel lbl_ImagenMonstruo;
+	private JLabel lbl_NombreCazador;
 	private JLabel lbl_ContadorTurnos;
 	private int contadorTurnos = 0;
 	private boolean esquivando = false;
-	private Cazador cazador;
-	private MonstruoGrande monstruo;
-
-	public PantallaCombate(Cazador cazador, MonstruoGrande monstruo) {
+	
+	
+	public PantallaCombate(Cazador cazador, MonstruoGrande monstruoGrande) {
 		setTitle("Sin lugar a dudas, una de las batallas más épicas que he visto nunca.exe");
 		setBounds(100, 100, 800, 500);
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
-		this.cazador = cazador;
-		this.monstruo = monstruo;
-
-		lbl_NombreMonstruo = new JLabel("New label");
-		lbl_NombreMonstruo.setBounds(574, 29, 46, 14);
+		
+		if(monstruoGrande != null) {
+            lbl_NombreMonstruo = new JLabel(monstruoGrande.getNombre());
+            lbl_ImagenMonstruo = new JLabel("");
+            String ruta = "/images/" + monstruoGrande.getImagePath();
+    		URL urlImagen = getClass().getResource(ruta);
+    		ImageIcon imageIcon = new ImageIcon(
+    				new ImageIcon(urlImagen).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+    		lbl_ImagenMonstruo.setIcon(imageIcon);
+    		lbl_ImagenMonstruo.setBounds(505, 64, 200, 200);
+    		contentPanel.add(lbl_ImagenMonstruo);
+        } else {
+            lbl_NombreMonstruo = new JLabel("No hay monstruos seleccionados");
+        }
+		
+		lbl_NombreMonstruo.setBounds(574, 29, 131, 14);
 		contentPanel.add(lbl_NombreMonstruo);
-
-		lbl_ImagenMonstruo = new JLabel("New label");
-		lbl_ImagenMonstruo.setBounds(505, 64, 200, 200);
-		contentPanel.add(lbl_ImagenMonstruo);
+		
+		if(cazador != null) {
+		lbl_NombreCazador = new JLabel(cazador.getNombre());
+		lbl_NombreCazador.setBounds(89, 31, 131, 14);
+		contentPanel.add(lbl_NombreCazador);
+		}
+		
 
 
 		JButton btn_Ataque = new JButton("Ataque");
 		btn_Ataque.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (cazador != null && monstruo != null) {
-					cazador.ataque(monstruo);
+				if (cazador != null && monstruoGrande != null) {
+					cazador.ataque(monstruoGrande);
 					double dañoCazador = cazador.getDañoUltimoTurno();
-					monstruo.ataqueAleatorio(cazador, esquivando);
+					monstruoGrande.ataqueAleatorio(cazador, esquivando);
 					textArea_AtaquesCazador.setText("El cazador ha realizado un ataque normal y ha efectuado "
 							+ dañoCazador + " de daño al monstruo.\n");
 					String mensaje;
-					String tipoAtaque = monstruo.getAtaqueRealizado();
-					double daño = monstruo.getDañoUltimoTurno();
+					String tipoAtaque = monstruoGrande.getAtaqueRealizado();
+					double daño = monstruoGrande.getDañoUltimoTurno();
 
 					if (tipoAtaque.equals("Rugido intimidante")) {
 						mensaje = "El monstruo ha realizado un rugido intimidante. ¡El poder de ataque del cazador ha disminuido un 3%!";
@@ -77,10 +91,10 @@ public class PantallaCombate extends JDialog {
 					textArea_AtaquesMonstruo.setText(mensaje);
 
 					lbl_SaludCazador.setText("Salud del cazador: " + cazador.getSaludActualCazador());
-					lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruo.getPuntosSaludActual());
+					lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruoGrande.getPuntosSaludActual());
 
 					// Verificar si el combate ha terminado
-					if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
+					if (cazador.getSaludActualCazador() <= 0 || monstruoGrande.getPuntosSaludActual() <= 0) {
 						String mensajeFin;
 						if (cazador.getSaludActualCazador() <= 0) {
 							mensajeFin = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos
@@ -106,20 +120,20 @@ public class PantallaCombate extends JDialog {
 		JButton btn_AtaqueFuerte = new JButton("Ataque Fuerte");
 		btn_AtaqueFuerte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (cazador != null && monstruo != null) {
+				if (cazador != null && monstruoGrande != null) {
 					try {
-						cazador.ataqueFuerte(monstruo);
-						monstruo.ataqueAleatorio(cazador, esquivando);
+						cazador.ataqueFuerte(monstruoGrande);
+						monstruoGrande.ataqueAleatorio(cazador, esquivando);
 						textArea_AtaquesCazador.setText("El cazador ha realizado un ataque fuerte y ha efectuado "
 								+ cazador.getDañoUltimoTurno() + " de daño al monstruo.\n");
 						textArea_AtaquesMonstruo.setText("El monstruo ha realizado un ataque: "
-								+ monstruo.getAtaqueRealizado() + " y ha efectuado " + monstruo.getDañoUltimoTurno()
+								+ monstruoGrande.getAtaqueRealizado() + " y ha efectuado " + monstruoGrande.getDañoUltimoTurno()
 								+ " de daño al cazador.\n");
 						lbl_SaludCazador.setText("Salud del cazador: " + cazador.getSaludActualCazador());
-						lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruo.getPuntosSaludActual());
+						lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruoGrande.getPuntosSaludActual());
 						contadorTurnos++;
 						// Verificar si el combate ha terminado
-						if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
+						if (cazador.getSaludActualCazador() <= 0 || monstruoGrande.getPuntosSaludActual() <= 0) {
 							String mensaje;
 							if (cazador.getSaludActualCazador() <= 0) {
 								mensaje = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos
@@ -148,21 +162,21 @@ public class PantallaCombate extends JDialog {
 		JButton btn_AccionArmaEspecial = new JButton("Especial");
 		btn_AccionArmaEspecial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (cazador != null && monstruo != null) {
+				if (cazador != null && monstruoGrande != null) {
 					try {
-						cazador.ataqueEspecial(monstruo);
-						monstruo.ataqueAleatorio(cazador, esquivando);
+						cazador.ataqueEspecial(monstruoGrande);
+						monstruoGrande.ataqueAleatorio(cazador, esquivando);
 						textArea_AtaquesCazador
 								.setText("El cazador ha realizado un ataque especial con su arma y ha efectuado "
 										+ cazador.getDañoUltimoTurno() + " de daño al monstruo. \n");
 						textArea_AtaquesMonstruo.setText("El monstruo ha realizado un ataque: "
-								+ monstruo.getAtaqueRealizado() + " y ha efectuado " + monstruo.getDañoUltimoTurno()
+								+ monstruoGrande.getAtaqueRealizado() + " y ha efectuado " + monstruoGrande.getDañoUltimoTurno()
 								+ " de daño al cazador.\n");
 						lbl_SaludCazador.setText("Salud del cazador: " + cazador.getSaludActualCazador());
-						lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruo.getPuntosSaludActual());
+						lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruoGrande.getPuntosSaludActual());
 						contadorTurnos++;
 						// Verificar si el combate ha terminado
-						if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
+						if (cazador.getSaludActualCazador() <= 0 || monstruoGrande.getPuntosSaludActual() <= 0) {
 							String mensaje;
 							if (cazador.getSaludActualCazador() <= 0) {
 								mensaje = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos
@@ -191,21 +205,21 @@ public class PantallaCombate extends JDialog {
 		JButton btn_Esquivar = new JButton("Esquivar");
 		btn_Esquivar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (cazador != null && monstruo != null) {
+				if (cazador != null && monstruoGrande != null) {
 					try {
-						cazador.esquivar(monstruo);
+						cazador.esquivar(monstruoGrande);
 						esquivando = true;
-						monstruo.ataqueAleatorio(cazador, esquivando);
+						monstruoGrande.ataqueAleatorio(cazador, esquivando);
 						esquivando = false;
 						textArea_AtaquesCazador.setText(
 								"El cazador se mueve con una flexibilidad asombrosa para llevar esa armadura y esquiva el ataque. \n");
 						textArea_AtaquesMonstruo.setText("El monstruo ha realizado un ataque: "
-								+ monstruo.getAtaqueRealizado() + " y ha efectuado 0 puntos de daño \n");
+								+ monstruoGrande.getAtaqueRealizado() + " y ha efectuado 0 puntos de daño \n");
 						lbl_SaludCazador.setText("Salud del cazador: " + cazador.getSaludActualCazador());
-						lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruo.getPuntosSaludActual());
+						lbl_SaludMonstruo.setText("Salud del monstruo: " + monstruoGrande.getPuntosSaludActual());
 						contadorTurnos++;
 						// Verificar si el combate ha terminado
-						if (cazador.getSaludActualCazador() <= 0 || monstruo.getPuntosSaludActual() <= 0) {
+						if (cazador.getSaludActualCazador() <= 0 || monstruoGrande.getPuntosSaludActual() <= 0) {
 							String mensaje;
 							if (cazador.getSaludActualCazador() <= 0) {
 								mensaje = "¡El combate ha terminado! El monstruo ha ganado en " + contadorTurnos
@@ -259,6 +273,7 @@ public class PantallaCombate extends JDialog {
 		lbl_ContadorTurnos.setFont(new Font("Arial", Font.ITALIC, 13));
 		lbl_ContadorTurnos.setBounds(314, 105, 113, 14);
 		contentPanel.add(lbl_ContadorTurnos);
-
+		
+		
 	}
 }

@@ -41,13 +41,10 @@ public class CombateInterface extends JDialog {
 	private List<MonstruoGrande> monstruos = monstruoGrandeBD.listarMonstruosGrandes();
 	private Cazador cazador;
 	private MonstruoGrande monstruoGrande;
-	private MonstruoGrande monstruoGrandeSeleccionado;
-
 	// LAS JLABEL, COMBOBOX, BOTONES QUE SON NECESARIOS DECLARAR ARRIBA. LAS QUE NO
 	// INTERACTUAN CON LA BASE DE DATOS NO ESTÁN AQUÍ YA QUE NO ES NECESARIO.
 	private JComboBox<String> comboBox_Armas;
 	private JComboBox<String> comboBox_Armaduras;
-	private JComboBox<String> comboBoxMonstruos;
 	private JComboBox<Cazador> comboBox_CargarCazador;
 	private JLabel lbl_ImagenMonstruo;
 	private JLabel lbl_RespuestaAtaqueMonstruo;
@@ -317,27 +314,25 @@ public class CombateInterface extends JDialog {
 		btn_Combate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Obtener el monstruo seleccionado del JComboBox
-				String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
-				monstruoGrande = monstruoGrandeBD.getMonstruoGrandePorNombre(nombreMonstruoSeleccionado);
+				 String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
+			        monstruoGrande = monstruoGrandeBD.getMonstruoGrandePorNombre(nombreMonstruoSeleccionado);
 
 				System.out.println("Salud del monstruo antes de la batalla: " + monstruoGrande.getPuntosSaludActual());
 
 				// Verificar si se ha seleccionado un cazador
 				cazador = (Cazador) comboBox_CargarCazador.getSelectedItem();
-				if (cazador == null) {
-					System.out.println("No se ha especificado un cazador");
-					return;
-				}
+		        if (cazador == null) {
+		            System.out.println("No se ha especificado un cazador");
+		            return;
+		        }
 
 				// Reiniciar los turnos del cazador cada combate
-				cazador.resetearTurnos();
-				cazador.resetearSaludCazador();
-				System.out.println("Salud del cazador antes de la batalla:" + cazador.getSaludActualCazador());
-				// Crear la instancia de PantallaCombate y mostrarla
-				pantallacombate = new PantallaCombate(cazador, monstruoGrande);
-				pantallacombate.setVisible(true);
-
-			}
+		        cazador.resetearTurnos();
+		        cazador.resetearSaludCazador();
+		        
+		        pantallacombate = new PantallaCombate(cazador, monstruoGrande);
+		        pantallacombate.setVisible(true);
+		    }
 		});
 		btn_Combate.setBounds(424, 643, 151, 48);
 		contentPanel.add(btn_Combate);

@@ -53,7 +53,7 @@ public class ArmaduraBD {
 				int poderDefensa = resultSet.getInt("poderDefensa");
 				String resistenciaArmaduraString = resultSet.getString("resistenciaArmadura");
 				Elemento resistenciaArmadura = Elemento.valueOf(resistenciaArmaduraString);
-				String debilidadArmaduraString = resultSet.getString("debilidadesArmadura");
+				String debilidadArmaduraString = resultSet.getString("debilidadArmadura");
 				Elemento debilidadArmadura = Elemento.valueOf(debilidadArmaduraString);
 				String imagen = resultSet.getString("imagen");
 				String descripcion = resultSet.getString("descripcion");
