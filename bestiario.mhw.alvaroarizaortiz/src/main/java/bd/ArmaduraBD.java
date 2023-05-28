@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import clases.Arma;
 import clases.Armadura;
 import enumeraciones.Elemento;
 import utils.BDUtil;

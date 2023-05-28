@@ -93,92 +93,92 @@ public class Bestiario extends JDialog {
 
 		JLabel lbl_EspecieMonstruo = new JLabel("Especie");
 		lbl_EspecieMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_EspecieMonstruo.setBounds(569, 219, 133, 30);
+		lbl_EspecieMonstruo.setBounds(569, 220, 133, 30);
 		Monstruo.add(lbl_EspecieMonstruo);
 
 		lbl_RespuestaEspecieMonstruo = new JLabel("Respuesta especie");
 		lbl_RespuestaEspecieMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RespuestaEspecieMonstruo.setBounds(712, 221, 168, 14);
+		lbl_RespuestaEspecieMonstruo.setBounds(712, 220, 168, 30);
 		Monstruo.add(lbl_RespuestaEspecieMonstruo);
 
 		JLabel lbl_TamañoMonstruo = new JLabel("Tamaño");
 		lbl_TamañoMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_TamañoMonstruo.setBounds(569, 249, 133, 30);
+		lbl_TamañoMonstruo.setBounds(569, 250, 133, 30);
 		Monstruo.add(lbl_TamañoMonstruo);
 
 		lbl_RespuestaTamañoMonstruo = new JLabel("Respuesta tamaño");
 		lbl_RespuestaTamañoMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RespuestaTamañoMonstruo.setBounds(712, 256, 168, 14);
+		lbl_RespuestaTamañoMonstruo.setBounds(712, 250, 168, 30);
 		Monstruo.add(lbl_RespuestaTamañoMonstruo);
 
 		JLabel lbl_SaludMonstruo = new JLabel("Salud");
 		lbl_SaludMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_SaludMonstruo.setBounds(569, 309, 133, 30);
+		lbl_SaludMonstruo.setBounds(569, 310, 133, 30);
 		Monstruo.add(lbl_SaludMonstruo);
 
 		lbl_respuestaSaludMonstruo = new JLabel("Respuesta salud");
 		lbl_respuestaSaludMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_respuestaSaludMonstruo.setBounds(712, 289, 168, 14);
+		lbl_respuestaSaludMonstruo.setBounds(712, 310, 168, 30);
 		Monstruo.add(lbl_respuestaSaludMonstruo);
 
 		JLabel lbl_AtaqueMonstruo = new JLabel("Ataque");
 		lbl_AtaqueMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_AtaqueMonstruo.setBounds(569, 279, 133, 30);
+		lbl_AtaqueMonstruo.setBounds(569, 280, 133, 30);
 		Monstruo.add(lbl_AtaqueMonstruo);
 
 		lbl_RespuestaAtaqueMonstruo = new JLabel("Respuesta ataque");
 		lbl_RespuestaAtaqueMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RespuestaAtaqueMonstruo.setBounds(712, 314, 168, 14);
+		lbl_RespuestaAtaqueMonstruo.setBounds(712, 280, 168, 30);
 		Monstruo.add(lbl_RespuestaAtaqueMonstruo);
 
 		JLabel lbl_LocalizacionMonstruo = new JLabel("Localización");
 		lbl_LocalizacionMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_LocalizacionMonstruo.setBounds(569, 339, 133, 30);
+		lbl_LocalizacionMonstruo.setBounds(569, 340, 133, 30);
 		Monstruo.add(lbl_LocalizacionMonstruo);
 
 		lbl_RespuestaLocalizacionMonstruo = new JLabel("Respuesta localizacion");
 		lbl_RespuestaLocalizacionMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RespuestaLocalizacionMonstruo.setBounds(712, 339, 168, 14);
+		lbl_RespuestaLocalizacionMonstruo.setBounds(712, 340, 168, 30);
 		Monstruo.add(lbl_RespuestaLocalizacionMonstruo);
 
 		JLabel lbl_CapturaMonstruo = new JLabel("¿Es capturable?");
 		lbl_CapturaMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_CapturaMonstruo.setBounds(569, 369, 133, 30);
+		lbl_CapturaMonstruo.setBounds(569, 370, 133, 30);
 		Monstruo.add(lbl_CapturaMonstruo);
 
 		lbl_RespuestaCapturaMonstruo = new JLabel("Respuesta Captura");
 		lbl_RespuestaCapturaMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RespuestaCapturaMonstruo.setBounds(712, 368, 168, 14);
+		lbl_RespuestaCapturaMonstruo.setBounds(712, 370, 168, 30);
 		Monstruo.add(lbl_RespuestaCapturaMonstruo);
 
 		JLabel lbl_ResistenciaMonstruo = new JLabel("Resistecia");
 		lbl_ResistenciaMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_ResistenciaMonstruo.setBounds(569, 399, 133, 30);
+		lbl_ResistenciaMonstruo.setBounds(569, 400, 133, 30);
 		Monstruo.add(lbl_ResistenciaMonstruo);
 
 		lbl_RespuestaResistenciaMonstruo = new JLabel("Respuesta resistencia");
 		lbl_RespuestaResistenciaMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RespuestaResistenciaMonstruo.setBounds(712, 403, 168, 14);
+		lbl_RespuestaResistenciaMonstruo.setBounds(712, 400, 168, 30);
 		Monstruo.add(lbl_RespuestaResistenciaMonstruo);
 
 		JLabel lbl_DebilidadMonstruo = new JLabel("Debilidad");
 		lbl_DebilidadMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_DebilidadMonstruo.setBounds(569, 429, 133, 30);
+		lbl_DebilidadMonstruo.setBounds(569, 430, 133, 30);
 		Monstruo.add(lbl_DebilidadMonstruo);
 
 		lbl_RepuestaDebilidadMonstruo = new JLabel("Respuesta debilidad");
 		lbl_RepuestaDebilidadMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RepuestaDebilidadMonstruo.setBounds(712, 433, 168, 14);
+		lbl_RepuestaDebilidadMonstruo.setBounds(712, 430, 168, 30);
 		Monstruo.add(lbl_RepuestaDebilidadMonstruo);
 
 		JLabel lbl_PuntoDebilMonstruo = new JLabel("Punto débil");
 		lbl_PuntoDebilMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
-		lbl_PuntoDebilMonstruo.setBounds(569, 459, 133, 30);
+		lbl_PuntoDebilMonstruo.setBounds(569, 460, 133, 30);
 		Monstruo.add(lbl_PuntoDebilMonstruo);
 
 		lbl_RespuestaPuntoDebilMonstruo = new JLabel("Respuesta punto debil");
 		lbl_RespuestaPuntoDebilMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		lbl_RespuestaPuntoDebilMonstruo.setBounds(712, 464, 168, 14);
+		lbl_RespuestaPuntoDebilMonstruo.setBounds(712, 460, 168, 30);
 		Monstruo.add(lbl_RespuestaPuntoDebilMonstruo);
 
 		textArea_DescripcionMonstruo = new JTextArea();

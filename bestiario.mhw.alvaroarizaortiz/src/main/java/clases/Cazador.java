@@ -10,33 +10,20 @@ public class Cazador {
 	private Arma armaEquipada; // Arma que el cazador tiene equipada
 	private int id; // Identificador cazador
 	private String nombre; // Nombre del cazador
-	private int saludActualCazador; // Salud actual del cazador (será menor que saludCazador debido a los daños
-									// excepto en el primer turno)
+	private int saludActualCazador; // Salud actual del cazador (será menor que saludCazador debido a los daños excepto en el primer turno)
 	private double dañoUltimoTurno = 0; // Daño que el cazador hizo en el último turno
 	private int turnoAtaqueFuerte = 3; // Contador para el ataque fuerte, solo disponible cada 3 turnos
-	private int turnoEsquivar = 2; // Contador para esquivar, solo disponible cada 2 turnos. Inicializa en 2 y va
-									// restando hasta 0. Luego vuelve a 2
-	private int turnoAtaqueCritico = 5; // Contador para el ataque crítico, solo disponible cada 5 turnos. Inicializa en
-										// 5 y va restando hasta 0. Luego vuelve a 5
-	private int turnoAtaqueMultiple = 5; // Contador para el ataque múltiple, solo disponible cada 5 turnos. Inicializa
-											// en 5 y va restando hasta 0. Luego vuelve a 5
-	private int turnoAtaqueConEscudo = 2; // Contador ataque con escudo. Inicializa en 2 y va restando hasta 0. Luego
-											// vuelve a 2
-	private boolean ataqueFuerteDisponible = true; // Indica si el ataque fuerte está disponible. Inicia en true para
-													// que esté disponible el primer turno del combate.
-	private boolean esquivarDisponible = true; // Indica si esquivar está disponible. Inicia en true para que esté
-												// disponible el primer turno del combate
-	private boolean ataqueCriticoDisponible = true; // Indica si el ataque crítico está disponible. Inicia en true para
-													// que esté disponible el primer turno del combate
-	private boolean ataqueMultipleDisponible = true; // Indica si el ataque múltiple está disponible. Inicia en true
-														// para que esté disponible el primer turno del combate
-	private boolean ataqueConEscudoDisponible = true; // Indica si defender está disponible. Inicia en true para que
-														// esté disponible el primer turno del combate
-	private boolean dañoAtaqueArmaReducido = false; // Indica si el daño del ataque del arma ha sido reducido. Inicia en
-													// false para que el daño del arma no empiece reducido
-	boolean esquivando = false;
-	private int turno = 0; // Contador de turnos
-
+	private int turnoEsquivar = 2; // Contador para esquivar, solo disponible cada 2 turnos. Inicializa en 2 y varestando hasta 0. Luego vuelve a 2
+	private int turnoAtaqueCritico = 5; // Contador para el ataque crítico, solo disponible cada 5 turnos. Inicializa en5 y va restando hasta 0. Luego vuelve a 5
+	private int turnoAtaqueMultiple = 5; // Contador para el ataque múltiple, solo disponible cada 5 turnos. Inicializa en 5 y va restando hasta 0. Luego vuelve a 5
+	private int turnoAtaqueConEscudo = 2; // Contador ataque con escudo. Inicializa en 2 y va restando hasta 0. Luegovuelve a 2
+	private boolean ataqueFuerteDisponible = true; // Indica si el ataque fuerte está disponible. Inicia en true paraque esté disponible el primer turno del combate.
+	private boolean esquivarDisponible = true; // Indica si esquivar está disponible. Inicia en true para que estédisponible el primer turno del combate
+	private boolean ataqueCriticoDisponible = true; // Indica si el ataque crítico está disponible. Inicia en true paraque esté disponible el primer turno del combate
+	private boolean ataqueMultipleDisponible = true; // Indica si el ataque múltiple está disponible. Inicia en truepara que esté disponible el primer turno del combate
+	private boolean ataqueConEscudoDisponible = true; // Indica si defender está disponible. Inicia en true para que esté disponible el primer turno del combate
+	boolean esquivando = false; // Indica si el cazador está esquivando ese turno
+	
 	// Constructor usado durante la realización del proyecto. Sobre todo en base de
 	// datos.
 	public Cazador(int saludCazador, Armadura armaduraEquipada, Arma armaEquipada, int id) {
@@ -134,9 +121,8 @@ public class Cazador {
 	// Método de ataque normal. Ataque estandar que utiliza el daño del arma (sujeto
 	// a los debuffs del monstruo)
 	public void ataque(MonstruoGrande monstruo) {
-		this.turno++;
 		int daño = this.armaEquipada.getPoderAtaque();
-		
+
 		if (monstruo.isDefendiendo()) {
 			daño = 0;
 			monstruo.setDefendiendo(false);
@@ -144,7 +130,6 @@ public class Cazador {
 		double dañoFinal = calcularDaño(monstruo, daño);
 		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
-		System.out.println("La salud actual del monstruo es " + monstruo.getPuntosSaludActual());
 
 		if (monstruo.getPuntosSaludActual() <= 0) {
 			resetearTurnos();
@@ -180,8 +165,6 @@ public class Cazador {
 		}
 
 		ataqueFuerteDisponible = false;
-		turno++;
-
 		resetearAtaqueFuerte();
 		resetearEsquivar();
 		resetearAtaqueCritico();
@@ -189,8 +172,12 @@ public class Cazador {
 		resetearAtaqueConEscudo();
 	}
 
-	// Método para esquivar. Se puede usar cada 2 turnos. Esquiva totalmente el
-	// ataque del monstruo si este iba a hacer daño
+	// Método para esquivar. Se puede usar cada 2 turnos. Es un método que he
+	// implementado para "ganar turnos". El monstruo únicamente se defenderá o
+	// rugirá si el cazador está esquivando, lo que debería permitirle al usuario
+	// ganar un turno para poder usar un ataque fuerte o un ataque especial si lo
+	// considera necesario. El resto del código se puede ver en el ataque aleatorio
+	// del monstruo.
 	public void esquivar(MonstruoGrande monstruo) throws AttackException {
 		if (!esquivarDisponible) {
 			throw new AttackException(
@@ -198,7 +185,6 @@ public class Cazador {
 		}
 
 		esquivarDisponible = false;
-		turno++;
 		if (monstruo.getPuntosSaludActual() <= 0) {
 			resetearTurnos();
 		}
@@ -218,7 +204,6 @@ public class Cazador {
 					"No puedes realizar un ataque crítico en este turno. El ataque especial de la Gran Espada solo está disponible cada 5 turnos");
 		}
 		ataqueCriticoDisponible = false;
-		turno++;
 		resetearEsquivar();
 		resetearAtaqueFuerte();
 		resetearAtaqueCritico();
@@ -249,7 +234,6 @@ public class Cazador {
 					"No puedes realizar un disparo múltiple en este turno. El ataque especial del Arco solo está disponible cada 5 turnos");
 		}
 		ataqueMultipleDisponible = false;
-		turno++;
 		resetearEsquivar();
 		resetearAtaqueFuerte();
 		resetearAtaqueCritico();
@@ -279,8 +263,6 @@ public class Cazador {
 					"No puedes realizar un ataque con escudo en este turno. El movimiento especial de la Lanza solo está disponible cada 2 turnos");
 		}
 		ataqueConEscudoDisponible = false;
-		turno++;
-
 		// El ataque con escudo hace 1.5 de daño del poder de la lanza equipada
 		int daño = (int) (this.armaEquipada.getPoderAtaque() * 1.5);
 		if (monstruo.isDefendiendo()) {
@@ -349,8 +331,6 @@ public class Cazador {
 			armaEquipada.reducirAtaque(porcentaje);
 
 		}
-
-		dañoAtaqueArmaReducido = true;
 	}
 
 	// Hacia abajo todos los métodos "resetear" que funcionan con un contador que
@@ -410,7 +390,6 @@ public class Cazador {
 	// Terminar un combate implica que la salud del monstruo o del cazador ha
 	// llegado a 0 y que el propio programa ha cerrado la pantalla de combate
 	public void resetearTurnos() {
-		this.turno = 0;
 		this.turnoAtaqueFuerte = 3;
 		this.turnoEsquivar = 2;
 		this.turnoAtaqueCritico = 5;
@@ -433,7 +412,6 @@ public class Cazador {
 		if (this.saludActualCazador < 0) {
 			this.saludActualCazador = 0;
 		}
-		System.out.println("Salud actual del cazador es " + this.saludActualCazador);
 	}
 
 	// toString formateado del Cazador

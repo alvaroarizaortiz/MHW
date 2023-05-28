@@ -10,7 +10,6 @@ import java.util.List;
 import clases.Arma;
 import clases.Armadura;
 import clases.Cazador;
-import enumeraciones.Elemento;
 import utils.BDUtil;
 
 public class CazadorBD {

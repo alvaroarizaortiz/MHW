@@ -1,9 +1,5 @@
 package clases;
 
-import java.util.ArrayList;
-
-import enumeraciones.Elemento;
-
 public class Monstruo extends ElementoConNombre {
 	private String especie; // Especie del monstruo
 	private int tamaño; // Tamaño del monstruo

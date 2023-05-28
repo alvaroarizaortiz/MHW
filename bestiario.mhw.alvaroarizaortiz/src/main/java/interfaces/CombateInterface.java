@@ -1,25 +1,21 @@
 package interfaces;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import bd.ArmaBD;
 import bd.ArmaduraBD;
 import bd.CazadorBD;
-import bd.MonstruoBD;
 import bd.MonstruoGrandeBD;
 import clases.Arma;
 import clases.Armadura;
 import clases.Cazador;
-import clases.Monstruo;
 import clases.MonstruoGrande;
 
 import javax.swing.JComboBox;
@@ -28,7 +24,6 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 import javax.swing.JTextField;
 
 public class CombateInterface extends JDialog {
@@ -38,7 +33,6 @@ public class CombateInterface extends JDialog {
 	private MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
 	private ArmaBD armaBD = new ArmaBD();
 	private ArmaduraBD armaduraBD = new ArmaduraBD();
-	private List<MonstruoGrande> monstruos = monstruoGrandeBD.listarMonstruosGrandes();
 	private Cazador cazador;
 	private MonstruoGrande monstruoGrande;
 	// LAS JLABEL, COMBOBOX, BOTONES QUE SON NECESARIOS DECLARAR ARRIBA. LAS QUE NO
@@ -314,25 +308,23 @@ public class CombateInterface extends JDialog {
 		btn_Combate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Obtener el monstruo seleccionado del JComboBox
-				 String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
-			        monstruoGrande = monstruoGrandeBD.getMonstruoGrandePorNombre(nombreMonstruoSeleccionado);
-
-				System.out.println("Salud del monstruo antes de la batalla: " + monstruoGrande.getPuntosSaludActual());
+				String nombreMonstruoSeleccionado = (String) comboBox_Monstruo.getSelectedItem();
+				monstruoGrande = monstruoGrandeBD.getMonstruoGrandePorNombre(nombreMonstruoSeleccionado);
 
 				// Verificar si se ha seleccionado un cazador
 				cazador = (Cazador) comboBox_CargarCazador.getSelectedItem();
-		        if (cazador == null) {
-		            System.out.println("No se ha especificado un cazador");
-		            return;
-		        }
+				if (cazador == null) {
+					System.out.println("No se ha especificado un cazador");
+					return;
+				}
 
 				// Reiniciar los turnos del cazador cada combate
-		        cazador.resetearTurnos();
-		        cazador.resetearSaludCazador();
-		        
-		        pantallacombate = new PantallaCombate(cazador, monstruoGrande);
-		        pantallacombate.setVisible(true);
-		    }
+				cazador.resetearTurnos();
+				cazador.resetearSaludCazador();
+
+				pantallacombate = new PantallaCombate(cazador, monstruoGrande);
+				pantallacombate.setVisible(true);
+			}
 		});
 		btn_Combate.setBounds(424, 643, 151, 48);
 		contentPanel.add(btn_Combate);

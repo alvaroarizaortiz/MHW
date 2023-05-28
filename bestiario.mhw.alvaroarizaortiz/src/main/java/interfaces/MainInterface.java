@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class MainInterface extends JFrame {
 
@@ -23,6 +24,7 @@ public class MainInterface extends JFrame {
     private BestiarioPequeño bestiariopequeño;
     private ArmaArmadura armaarmadura;
     private CombateInterface combate;
+    private Feedback feedback;
     private Clip clip;
 
     public static void main(String[] args) {
@@ -53,11 +55,15 @@ public class MainInterface extends JFrame {
 
         combate = new CombateInterface(this, true);
         combate.setVisible(false);
+        
+        feedback = new Feedback(this, true);
+        feedback.setVisible(false);
 
         setTitle("Bienvenidos al Bestiario + Combate de Monster Hunter World (pensé en un título más largo pero así está bien)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 500);
         contentPane = new JPanel();
+        contentPane.setForeground(new Color(230, 230, 230));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -102,6 +108,16 @@ public class MainInterface extends JFrame {
         });
         btn_Combate.setBounds(471, 323, 191, 83);
         contentPane.add(btn_Combate);
+        
+        JButton btn_Feedback = new JButton("Feedback");
+        btn_Feedback.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		stopMusic(); // Detener la música al pulsar el botón
+                feedback.setVisible(true);
+        	}
+        });
+        btn_Feedback.setBounds(283, 186, 191, 83);
+        contentPane.add(btn_Feedback);
     }
 
     private void playMusic(String filepath) {

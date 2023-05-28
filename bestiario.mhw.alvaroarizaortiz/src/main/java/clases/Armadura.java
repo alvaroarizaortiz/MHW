@@ -1,7 +1,5 @@
 package clases;
 
-import java.util.ArrayList;
-
 import enumeraciones.Elemento;
 
 public class Armadura extends ElementoConNombre {
