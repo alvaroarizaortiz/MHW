@@ -42,7 +42,7 @@ public class ArmaArmadura extends JDialog {
 		setTitle("ARMAS Y ARMADURAS");
 		setBounds(100, 100, 1000, 1000);
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
-		contentPanel.setBackground(Color.GRAY);
+		contentPanel.setBackground(new Color(42, 97, 88));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
@@ -52,10 +52,14 @@ public class ArmaArmadura extends JDialog {
 		contentPanel.add(panel_Armas);
 		panel_Armas.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("ARMAS");
-		lblNewLabel.setBounds(193, 11, 71, 58);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		panel_Armas.add(lblNewLabel);
+		ImageIcon rawarmas = new ImageIcon(getClass().getResource("/images/armas.png"));
+		Image imagearmas = rawarmas.getImage().getScaledInstance(370, 124, Image.SCALE_SMOOTH);
+		ImageIcon finalarmas = new ImageIcon(imagearmas);
+		JLabel lbl_Armas = new JLabel("");
+		lbl_Armas.setIcon(finalarmas);
+		lbl_Armas.setBounds(55, 25, 370, 124);
+		lbl_Armas.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		panel_Armas.add(lbl_Armas);
 
 		JComboBox comboBox_Armas = new JComboBox();
 		List<String> nombresArmas = armaBD.getNombresArmas();
@@ -85,43 +89,50 @@ public class ArmaArmadura extends JDialog {
 			}
 		});
 
-		comboBox_Armas.setBounds(121, 60, 201, 34);
+		comboBox_Armas.setBounds(98, 184, 297, 34);
 		panel_Armas.add(comboBox_Armas);
 
 		JLabel lbl_TipoArma = new JLabel("Tipo de arma");
-		lbl_TipoArma.setBounds(10, 120, 110, 26);
+		lbl_TipoArma.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
+		lbl_TipoArma.setBounds(98, 229, 110, 30);
 		panel_Armas.add(lbl_TipoArma);
 
 		lbl_RespuestatipoArma = new JLabel("Respuesta tipo arma");
-		lbl_RespuestatipoArma.setBounds(198, 116, 192, 26);
+		lbl_RespuestatipoArma.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
+		lbl_RespuestatipoArma.setBounds(248, 229, 192, 30);
 		panel_Armas.add(lbl_RespuestatipoArma);
 
 		JLabel lbl_PoderAtaqueArma = new JLabel("Poder de ataque");
-		lbl_PoderAtaqueArma.setBounds(10, 166, 90, 26);
+		lbl_PoderAtaqueArma.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
+		lbl_PoderAtaqueArma.setBounds(98, 279, 163, 30);
 		panel_Armas.add(lbl_PoderAtaqueArma);
 
 		lbl_RespuestapoderataqueArma = new JLabel("Respuesta poder ataque");
-		lbl_RespuestapoderataqueArma.setBounds(198, 166, 124, 26);
+		lbl_RespuestapoderataqueArma.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
+		lbl_RespuestapoderataqueArma.setBounds(271, 279, 124, 30);
 		panel_Armas.add(lbl_RespuestapoderataqueArma);
 
 		JLabel lbl_ElementoAtaque = new JLabel("Elemento");
-		lbl_ElementoAtaque.setBounds(10, 206, 90, 26);
+		lbl_ElementoAtaque.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
+		lbl_ElementoAtaque.setBounds(98, 329, 90, 30);
 		panel_Armas.add(lbl_ElementoAtaque);
 
 		lbl_RespuestaelementoataqueArma = new JLabel("Respuesta elemento ataque");
-		lbl_RespuestaelementoataqueArma.setBounds(198, 206, 135, 26);
+		lbl_RespuestaelementoataqueArma.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
+		lbl_RespuestaelementoataqueArma.setBounds(271, 329, 135, 30);
 		panel_Armas.add(lbl_RespuestaelementoataqueArma);
 
 		lbl_ArmaImagen = new JLabel();
-		lbl_ArmaImagen.setBounds(67, 479, 350, 350);
+		lbl_ArmaImagen.setBounds(67, 512, 350, 350);
 		panel_Armas.add(lbl_ArmaImagen);
 
 		textArea_DescripcionArma = new JTextArea();
-		textArea_DescripcionArma.setBackground(Color.LIGHT_GRAY);
+		textArea_DescripcionArma.setForeground(Color.WHITE);
+		textArea_DescripcionArma.setBackground(new Color(42, 97, 88));
 		textArea_DescripcionArma.setLineWrap(true);
 		textArea_DescripcionArma.setWrapStyleWord(true);
 		textArea_DescripcionArma.setEditable(false);
-		textArea_DescripcionArma.setBounds(98, 243, 300, 100);
+		textArea_DescripcionArma.setBounds(97, 392, 300, 65);
 		panel_Armas.add(textArea_DescripcionArma);
 
 		// Esto deja el ComboBox inicializado en el primer arma y ya coge los datos de
@@ -150,9 +161,13 @@ public class ArmaArmadura extends JDialog {
 		contentPanel.add(panel_Armaduras);
 		panel_Armaduras.setLayout(null);
 
-		JLabel lbl_Armaduras = new JLabel("ARMADURAS");
+		ImageIcon rawarmaduras = new ImageIcon(getClass().getResource("/images/armaduras.png"));
+		Image imagearmaduras = rawarmaduras.getImage().getScaledInstance(448, 121, Image.SCALE_SMOOTH);
+		ImageIcon finalarmaduras = new ImageIcon(imagearmaduras);
+		JLabel lbl_Armaduras = new JLabel("");
+		lbl_Armaduras.setIcon(finalarmaduras);
 		lbl_Armaduras.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lbl_Armaduras.setBounds(181, 19, 113, 25);
+		lbl_Armaduras.setBounds(19, 25, 448, 121);
 		panel_Armaduras.add(lbl_Armaduras);
 
 		JComboBox comboBox_Armaduras = new JComboBox();
@@ -185,43 +200,46 @@ public class ArmaArmadura extends JDialog {
 
 		});
 
-		comboBox_Armaduras.setBounds(117, 55, 201, 34);
+		comboBox_Armaduras.setBounds(98, 184, 297, 34);
 		panel_Armaduras.add(comboBox_Armaduras);
 
 		JLabel lbl_PoderDefensaArmadura = new JLabel("Poder de defensa");
-		lbl_PoderDefensaArmadura.setBounds(88, 132, 100, 14);
+		lbl_PoderDefensaArmadura.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
+		lbl_PoderDefensaArmadura.setBounds(98, 229, 163, 30);
 		panel_Armaduras.add(lbl_PoderDefensaArmadura);
 
 		lbl_Respuestapoderdefensarmadura = new JLabel("Respuesta poder defensa");
-		lbl_Respuestapoderdefensarmadura.setBounds(301, 132, 133, 14);
+		lbl_Respuestapoderdefensarmadura.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
+		lbl_Respuestapoderdefensarmadura.setBounds(296, 229, 133, 30);
 		panel_Armaduras.add(lbl_Respuestapoderdefensarmadura);
 
 		JLabel lbl_ResistenciaArmadura = new JLabel("Resistencia");
-		lbl_ResistenciaArmadura.setBounds(88, 168, 88, 14);
+		lbl_ResistenciaArmadura.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
+		lbl_ResistenciaArmadura.setBounds(98, 279, 88, 30);
 		panel_Armaduras.add(lbl_ResistenciaArmadura);
 
 		lbl_RespuestaresistenciaArmadura = new JLabel("Respuesta resistencia");
-		lbl_RespuestaresistenciaArmadura.setBounds(301, 168, 113, 14);
+		lbl_RespuestaresistenciaArmadura.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
+		lbl_RespuestaresistenciaArmadura.setBounds(254, 279, 113, 30);
 		panel_Armaduras.add(lbl_RespuestaresistenciaArmadura);
 
 		JLabel lbl_DebilidadArmadura = new JLabel("Debilidad");
-		lbl_DebilidadArmadura.setBounds(88, 204, 68, 14);
+		lbl_DebilidadArmadura.setFont(new Font("Futura Md BT", Font.PLAIN, 17));
+		lbl_DebilidadArmadura.setBounds(96, 329, 120, 30);
 		panel_Armaduras.add(lbl_DebilidadArmadura);
 
 		lbl_RespuestadebilidadArmadura = new JLabel("Respuesta debilidad");
-		lbl_RespuestadebilidadArmadura.setBounds(314, 204, 100, 14);
+		lbl_RespuestadebilidadArmadura.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
+		lbl_RespuestadebilidadArmadura.setBounds(233, 329, 100, 30);
 		panel_Armaduras.add(lbl_RespuestadebilidadArmadura);
 
-		lbl_ArmaduraImagen = new JLabel();
-		lbl_ArmaduraImagen.setBounds(117, 428, 250, 500);
-		panel_Armaduras.add(lbl_ArmaduraImagen);
-
 		textArea_DescripcionArmadura = new JTextArea();
-		textArea_DescripcionArmadura.setBackground(Color.LIGHT_GRAY);
+		textArea_DescripcionArmadura.setForeground(Color.WHITE);
+		textArea_DescripcionArmadura.setBackground(new Color(42, 97, 88));
 		textArea_DescripcionArmadura.setLineWrap(true);
 		textArea_DescripcionArmadura.setWrapStyleWord(true);
 		textArea_DescripcionArmadura.setEditable(false);
-		textArea_DescripcionArmadura.setBounds(88, 241, 300, 100);
+		textArea_DescripcionArmadura.setBounds(97, 392, 300, 65);
 		panel_Armaduras.add(textArea_DescripcionArmadura);
 		
 		String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
@@ -231,12 +249,16 @@ public class ArmaArmadura extends JDialog {
 		lbl_RespuestaresistenciaArmadura.setText(armadura.getResistenciaArmadura().toString());
 		lbl_RespuestadebilidadArmadura.setText(armadura.getDebilidadArmadura().toString());
 		textArea_DescripcionArmadura.setText(armadura.getDescripcion());
+		
+				lbl_ArmaduraImagen = new JLabel();
+				lbl_ArmaduraImagen.setBounds(150, 514, 200, 400);
+				panel_Armaduras.add(lbl_ArmaduraImagen);
 
 		URL location1 = this.getClass().getResource("/images/" + armadura.getImagePath());
 		if (location1 != null) {
 			ImageIcon icon = new ImageIcon(location1);
 			Image image = icon.getImage();
-			Image newimg = image.getScaledInstance(250, 500, java.awt.Image.SCALE_SMOOTH);
+			Image newimg = image.getScaledInstance(200, 400, java.awt.Image.SCALE_SMOOTH);
 			icon = new ImageIcon(newimg);
 			lbl_ArmaduraImagen.setIcon(icon);
 		} else {
