@@ -76,7 +76,6 @@ public class Bestiario extends JDialog {
 		lbl_BestiarioMonstruoGrande.setBounds(285, 35, 430, 169);
 		Monstruo.add(lbl_BestiarioMonstruoGrande);
 
-
 		lbl_NombreMonstruo = new JLabel("NombreMonstruo");
 		lbl_NombreMonstruo.setForeground(new Color(42, 97, 88));
 		lbl_NombreMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 24));
@@ -191,7 +190,10 @@ public class Bestiario extends JDialog {
 			mostrarMonstruo(monstruos.get(indexMonstruo));
 		}
 
-		JButton btn_Anterior = new JButton("Anterior");
+		ImageIcon rawIzquierda = new ImageIcon(getClass().getResource("/images/izquierda.png"));
+		Image imagenIzquierda = rawIzquierda.getImage().getScaledInstance(75, 85, Image.SCALE_SMOOTH); 
+		ImageIcon botonIzquierda = new ImageIcon(imagenIzquierda);
+		JButton btn_Anterior = new JButton(botonIzquierda);
 		btn_Anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (indexMonstruo > 0) {
@@ -200,10 +202,13 @@ public class Bestiario extends JDialog {
 				}
 			}
 		});
-		btn_Anterior.setBounds(569, 609, 89, 23);
+		btn_Anterior.setBounds(627, 582, 75, 85);
 		Monstruo.add(btn_Anterior);
 
-		JButton btn_Siguiente = new JButton("Siguiente");
+		ImageIcon rawDerecha = new ImageIcon(getClass().getResource("/images/derecha.png"));
+		Image imagenDerecha = rawDerecha.getImage().getScaledInstance(75, 85, Image.SCALE_SMOOTH); 
+		ImageIcon botonDerecha = new ImageIcon(imagenDerecha);
+		JButton btn_Siguiente = new JButton(botonDerecha);
 		btn_Siguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (indexMonstruo < monstruos.size() - 1) {
@@ -213,7 +218,7 @@ public class Bestiario extends JDialog {
 			}
 		});
 
-		btn_Siguiente.setBounds(712, 609, 89, 23);
+		btn_Siguiente.setBounds(752, 582, 75, 85);
 		Monstruo.add(btn_Siguiente);
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.sound.sampled.AudioInputStream;
@@ -123,6 +124,20 @@ public class MainInterface extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 stopMusic(); // Detener la música al pulsar el botón
                 combate.setVisible(true);
+                
+                String message =
+                        "COMO JUGAR:\n\n"
+                        + "0. La resistencia del monstruo enemigo es con el elemento que golpea, así que deberías buscar una armadura resistente a ese elemento. \n"
+                        + "Su debilidad es el elemento que debes buscar equipar en tu arma.\n"
+                        + "Una efectividad correcta implica 1.5x en el daño y una incorrecta implica 0.5x tanto para el cazador como para el monstruo \n\n"
+                        + "1. Equipa a tu personaje: elige la armadura y el arma teniendo en cuenta sus resistencias y sus debilidades elementales. \n"
+                        + "Cada arma tiene un ataque especial, que hace una cantidad de daño y tiene un cooldown diferente. \n "
+                        + "Ponle un nombre a tu cazador y pulsa el botón de crear. Luego buscalo en el ComboBox y equípalo.\n\n"
+                        + "2. Elige un monstruo: cada monstruo tiene niveles de salud, ataque y debilidades y resistencias elementales. \n"
+                        + "Algunos son fáciles de ganar aunque te equipas mal, otros son imposibles de ganar si no comprendes como funcionan las efectividades elementales.\n\n"
+                        + "3. Pulsa el botón de A LA BATALLA.";
+                    
+                    JOptionPane.showMessageDialog(null, message);
             }
         });
         btn_Combate.setBounds(277, 198, 220, 150);

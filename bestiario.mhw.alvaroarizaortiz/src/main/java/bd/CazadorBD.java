@@ -44,9 +44,9 @@ public class CazadorBD {
 
 			int rowsAffected = statement.executeUpdate();
 			if (rowsAffected > 0) {
-				System.out.println("Cazador insertado correctamente.");
+				System.out.println("");
 			} else {
-				System.out.println("No se pudo insertar el cazador");
+				System.out.println("");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

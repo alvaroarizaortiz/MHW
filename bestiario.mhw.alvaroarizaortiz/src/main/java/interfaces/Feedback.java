@@ -29,7 +29,7 @@ public class Feedback extends JDialog {
 
 	public Feedback(MainInterface madre, boolean modal) {
 		setTitle("Feedback");
-		setBounds(100, 100, 700, 700);
+		setBounds(100, 100, 700, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(230, 230, 230));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -38,55 +38,55 @@ public class Feedback extends JDialog {
 
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Futura Md BT", Font.BOLD, 14));
-		lblNombre.setBounds(174, 184, 67, 14);
+		lblNombre.setBounds(174, 129, 67, 14);
 		contentPanel.add(lblNombre);
 
 		textFieldNombre = new JTextField();
 		textFieldNombre.setFont(new Font("Futura Md BT", Font.PLAIN, 12));
-		textFieldNombre.setBounds(251, 182, 179, 20);
+		textFieldNombre.setBounds(251, 127, 179, 20);
 		contentPanel.add(textFieldNombre);
 		textFieldNombre.setColumns(20);
 
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Futura Md BT", Font.BOLD, 14));
-		lblEmail.setBounds(190, 242, 67, 14);
+		lblEmail.setBounds(190, 187, 67, 14);
 		contentPanel.add(lblEmail);
 
 		textFieldEmail = new JTextField();
 		textFieldEmail.setFont(new Font("Futura Md BT", Font.PLAIN, 12));
-		textFieldEmail.setBounds(251, 240, 179, 20);
+		textFieldEmail.setBounds(251, 185, 179, 20);
 		contentPanel.add(textFieldEmail);
 		textFieldEmail.setColumns(20);
 
 		JLabel lblFeedback = new JLabel("Feedback sobre el programa:");
 		lblFeedback.setFont(new Font("Futura Md BT", Font.BOLD, 14));
-		lblFeedback.setBounds(225, 356, 216, 14);
+		lblFeedback.setBounds(225, 301, 216, 14);
 		contentPanel.add(lblFeedback);
 
 		textAreaFeedback = new JTextArea();
 		textAreaFeedback.setForeground(Color.WHITE);
 		textAreaFeedback.setBackground(new Color(42, 97, 88));
 		textAreaFeedback.setFont(new Font("Futura Md BT", Font.PLAIN, 12));
-		textAreaFeedback.setBounds(210, 381, 244, 94);
+		textAreaFeedback.setBounds(210, 326, 244, 94);
 		textAreaFeedback.setLineWrap(true);
 		textAreaFeedback.setWrapStyleWord(true);
 		contentPanel.add(textAreaFeedback);
 
 		JLabel lblRol = new JLabel("Rol:");
 		lblRol.setFont(new Font("Futura Md BT", Font.BOLD, 14));
-		lblRol.setBounds(206, 303, 51, 14);
+		lblRol.setBounds(206, 248, 51, 14);
 		contentPanel.add(lblRol);
 
 		rdbtnProfesor = new JRadioButton("Profesor");
 		rdbtnProfesor.setBackground(new Color(230, 230, 230));
 		rdbtnProfesor.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		rdbtnProfesor.setBounds(251, 299, 83, 23);
+		rdbtnProfesor.setBounds(251, 244, 83, 23);
 		contentPanel.add(rdbtnProfesor);
 
 		rdbtnEstudiante = new JRadioButton("Estudiante");
 		rdbtnEstudiante.setBackground(new Color(230, 230, 230));
 		rdbtnEstudiante.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-		rdbtnEstudiante.setBounds(336, 299, 91, 23);
+		rdbtnEstudiante.setBounds(336, 244, 91, 23);
 		contentPanel.add(rdbtnEstudiante);
 
 		ButtonGroup buttonGroupRol = new ButtonGroup();
@@ -95,17 +95,17 @@ public class Feedback extends JDialog {
 
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.setFont(new Font("Futura Md BT", Font.BOLD, 14));
-		btnEnviar.setBounds(294, 486, 83, 23);
+		btnEnviar.setBounds(294, 431, 83, 23);
 		contentPanel.add(btnEnviar);
 		
-		ImageIcon rawfb = new ImageIcon(getClass().getResource("/images/fb.png"));
-		Image imagefb = rawfb.getImage().getScaledInstance(387, 261, Image.SCALE_SMOOTH);
+		ImageIcon rawfb = new ImageIcon(getClass().getResource("/images/feed.png"));
+		Image imagefb = rawfb.getImage().getScaledInstance(279, 42, Image.SCALE_SMOOTH);
 		ImageIcon finalfb = new ImageIcon(imagefb);
 		JLabel lbl_titulofeedback = new JLabel("FEEDBACK");
 		lbl_titulofeedback.setIcon(finalfb);
 		lbl_titulofeedback.setForeground(new Color(166, 38, 47));
 		lbl_titulofeedback.setFont(new Font("Futura Md BT", Font.PLAIN, 20));
-		lbl_titulofeedback.setBounds(251, 33, 100, 100);
+		lbl_titulofeedback.setBounds(190, 46, 279, 42);
 		contentPanel.add(lbl_titulofeedback);
 		
 		JTextArea textArea_creditos = new JTextArea("");
@@ -116,7 +116,7 @@ public class Feedback extends JDialog {
 		);
 		textArea_creditos.setFont(new Font("Futura Md BT", Font.PLAIN, 13));
 		textArea_creditos.setBackground(new Color(230, 230, 230));
-		textArea_creditos.setBounds(318, 585, 356, 65);
+		textArea_creditos.setBounds(318, 485, 356, 65);
 		textArea_creditos.setLineWrap(true);
 		textArea_creditos.setWrapStyleWord(true);
 		contentPanel.add(textArea_creditos);

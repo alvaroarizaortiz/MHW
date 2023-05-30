@@ -29,8 +29,10 @@ public class PantallaCombate extends JDialog {
 	private JLabel lbl_ImagenMonstruo;
 	private JLabel lbl_NombreCazador;
 	private JLabel lbl_ContadorTurnos;
+	private JLabel lbl_ImagenCazador;
 	private int contadorTurnos = 0;
 	private boolean esquivando = false;
+	private JLabel lbl_versus;
 
 	public PantallaCombate(Cazador cazador, MonstruoGrande monstruoGrande) {
 		setTitle("Sin lugar a dudas, una de las batallas más épicas que he visto nunca.exe");
@@ -55,14 +57,14 @@ public class PantallaCombate extends JDialog {
 			lbl_NombreMonstruo = new JLabel("No hay monstruos seleccionados");
 		}
 
-		lbl_NombreMonstruo.setBounds(574, 29, 131, 14);
-		lbl_NombreMonstruo.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
+		lbl_NombreMonstruo.setBounds(574, 29, 200, 14);
+		lbl_NombreMonstruo.setFont(new Font("Futura Md BT", Font.BOLD, 14));
 		contentPanel.add(lbl_NombreMonstruo);
 
 		if (cazador != null) {
 			lbl_NombreCazador = new JLabel(cazador.getNombre());
-			lbl_NombreCazador.setFont(new Font("Futura Md BT", Font.PLAIN, 14));
-			lbl_NombreCazador.setBounds(89, 31, 131, 14);
+			lbl_NombreCazador.setFont(new Font("Futura Md BT", Font.BOLD, 14));
+			lbl_NombreCazador.setBounds(89, 31, 250, 14);
 			contentPanel.add(lbl_NombreCazador);
 		}
 
@@ -331,8 +333,25 @@ public class PantallaCombate extends JDialog {
 
 		lbl_ContadorTurnos = new JLabel("Turnos: " + contadorTurnos);
 		lbl_ContadorTurnos.setFont(new Font("Futura Md BT", Font.ITALIC, 14));
-		lbl_ContadorTurnos.setBounds(321, 129, 113, 14);
+		lbl_ContadorTurnos.setBounds(356, 85, 80, 14);
 		contentPanel.add(lbl_ContadorTurnos);
+		
+		ImageIcon rawcazador = new ImageIcon(getClass().getResource("/images/cazador.png"));
+		Image imagecazador = rawcazador.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+		ImageIcon finalcazador = new ImageIcon(imagecazador);
+		lbl_ImagenCazador = new JLabel("");
+		lbl_ImagenCazador.setIcon(finalcazador);
+		lbl_ImagenCazador.setBounds(62, 64, 200, 200);
+		contentPanel.add(lbl_ImagenCazador);
+		
+		
+		ImageIcon rawvs = new ImageIcon(getClass().getResource("/images/vs.png"));
+		Image imagevs = rawvs.getImage().getScaledInstance(110, 115, Image.SCALE_SMOOTH);
+		ImageIcon finalvs = new ImageIcon(imagevs);
+		lbl_versus = new JLabel("");
+		lbl_versus.setIcon(finalvs);
+		lbl_versus.setBounds(335, 110, 110, 115);
+		contentPanel.add(lbl_versus);
 
 	}
 }

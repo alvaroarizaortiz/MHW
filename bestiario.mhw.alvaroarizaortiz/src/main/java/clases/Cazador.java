@@ -158,7 +158,6 @@ public class Cazador {
 		double dañoFinal = calcularDaño(monstruo, daño);
 		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
-		System.out.println(monstruo.getPuntosSaludActual());
 
 		if (monstruo.getPuntosSaludActual() <= 0) {
 			resetearTurnos();
@@ -218,7 +217,6 @@ public class Cazador {
 		double dañoFinal = calcularDaño(monstruo, daño);
 		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
-		System.out.println(monstruo.getPuntosSaludActual());
 
 		if (monstruo.getPuntosSaludActual() <= 0) {
 			resetearTurnos();
@@ -248,7 +246,6 @@ public class Cazador {
 		double dañoFinal = calcularDaño(monstruo, daño);
 		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
-		System.out.println(monstruo.getPuntosSaludActual());
 
 		if (monstruo.getPuntosSaludActual() <= 0) {
 			resetearTurnos();
@@ -271,7 +268,6 @@ public class Cazador {
 		double dañoFinal = calcularDaño(monstruo, daño);
 		dañoUltimoTurno = dañoFinal;
 		monstruo.recibirDaño(dañoFinal);
-		System.out.println(monstruo.getPuntosSaludActual());
 
 		if (monstruo.getPuntosSaludActual() <= 0) {
 			resetearTurnos();
