@@ -21,6 +21,7 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
 import excepciones.EmailException;
+import excepciones.FormularioVacioException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +40,7 @@ public class Feedback extends JDialog {
 	private JRadioButton rdbtnProfesor;
 	private JRadioButton rdbtnEstudiante;
 
-	//Insertar sonido y controlar volumen
+	// Insertar sonido y controlar volumen
 	private void playSound(String soundName, float volume) {
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(soundName));
@@ -168,11 +169,17 @@ public class Feedback extends JDialog {
 				try {
 					String nombre = textFieldNombre.getText();
 					String email = textFieldEmail.getText();
+					String feedback = textAreaFeedback.getText();
+
+					if (nombre.isEmpty() || feedback.isEmpty()) {
+						throw new FormularioVacioException("El nombre y el mensaje no pueden estar vacíos.");
+					}
+
 					if (!email.contains("@")) {
-						throw new EmailException("Email inválido  " + email + ", por favor, inserte \n"
+						throw new EmailException("Email inválido " + email + ", por favor, inserte \n"
 								+ " una dirección de correo electrónico que use @ ");
 					}
-					String feedback = textAreaFeedback.getText();
+
 					String rol = rdbtnProfesor.isSelected() ? "Profesor" : "Estudiante";
 
 					playSound("/song/thanks.wav", -15.0f);
@@ -191,8 +198,12 @@ public class Feedback extends JDialog {
 				} catch (EmailException ex) {
 					// Excepción email
 					JOptionPane.showMessageDialog(contentPanel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (FormularioVacioException ex) {
+					// Excepción formulario vacío
+					JOptionPane.showMessageDialog(contentPanel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
+
 	}
 }
