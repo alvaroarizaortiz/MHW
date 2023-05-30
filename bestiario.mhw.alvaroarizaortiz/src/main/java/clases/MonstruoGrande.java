@@ -6,7 +6,7 @@ import excepciones.AttackException;
 import java.util.Random;
 
 public class MonstruoGrande extends Monstruo {
-    private String puntoDebil; // Punto debil del monstruo. Usada solo en bestiario
+    private String puntoDebil; // Punto débil del monstruo. Usada solo en bestiario
     private double dañoUltimoTurno = 0; // Daño del ultimo turno del monstruo, establecido a 0 por defecto
     private boolean esCapturable; // Usado en bestiario para indicar si es o no capturable
     private Elemento resistencias; // Elemento que resiste el monstruo (enum): FUEGO, AGUA, ELECTRICIDAD, HIELO, DRAGON

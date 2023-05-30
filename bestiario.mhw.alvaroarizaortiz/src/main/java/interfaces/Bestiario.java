@@ -14,10 +14,16 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.List;
 import java.awt.event.ActionEvent;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.ImageIcon;
 import java.awt.CardLayout;
 import javax.swing.JTextArea;
 
+@SuppressWarnings("serial")
 public class Bestiario extends JDialog {
 	MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
 	List<MonstruoGrande> monstruos = monstruoGrandeBD.listarMonstruosGrandes();
@@ -35,6 +41,22 @@ public class Bestiario extends JDialog {
 	private JLabel lbl_RepuestaDebilidadMonstruo;
 	private JLabel lbl_RespuestaPuntoDebilMonstruo;
 	private JTextArea textArea_DescripcionMonstruo;
+
+	//Insertar sonido y controlar volumen
+	private void playSound(String soundName, float volume) {
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(soundName));
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(volume);
+
+			clip.start();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
 
 	public void mostrarMonstruo(MonstruoGrande monstruo) {
 		String rutaImagen = "/images/" + monstruo.getImagePath();
@@ -191,11 +213,12 @@ public class Bestiario extends JDialog {
 		}
 
 		ImageIcon rawIzquierda = new ImageIcon(getClass().getResource("/images/izquierda.png"));
-		Image imagenIzquierda = rawIzquierda.getImage().getScaledInstance(75, 85, Image.SCALE_SMOOTH); 
+		Image imagenIzquierda = rawIzquierda.getImage().getScaledInstance(75, 85, Image.SCALE_SMOOTH);
 		ImageIcon botonIzquierda = new ImageIcon(imagenIzquierda);
 		JButton btn_Anterior = new JButton(botonIzquierda);
 		btn_Anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				playSound("/song/pasarpagina.wav", -15.0f);
 				if (indexMonstruo > 0) {
 					indexMonstruo--;
 					mostrarMonstruo(monstruos.get(indexMonstruo));
@@ -206,11 +229,12 @@ public class Bestiario extends JDialog {
 		Monstruo.add(btn_Anterior);
 
 		ImageIcon rawDerecha = new ImageIcon(getClass().getResource("/images/derecha.png"));
-		Image imagenDerecha = rawDerecha.getImage().getScaledInstance(75, 85, Image.SCALE_SMOOTH); 
+		Image imagenDerecha = rawDerecha.getImage().getScaledInstance(75, 85, Image.SCALE_SMOOTH);
 		ImageIcon botonDerecha = new ImageIcon(imagenDerecha);
 		JButton btn_Siguiente = new JButton(botonDerecha);
 		btn_Siguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				playSound("/song/pasarpagina.wav", -15.0f);
 				if (indexMonstruo < monstruos.size() - 1) {
 					indexMonstruo++;
 					mostrarMonstruo(monstruos.get(indexMonstruo));

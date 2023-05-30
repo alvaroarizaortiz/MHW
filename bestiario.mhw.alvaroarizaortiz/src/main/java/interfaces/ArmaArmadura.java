@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class ArmaArmadura extends JDialog {
 	private ArmaBD armaBD = new ArmaBD();
 	private ArmaduraBD armaduraBD = new ArmaduraBD();
@@ -241,7 +242,7 @@ public class ArmaArmadura extends JDialog {
 		textArea_DescripcionArmadura.setEditable(false);
 		textArea_DescripcionArmadura.setBounds(97, 392, 300, 65);
 		panel_Armaduras.add(textArea_DescripcionArmadura);
-		
+
 		String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
 
 		Armadura armadura = armaduraBD.getArmaduraPorNombre(nombreArmaduraSeleccionada);
@@ -249,10 +250,10 @@ public class ArmaArmadura extends JDialog {
 		lbl_RespuestaresistenciaArmadura.setText(armadura.getResistenciaArmadura().toString());
 		lbl_RespuestadebilidadArmadura.setText(armadura.getDebilidadArmadura().toString());
 		textArea_DescripcionArmadura.setText(armadura.getDescripcion());
-		
-				lbl_ArmaduraImagen = new JLabel();
-				lbl_ArmaduraImagen.setBounds(150, 514, 200, 400);
-				panel_Armaduras.add(lbl_ArmaduraImagen);
+
+		lbl_ArmaduraImagen = new JLabel();
+		lbl_ArmaduraImagen.setBounds(150, 514, 200, 400);
+		panel_Armaduras.add(lbl_ArmaduraImagen);
 
 		URL location1 = this.getClass().getResource("/images/" + armadura.getImagePath());
 		if (location1 != null) {
@@ -265,5 +266,4 @@ public class ArmaArmadura extends JDialog {
 			System.err.println("No se pudo encontrar la imagen: " + armadura.getImagePath());
 		}
 	}
-	}
-
+}

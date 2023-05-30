@@ -17,18 +17,23 @@ import clases.Arma;
 import clases.Armadura;
 import clases.Cazador;
 import clases.MonstruoGrande;
+import excepciones.NombreCazadorVacio;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class CombateInterface extends JDialog {
-	// AQUÍ ARRIBA ESTÁN TODAS LAS INSTANCIAS Y VARIABLES DECLARADAS.
+
 	private PantallaCombate pantallacombate;
 	private final JPanel contentPanel = new JPanel();
 	private MonstruoGrandeBD monstruoGrandeBD = new MonstruoGrandeBD();
@@ -36,8 +41,7 @@ public class CombateInterface extends JDialog {
 	private ArmaduraBD armaduraBD = new ArmaduraBD();
 	private Cazador cazador;
 	private MonstruoGrande monstruoGrande;
-	// LAS JLABEL, COMBOBOX, BOTONES QUE SON NECESARIOS DECLARAR ARRIBA. LAS QUE NO
-	// INTERACTUAN CON LA BASE DE DATOS NO ESTÁN AQUÍ YA QUE NO ES NECESARIO.
+
 	private JComboBox<String> comboBox_Armas;
 	private JComboBox<String> comboBox_Armaduras;
 	private JComboBox<Cazador> comboBox_CargarCazador;
@@ -59,11 +63,12 @@ public class CombateInterface extends JDialog {
 	private JLabel lbl_eligemonstruo;
 
 	public CombateInterface(MainInterface madre, boolean modal) {
-		setTitle("Prepárate para el combate");
+		setTitle("EQUÍPATE PARA EL COMBATE");
 		pantallacombate = new PantallaCombate(cazador, monstruoGrande);
 		pantallacombate.setVisible(false);
 		setBounds(100, 100, 1200, 900);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(230, 230, 230));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -93,6 +98,7 @@ public class CombateInterface extends JDialog {
 		contentPanel.add(lbl_ImagenMonstruo);
 
 		JPanel panel_Cazador = new JPanel();
+		panel_Cazador.setBackground(new Color(230, 230, 230));
 		panel_Cazador.setBounds(88, 124, 680, 726);
 		contentPanel.add(panel_Cazador);
 		panel_Cazador.setLayout(null);
@@ -200,24 +206,33 @@ public class CombateInterface extends JDialog {
 		JButton btnCrearCazador = new JButton("Crear cazador");
 		btnCrearCazador.setBounds(485, 608, 120, 25);
 		panel_Cazador.add(btnCrearCazador);
-
 		btnCrearCazador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nombreArmaSeleccionada = (String) comboBox_Armas.getSelectedItem();
-				String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
-				String nombreCazador = textField_RespuestaNombreCazador.getText();
+				try {
+					String nombreArmaSeleccionada = (String) comboBox_Armas.getSelectedItem();
+					String nombreArmaduraSeleccionada = (String) comboBox_Armaduras.getSelectedItem();
+					String nombreCazador = textField_RespuestaNombreCazador.getText();
 
-				Arma arma = armaBD.getArmaPorNombre(nombreArmaSeleccionada);
-				Armadura armadura = armaduraBD.getArmaduraPorNombre(nombreArmaduraSeleccionada);
+					// Verificamos si el nombre del cazador es válido, no puede estar en blanco
+					if (nombreCazador.isEmpty()) {
+						throw new NombreCazadorVacio("El nombre del cazador no puede estar vacío.");
+					}
 
-				Cazador cazador = new Cazador(5000, armadura, arma, nombreCazador);
-				CazadorBD cazadorBD = new CazadorBD();
-				cazadorBD.insertCazador(cazador);
+					Arma arma = armaBD.getArmaPorNombre(nombreArmaSeleccionada);
+					Armadura armadura = armaduraBD.getArmaduraPorNombre(nombreArmaduraSeleccionada);
 
-				comboBox_CargarCazador.removeAllItems();
-				List<Cazador> cazadores = cazadorBD.getAllCazadores();
-				for (Cazador cazadorbox : cazadores) {
-					comboBox_CargarCazador.addItem(cazadorbox);
+					Cazador cazador = new Cazador(5000, armadura, arma, nombreCazador);
+					CazadorBD cazadorBD = new CazadorBD();
+					cazadorBD.insertCazador(cazador);
+
+					comboBox_CargarCazador.removeAllItems();
+					List<Cazador> cazadores = cazadorBD.getAllCazadores();
+					for (Cazador cazadorbox : cazadores) {
+						comboBox_CargarCazador.addItem(cazadorbox);
+					}
+				} catch (NombreCazadorVacio ex) {
+					// La excepción muestra una ventana de error
+					JOptionPane.showMessageDialog(panel_Cazador, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

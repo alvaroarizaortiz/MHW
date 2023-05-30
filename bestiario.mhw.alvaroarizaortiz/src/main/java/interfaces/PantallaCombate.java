@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class PantallaCombate extends JDialog {
 	private JTextArea textArea_AtaquesCazador;
 	private JTextArea textArea_AtaquesMonstruo;
@@ -35,7 +36,7 @@ public class PantallaCombate extends JDialog {
 	private JLabel lbl_versus;
 
 	public PantallaCombate(Cazador cazador, MonstruoGrande monstruoGrande) {
-		setTitle("Sin lugar a dudas, una de las batallas más épicas que he visto nunca.exe");
+		setTitle("SIN LUGAR A DUDAS, UNA DE LAS BATALLAS MÁS ÉPICAS QUE HE VISTO NUNCA.EXE");
 		setBounds(100, 100, 800, 500);
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		contentPanel.setBackground(new Color(230, 230, 230));
@@ -128,8 +129,7 @@ public class PantallaCombate extends JDialog {
 				if (cazador != null && monstruoGrande != null) {
 					try {
 						cazador.ataqueFuerte(monstruoGrande);
-						double dañoCazador = cazador.getDañoUltimoTurno(); // Se obtiene el daño justo después del
-																			// ataque del cazador
+						double dañoCazador = cazador.getDañoUltimoTurno();
 						textArea_AtaquesCazador.setText("El cazador ha realizado un ataque fuerte y ha efectuado "
 								+ dañoCazador + " de daño al monstruo.\n");
 						monstruoGrande.ataqueAleatorio(cazador, esquivando);
@@ -335,7 +335,7 @@ public class PantallaCombate extends JDialog {
 		lbl_ContadorTurnos.setFont(new Font("Futura Md BT", Font.ITALIC, 14));
 		lbl_ContadorTurnos.setBounds(356, 85, 80, 14);
 		contentPanel.add(lbl_ContadorTurnos);
-		
+
 		ImageIcon rawcazador = new ImageIcon(getClass().getResource("/images/cazador.png"));
 		Image imagecazador = rawcazador.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 		ImageIcon finalcazador = new ImageIcon(imagecazador);
@@ -343,8 +343,7 @@ public class PantallaCombate extends JDialog {
 		lbl_ImagenCazador.setIcon(finalcazador);
 		lbl_ImagenCazador.setBounds(62, 64, 200, 200);
 		contentPanel.add(lbl_ImagenCazador);
-		
-		
+
 		ImageIcon rawvs = new ImageIcon(getClass().getResource("/images/vs.png"));
 		Image imagevs = rawvs.getImage().getScaledInstance(110, 115, Image.SCALE_SMOOTH);
 		ImageIcon finalvs = new ImageIcon(imagevs);

@@ -42,7 +42,7 @@ CREATE TABLE `arma` (
 
 LOCK TABLES `arma` WRITE;
 /*!40000 ALTER TABLE `arma` DISABLE KEYS */;
-INSERT INTO `arma` VALUES (1,1296,'Gran Espada','FUEGO','Brillaspada Rathalos','brillaspadarathalos.png','Imponente hoja que reluce con brillo propio. Algunos cazadores dicen haber visto como evoca llamas sin ni siquiera estar en combate.'),(2,1296,'Gran Espada','AGUA','Hoja Venus Real','hojavenusreal.png','Hermosa hoja ondulante con un poderoso ataque acuático. Su elegante diseño evoca la belleza de las tierras andalusíes con los almendros en flor.'),(3,1296,'Gran Espada','HIELO','Serasilfo alado','serasilfoalado.png','No se conoce material más frío que el que fue forjado para esta hoja. Un solo corte de este arma podría congelar la sangre de cualquier monstruo.'),(4,1296,'Gran Espada','ELECTRICIDAD','Vara endemoniada','varaendemoniada.png','Las leyendas cuentan que los cazadores del Viejo Mundo encontraron este arma atraídos fatalmente por un sin fin de voces espectrales.'),(5,1296,'Gran Espada','DRAGON','Dharma inamovible','dharmainamovible.png','Una hoja forjada con Dragonita, el mineral más pesado del Nuevo Mundo. Solo los cazadores más fuertes pueden blandirla y usarla en combate.'),(6,1152,'Gran Espada','VENENO','Hoja oculta','hojaoculta.png','Sólo hace falta rozar el filo de este arma para inyectar una dosis letal de veneno que acaba con la presa en unos pocos minutos. Se recomienda el uso de guantes.'),(7,1392,'Gran Espada','PARALISIS','Trituracídico','trituracidico.png','A veces no es necesario ni golpear con esta gran espada, ya que muchos enemigos se quedan paralizados solo del pavor que infunde.'),(8,1296,'Gran Espada','SUEÑO','Somnoespada','somnoespada.png','Una imponente espada onírica que sume a su presa en un dulce pero letal sueño del que muy pocos pueden despertarse.'),(9,1440,'Gran Espada','EXPLOSION','Filo Parteluz','filoparteluz.png','Hecha de un material exportado de tierras lejanas por la compañía minera \"ACME\". Genera explosiones al mínimo contacto.'),(10,621,'Lanza','FUEGO','Prominencia de Plata','prominenciadeplata.png','La punta incandesdecente de esta lanza brilla como la plata fundida, dejando un rastro de fuego a su paso.'),(11,621,'Lanza','AGUA','Hidrolanza','hidrolanza.png','Una lanza que desencadena la fueza incontenible de los mares. Sus arremetidas acuáticas generan un torrente devastador.'),(12,621,'Lanza','HIELO','Ectis de caballería','ectisdecaballeria.png','Considerada la lanza más majestuosa de todas las jamás forjadas. Su poder gélido congela incluso los corazones más ardientes.'),(13,621,'Lanza','ELECTRICIDAD','Lanza Naar','lanzanaar.png','La energía que emana de esta lanza es sobrecogedora. Los relámpagos danzan con cada arremetida y electrifican el campo de batalla.'),(14,621,'Lanza','DRAGON','Huso del destino','husodeldestino.png','Lanza que porta el legado de los dragones ancianos. El cazador que la blande penetra las defensas enemigas con la determinación de un destino inquebrantable.'),(15,552,'Lanza','VENENO','Lobo incesante','loboincesante.png','Cada corte de este filo es comparable con la mordida del más feroz de los lobos salvajes y su veneno es igual de sigiloso que este.'),(16,598,'Lanza','PARALISIS','Lanza estrella brillante','lanzaestrellabrillante.png','Un estandarte que deslumbra como una estrella en el firmamento. Cada golpe deja paralizado al enemigo, ya sea por su belleza o por su poder.'),(17,598,'Lanza','SUEÑO','Calumnia','calumnia.png','Hecha de cristal ligero. Sus ataques silenciosos y sigilosos susurran promesas de sueños eternos, sumiendo a los oponentes en un letargo profundo.'),(18,552,'Lanza','EXPLOSION','Taladro Gamma','taladrogamma.png','Las embestidas de este arma son tan destructivas que las ondas que genera se pueden ver y escuchar a kilómetros de distancia.'),(19,313,'Arco','FUEGO','Gigantomaquia','gigantomaquia.png','Se dice que este arco antes tenía un tamaño normal pero al cazador que lo portaba se le cayó algo de sulfato atómico encima.'),(20,312,'Arco','AGUA','Vuelo nocturno','vuelonocturno.png','Las flechas lanzadas por este arco son tan veloces  que recogen la condensación del agua en el aire, dejando un rastro de neblina en su estela.'),(21,312,'Arco','HIELO','Evelia cautivadora','eveliacautivadora.png','Sus flechas congeladas deslumbran como cristales en el aire, atrapando a los enemigos en una danza de frío y muerte.'),(22,312,'Arco','ELECTRICIDAD','Horadadragones','horadadragones.png','Un arco cargado con la energía de los dragones ancianos. Sus flechas truenan en el horizonte, desgarrando el aire y liberando descargas eléctricas.'),(23,312,'Arco','DRAGON','Flecha lunática','flechalunatica.png','El influjo lunar hace que sus flechas surquen el cielo y golpeen en el enemigo perforándolo con un destello de luz lunar. Su verdadero poder se libera las noches de luna llena.'),(24,300,'Arco','VENENO','Hilo del destino','hilodeldestino.png','Las flechas de este arco tejen una tela de araña que atrapa al enemigo en un funesto destino. El propio arco drena la vida del enemigo retenido en sus redes. '),(25,300,'Arco','PARALISIS','Fulgurante','fulgurante.png','La presa nunca sabrá que le ocurrió. Sus flechas son indetectables y al entrar en contacto con la carne enemiga los deja inmóviles y vulnerables ante su destino.'),(26,292,'Arco','SUEÑO','Dulces sueños','dulcessueños.png','Sus flechas soporíferas envían a los oponentes a un estado de profundo letargo, sumergiéndolos en un sueño tranquilo del cual no pueden escapar.'),(27,312,'Arco','EXPLOSION','Arco Neo','arconeo.png','Las flechas de este arco desatan una estela explosiva, similar al estruendo de una ballesta pesada, que arrasa con todo a su paso.');
+INSERT INTO `arma` VALUES (1,750,'Gran Espada','FUEGO','Brillaspada Rathalos','brillaspadarathalos.png','Imponente hoja que reluce con brillo propio. Algunos cazadores dicen haber visto como evoca llamas sin ni siquiera estar en combate.'),(2,750,'Gran Espada','AGUA','Hoja Venus Real','hojavenusreal.png','Hermosa hoja ondulante con un poderoso ataque acuático. Su elegante diseño evoca la belleza de las tierras andalusíes con los almendros en flor.'),(3,750,'Gran Espada','HIELO','Serasilfo alado','serasilfoalado.png','No se conoce material más frío que el que fue forjado para esta hoja. Un solo corte de este arma podría congelar la sangre de cualquier monstruo.'),(4,750,'Gran Espada','ELECTRICIDAD','Vara endemoniada','varaendemoniada.png','Las leyendas cuentan que los cazadores del Viejo Mundo encontraron este arma atraídos fatalmente por un sin fin de voces espectrales.'),(5,750,'Gran Espada','DRAGON','Dharma inamovible','dharmainamovible.png','Una hoja forjada con Dragonita, el mineral más pesado del Nuevo Mundo. Solo los cazadores más fuertes pueden blandirla y usarla en combate.'),(6,650,'Lanza','FUEGO','Prominencia de Plata','prominenciadeplata.png','La punta incandesdecente de esta lanza brilla como la plata fundida, dejando un rastro de fuego a su paso.'),(7,650,'Lanza','AGUA','Hidrolanza','hidrolanza.png','Una lanza que desencadena la fueza incontenible de los mares. Sus arremetidas acuáticas generan un torrente devastador.'),(8,650,'Lanza','HIELO','Ectis de caballería','ectisdecaballeria.png','Considerada la lanza más majestuosa de todas las jamás forjadas. Su poder gélido congela incluso los corazones más ardientes.'),(9,650,'Lanza','ELECTRICIDAD','Lanza Naar','lanzanaar.png','La energía que emana de esta lanza es sobrecogedora. Los relámpagos danzan con cada arremetida y electrifican el campo de batalla.'),(10,650,'Lanza','DRAGON','Huso del destino','husodeldestino.png','Lanza que porta el legado de los dragones ancianos. El cazador que la blande penetra las defensas enemigas con la determinación de un destino inquebrantable.'),(11,500,'Arco','FUEGO','Gigantomaquia','gigantomaquia.png','Se dice que este arco antes tenía un tamaño normal pero al cazador que lo portaba se le cayó algo de sulfato atómico encima.'),(12,500,'Arco','AGUA','Vuelo nocturno','vuelonocturno.png','Las flechas lanzadas por este arco son tan veloces  que recogen la condensación del agua en el aire, dejando un rastro de neblina en su estela.'),(13,500,'Arco','HIELO','Evelia cautivadora','eveliacautivadora.png','Sus flechas congeladas deslumbran como cristales en el aire, atrapando a los enemigos en una danza de frío y muerte.'),(14,500,'Arco','ELECTRICIDAD','Horadadragones','horadadragones.png','Un arco cargado con la energía de los dragones ancianos. Sus flechas truenan en el horizonte, desgarrando el aire y liberando descargas eléctricas.'),(15,500,'Arco','DRAGON','Flecha lunática','flechalunatica.png','El influjo lunar hace que sus flechas surquen el cielo y golpeen en el enemigo perforándolo con un destello de luz lunar. Su verdadero poder se libera las noches de luna llena.');
 /*!40000 ALTER TABLE `arma` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,12 +87,13 @@ CREATE TABLE `cazador` (
   `idArma` int(11) DEFAULT NULL,
   `idArmadura` int(11) DEFAULT NULL,
   `puntosSalud` int(11) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_cazador_armadura` (`idArmadura`),
   KEY `idArma` (`idArma`),
   CONSTRAINT `cazador_ibfk_1` FOREIGN KEY (`idArma`) REFERENCES `arma` (`id`),
   CONSTRAINT `fk_cazador_armadura` FOREIGN KEY (`idArmadura`) REFERENCES `armadura` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,38 +102,8 @@ CREATE TABLE `cazador` (
 
 LOCK TABLES `cazador` WRITE;
 /*!40000 ALTER TABLE `cazador` DISABLE KEYS */;
-INSERT INTO `cazador` VALUES (7,4,3,5000),(8,4,7,5000),(9,5,3,5000);
+INSERT INTO `cazador` VALUES (1,2,1,5000,'Cazador predeterminado nº1'),(2,8,5,5000,'Cazador predeterminado nº2'),(3,14,6,5000,'Cazador predeterminado nº3');
 /*!40000 ALTER TABLE `cazador` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `combate`
---
-
-DROP TABLE IF EXISTS `combate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `combate` (
-  `id` int(11) NOT NULL,
-  `turno` int(11) NOT NULL,
-  `idCazador` int(11) DEFAULT NULL,
-  `idMonstruo` int(11) DEFAULT NULL,
-  `ganador` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idCazador` (`idCazador`),
-  KEY `idMonstruo` (`idMonstruo`),
-  CONSTRAINT `combate_ibfk_1` FOREIGN KEY (`idCazador`) REFERENCES `cazador` (`id`),
-  CONSTRAINT `combate_ibfk_2` FOREIGN KEY (`idMonstruo`) REFERENCES `monstruo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `combate`
---
-
-LOCK TABLES `combate` WRITE;
-/*!40000 ALTER TABLE `combate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `combate` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -257,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-22 19:55:30
+-- Dump completed on 2023-05-30 12:42:21
