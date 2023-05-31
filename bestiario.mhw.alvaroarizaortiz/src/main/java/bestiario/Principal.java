@@ -13,5 +13,8 @@ public class Principal {
 		// para como han ido las cosas. Se que puede haber algo de lío en el código pero espero que esté lo suficientemente claro y ordenado.
 		
 		// Gracias por tomarte el tiempo de leerlo y corregirlo.
+		
+		// PD: Abrir desde MainInterface en el paquete interfaces
+		// PD2: A día 31 de mayo al importar el proyecto desde github se abre con error y hay que cambiarle el jdk (no sé por qué)
 	}
 }
